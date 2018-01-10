@@ -24,21 +24,21 @@ using Planet = bc_Planet;
 
 Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
 std::string planet_debug(Planet planet) { return bc_Planet_debug(planet); }
-std::string planet_eq(Planet planet, Planet other) { return bc_Planet_eq(planet, other); }
 std::string planet_to_json(Planet planet) { return bc_Planet_to_json(planet); }
 Planet      planet_from_json(std::string s) { return bc_Planet_from_json(s.c_str()); }
 
 // Direction
 using Direction = bc_Direction;
 
-Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
-Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
-Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
-Direction   direction_from_json(std::string s) { return bc_Direction_from_json(s.c_str()); }
-std::string direction_to_json(Direction direction) { return bc_Direction_to_json(direction); }
 int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
 int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
 bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
+Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
+Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
+Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
+
+Direction   direction_from_json(std::string s) { return bc_Direction_from_json(s.c_str()); }
+std::string direction_to_json(Direction direction) { return bc_Direction_to_json(direction); }
 
 
 // MapLocation
@@ -55,29 +55,29 @@ public:
   void set_x(int x) { m_x = x; }
   void set_y(int y) { m_y = y; }
 
-  MapLocation add(Direction direction) {
+  MapLocation add(Direction direction) const {
     return MapLocation(m_planet,
                        m_x + direction_dx(direction),
                        m_y + direction_dy(direction));
   }
 
-  MapLocation subtract(Direction direction) {
+  MapLocation subtract(Direction direction) const {
     return MapLocation(m_planet,
                        m_x - direction_dx(direction),
                        m_y - direction_dy(direction));
   }
 
-  MapLocation add_multiple(Direction direction, int multiple) {
+  MapLocation add_multiple(Direction direction, int multiple) const {
     return MapLocation(m_planet,
                        m_x + direction_dx(direction) * multiple,
                        m_y + direction_dy(direction) * multiple);
   }
 
-  MapLocation translate(Direction direction, int dx, int dy) {
+  MapLocation translate(Direction direction, int dx, int dy) const {
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  int distance_squared_to(MapLocation map_location) {
+  int distance_squared_to(MapLocation map_location) const {
     if (m_planet != map_location.get_planet())
       return INT_MAX;
     int dx = m_x - map_location.get_x();
@@ -86,15 +86,27 @@ public:
   }
 
   // TODO
-  Direction direction_to(MapLocation other);
+  Direction direction_to(MapLocation other) const;
 
-  // TODO
-  Direction is_adjacent_to(MapLocation other);
+  Direction is_adjacent_to(MapLocation other) const {
+    return ((*this) != map_location and
+            std::abs(m_x - map_location.get_x()) <= 1 and
+            std::abs(m_y - map_location.get_y()) <= 1);
 
-  // TODO
-  bool is_within_range(unsigned int range, MapLocation map_location) {
+  }
+
+  bool is_within_range(unsigned int range, MapLocation map_location) const {
     return range >= distance_squared_to(map_location);
   }
+
+  operator ==(cosnt MapLocation& map_location) const {
+    return (map_location.get_planet() == m_planet() and
+            map_location.get_x() == m_x and
+            map_location.get_y() == m_y);
+  }
+  operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
+
+  // TODO: JSON
 
 private:
   Planet m_planet;
@@ -102,7 +114,11 @@ private:
   int m_y;
 };
 
-// TODO: Location
+
+// Location
+class Location {
+};
+
 
 // Team
 using Team = bc_Team;
@@ -130,6 +146,8 @@ private:
 Player      player_from_json(std::string s) { return bc_Player_from_json(s.c_str()); }
 std::string player_debug(Player player) { return bc_Player_debug(player); }
 std::string player_to_json(Player player) { return bc_Player_to_json(player); }
+
+
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
