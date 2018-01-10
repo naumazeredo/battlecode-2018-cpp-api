@@ -99,7 +99,7 @@ public:
 
   }
 
-  bool is_within_range(unsigned int range, MapLocation map_location) const {
+  bool is_within_range(unsigned range, MapLocation map_location) const {
     return range >= distance_squared_to(map_location);
   }
 
@@ -219,6 +219,55 @@ std::string player_debug(Player player) { return bc_Player_debug(player); }
 std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 
 
+// UnitType
+using UnitType = bc_UnitType;
+
+int unittype_get_factory_cost(UnitType unit_type) {
+  if (unit_type != Factory and unit_type != Rocket) {
+    // TODO: Use Logger
+  }
+
+  return bc_UnitType_factory_cost(unit_type);
+}
+
+int unittype_get_blueprint_cost(UnitType unit_type) {
+  if (unit_type != Factory and unit_type != Rocket) {
+    // TODO: Use Logger
+  }
+
+  return bc_UnitType_blueprint_cost(unit_type);
+}
+
+// Don't need to receive UnitType as C API, because it makes no sense...
+int unittype_get_replicate_cost() { return bc_UnitType_replicate_cost(Worker); }
+
+int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
+
+
+// TODO: UnitType JSON
+
+//(TODO)Unit
+//
+//(TODO)PlanetMap
+//
+//(TODO)AsteroidStrike
+//
+//(TODO)AsteroidPattern
+//
+//(TODO)OrbitPattern
+//
+//(TODO)GameMap
+//
+//(TODO)ResearchInfo
+//
+//(TODO)RocketLanding
+//
+//(TODO)RocketLandingInfo
+//
+//(TODO)GameController
+//
+
+
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
@@ -257,27 +306,4 @@ public:
 };
 
 }
-
-//(TODO)UnitType
-//
-//(TODO)Unit
-//
-//(TODO)PlanetMap
-//
-//(TODO)AsteroidStrike
-//
-//(TODO)AsteroidPattern
-//
-//(TODO)OrbitPattern
-//
-//(TODO)GameMap
-//
-//(TODO)ResearchInfo
-//
-//(TODO)RocketLanding
-//
-//(TODO)RocketLandingInfo
-//
-//(TODO)GameController
-//
 
