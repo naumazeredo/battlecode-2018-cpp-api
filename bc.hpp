@@ -94,6 +94,8 @@ public:
 
   // TODO: Copy/move semantics
 
+  bc_MapLocation* to_bc() const { return new_bc_MapLocation(Planet, x, y); }
+
   Planet get_planet() const { return m_planet; }
   int get_x() const { return m_x; }
   int get_y() const { return m_y; }
@@ -175,8 +177,19 @@ public:
   Location(MapLocation map_location) : m_type { Map }, m_map_location { map_location } {}
   Location(int garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
 
-  // TODO
-  Location(bc_Location* location) {}
+  Location(bc_Location* location) {
+    if (bc_Location_is_on_map(location)) {
+      m_type = Map;
+      m_map_location = bc_Location_map_location(location);
+    } else if (bc_Location_is_in_garrison(location)) {
+      m_type = Garrison;
+      m_garrison = bc_Location_structure(location);
+    } else {
+      m_type = Space;
+    }
+
+    delete_bc_Location(location);
+  }
 
   // TODO: Copy/move semantics
 
@@ -250,15 +263,13 @@ public:
 
   bool    operator==(const Player& player) { return m_team == player.m_team and m_planet == player.m_planet; }
 
+  // TODO: Player to_string
+  // TODO: Player JSON
+
 private:
   Team   m_team;
   Planet m_planet;
 };
-
-// TODO: move to Player class
-Player      player_from_json(std::string s) { return bc_Player_from_json(s.c_str()); }
-std::string player_debug(Player player) { return bc_Player_debug(player); }
-std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 
 
 // VecUnitID
@@ -311,7 +322,7 @@ public:
 
   // NOT IMPLEMENT: bc_Unit_research_level
 
-  // TODO: Don't use macros. Write better function names!
+  // FIXME: Don't use macros. Write better function names!
 
   // Magic!
 #define F(x) bc_Unit_ ## x
@@ -320,6 +331,7 @@ public:
 #define GET_CAST(ret, var) ret G(var)() const { return ret { F(func)(m_unit) }; }
 #define GET_ERROR(ret, var, cond, err) ret G(var)() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
 #define IS_ERROR(var, cond, err) bool var() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
+#define GET_FUNC(ret, var, func, cond, err) ret G(var)() const { log_error((cond), (err)); return func( F(func)(m_unit) ); }
 
   GET(Team, team);
   GET_CAST(Location, location);
@@ -372,7 +384,7 @@ public:
   // Structures
   IS_ERROR (structure_is_build, is_structure(m_unittype), "Not Structure!");
   GET_ERROR(unsigned, structure_max_capacity, is_structure(m_unittype), "Not Structure!");
-  // TODO: bc_Unit_structure_garrison
+  GET_FUNC(vector<unsigned>, structure_garrison, to_vector, is_structure(m_unittype), "Not Structure!");
 
   // Factory
   IS_ERROR (is_factory_producting, (m_unittype == Factory), "Not Factory!");
@@ -419,25 +431,42 @@ public:
     m_planet = bc_PlanetMap_planet_get(m_planet_map);
     m_height = bc_PlanetMap_height_get(m_planet_map);
     m_width  = bc_PlanetMap_width_get (m_planet_map);
+    m_initial_units = to_vector(bc_PlanetMap_initial_map_get(m_planet_map));
   }
 
   Planet   get_planet() const { return m_planet; }
   unsigned get_height() const { return m_height; }
-  unsigned get_width() const { return m_width; }
-  const    std::vector<Unit>& get_initial_units() const { return initial_units_; }
+  unsigned get_width () const { return m_width; }
+  const    std::vector<Unit>& get_initial_units() const { return m_initial_units; }
 
-  void set_planet(Planet planet) { planet_ = planet; }
-  void set_height(unsigned height) { height_ = height; }
-  void set_width(unsigned width) { width_ = width; }
-  //TODO: void set_initial_units()
+  void set_planet(Planet   planet) { m_planet = planet; }
+  void set_height(unsigned height) { m_height = height; }
+  void set_width (unsigned width ) { m_width = width; }
+
   bool is_on_map(MapLocation location ) const {
-    return (location.get_x()< width_) &&
-           (location.get_y()< height_) &&
-           (location.get_planet() == planet_);
+    return (location.get_x()< m_width) &&
+           (location.get_y()< m_height) &&
+           (location.get_planet() == m_planet);
   }
 
-  bool is_passable_terrain_at(const MapLocation& location) const {
-    return is_passable_terrain_[location.get_x()][location.get_y()];
+  bool is_passable_terrain_at(const MapLocation& map_location) const {
+    log_error(m_planet_map, "PlanetMap not loaded!");
+
+    auto loc = map_location.to_bc();
+    auto ans = bc_PlanetMap_is_passable_terrain_at(m_planet_map, loc);
+    delete_bc_MapLocation(loc);
+
+    return ans;
+  }
+
+  unsigned get_initial_karbonite_at(const MapLocation& map_location) const {
+    log_error(m_planet_map, "PlanetMap not loaded!");
+
+    auto loc = map_location.to_bc();
+    auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, loc);
+    delete_bc_MapLocation(loc);
+
+    return ans;
   }
 
 private:
@@ -445,12 +474,17 @@ private:
   Planet                             m_planet;
   unsigned                           m_height, width;
   std::vector<Unit>                  m_initial_units;
-  std::vector<std::vector<bool>>     m_is_passable_terrain;
-  std::vector<std::vector<unsigned>> m_initial_karbonite;
+
+  // TODO: Use the maps to store the values and never query the same position again
+  //std::vector<std::vector<bool>> m_is_passable_terrain;
+  //std::vector<std::vector<unsigned>> m_initial_karbonite;
 };
 
+// We only need to load the planetmaps once for all
+PlanetMap EarthPlanetMap, MarsPlanetMap;
 
-//TODO:AsteroidStrike
+
+//(TODO)AsteroidStrike - Not useful until Teh Devs explain how to use it!
 
 class AsteroidStrike{
 public:
@@ -468,8 +502,7 @@ private:
   MapLocation location_;
 };
 
-//(TODO)AsteroidStrike - Not useful until Teh Devs explain how to use it!
-//
+
 //(TODO)AsteroidPattern - Not useful until Teh Devs explain how to use it!
 
 /*
