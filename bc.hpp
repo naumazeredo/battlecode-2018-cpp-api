@@ -575,37 +575,8 @@ private:
 };
 
 
-// GameMap
-// XXX: This is not used! Moved GameController
-/*
-class GameMap {
-public:
-  GameMap(bc_GameMap* game_map) :
-      m_game_map { game_map },
-      m_earth_map { bc_GameMap_earth_map_get(m_game_map) },
-      m_mars_map { bc_GameMap_mars_map_get(m_game_map) },
-      m_asteroid_pattern { bc_GameMap_asteroids_get(m_game_map) },
-      m_orbit_pattern { bc_GameMap_orbit_get(m_game_map) }
-  {}
-
-  const PlanetMap& get_earth_map() const { return m_earth_map; }
-  const PlanetMap& get_mars_map() const { return m_mars_map; }
-  const AsteroidPattern& get_asteroid_pattern() const { return m_asteroid_pattern; }
-  const OrbitPattern& get_orbit_pattern()       const { return m_orbit_pattern; }
-
-private:
-  bc_GameMap*     m_game_map;
-
-  PlanetMap       m_earth_map;
-  PlanetMap       m_mars_map;
-  AsteroidPattern m_asteroid_pattern;
-  OrbitPattern    m_orbit_pattern;
-};
-*/
-
-
 //ResearchInfo
-class ResearchInfo{
+class ResearchInfo {
   ResearchInfo(bc_ResearchInfo* info) : m_info { info } {
     log_error(info, "Null bc_ResearchInfo!");
   }
@@ -621,7 +592,7 @@ class ResearchInfo{
   unsigned cost_of  (UnitType branch, unsigned level) const { return ::cost_of( branch,level ); }
 
   unsigned get_level(UnitType branch) const { return bc_ResearchInfo_get_level( m_info, branch ); }
-  std::vector<UnitType> get_queue()   const { return to_vector(bc_ResearchInfo_queue( m_info ); }
+  std::vector<UnitType> get_queue()   const { return to_vector(bc_ResearchInfo_queue( m_info )); }
   bool has_next_in_queue         ()   const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
   UnitType next_in_queue         ()   const { return bc_ResearchInfo_next_in_queue( m_info ); }
   unsigned rounds_lext           ()   const { return bc_ResearchInfo_rounds_left( m_info ); }
@@ -630,49 +601,55 @@ private:
   bc_ResearchInfo* m_info = nullptr;
 };
 
-//(TODO)ResearchInfo
-//
 
 // RocketLanding
 class RocketLanding {
 public:
-  RocketLanding(bc_RocketLanding* rocket_landing, MapLocation* destination) : 
-    m_rocket { rocket_landing }, m_destination { destination }
-  {}
+  RocketLanding(bc_RocketLanding* rocket_landing, MapLocation destination) :
+      m_rocket { rocket_landing }, m_destination { destination }
+  {
+    log_error(rocket_landing, "Null bc_RocketLanding!");
+  }
 
-  ~RocketLanding(){
+  ~RocketLanding() {
+    if (m_rocket)
       delete_bc_RocketLanding(m_rocket);
   }
 
-  unsigned    get_rocket_id  () const { return m_rocket_id; }
-  MapLocation get_destination() const { return MapLocation(bc_RocketLanding_destination_get(m_rocket)); }
+  unsigned           get_rocket_id  () const { return m_rocket_id; }
+  const MapLocation& get_destination() const { return m_destination; }
 
 private:
   bc_RocketLanding* m_rocket;
-  MapLocation*      m_destination;
+  MapLocation       m_destination;
   unsigned          m_rocket_id;
 };
 
 
-//(TODO)VecRocketLanding
-//
+// VecRocketLanding
+// std::vector<RocketLanding> to_vector(bc_VecRocketLanding*);
+VEC(RocketLanding, bc_VecRocketLanding)
+
 
 // RocketLandingInfo
 class RocketLandingInfo {
-  RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) : m_rocket_landing_info { rocket_landing_info }
-  {}
-
-  ~RocketLandingInfo(){
-    delete_bc_RocketLandingInfo(m_rocket_landing_info);
+  RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) :
+      m_rocket_landing_info { rocket_landing_info }
+  {
+    log_error(rocket_landing_info, "Null bc_RocketLandingInfo!");
   }
 
-  std::vector<RocketLanding> get_landings_on(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info, round)); }
+  ~RocketLandingInfo(){
+    if (m_rocket_landing_info)
+      delete_bc_RocketLandingInfo(m_rocket_landing_info);
+  }
+
+  std::vector<RocketLanding> get_landings_on_round(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info, round)); }
 
 private:
   bc_RocketLandingInfo* m_rocket_landing_info;
 };
-//(TODO)GameController
-//
+
 
 // GameController
 // IMPORTANT: Don't instantiate twice, might fail creating multiple bc_GameController
