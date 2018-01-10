@@ -51,7 +51,7 @@ public:
   int get_x() const { return m_x; }
   int get_y() const { return m_y; }
 
-  void set_planet(Planet planet) { m_planet = p; }
+  void set_planet(Planet planet) { m_planet = planet; }
   void set_x(int x) { m_x = x; }
   void set_y(int y) { m_y = y; }
 
@@ -73,11 +73,11 @@ public:
                        m_y + direction_dy(direction) * multiple);
   }
 
-  MapLocation translate(Direction direction, int dx, int dy) const {
+  MapLocation translate(int dx, int dy) const {
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  int distance_squared_to(MapLocation map_location) const {
+  unsigned distance_squared_to(MapLocation map_location) const {
     if (m_planet != map_location.get_planet())
       return INT_MAX;
     int dx = m_x - map_location.get_x();
@@ -89,9 +89,9 @@ public:
   Direction direction_to(MapLocation other) const;
 
   Direction is_adjacent_to(MapLocation other) const {
-    return ((*this) != map_location and
-            std::abs(m_x - map_location.get_x()) <= 1 and
-            std::abs(m_y - map_location.get_y()) <= 1);
+    return ((*this) != other and
+            std::abs(m_x - other.get_x()) <= 1 and
+            std::abs(m_y - other.get_y()) <= 1);
 
   }
 
@@ -99,12 +99,12 @@ public:
     return range >= distance_squared_to(map_location);
   }
 
-  operator ==(cosnt MapLocation& map_location) const {
-    return (map_location.get_planet() == m_planet() and
+  bool operator ==(const MapLocation& map_location) const {
+    return (map_location.get_planet() == m_planet and
             map_location.get_x() == m_x and
             map_location.get_y() == m_y);
   }
-  operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
+  bool operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
 
   // TODO: JSON
 
