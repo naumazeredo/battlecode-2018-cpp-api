@@ -15,8 +15,20 @@
 
 namespace bc {
 
-// TODO: Implement the classes/namespaces/everything using C++11/C++14/C++17
-// TODO: Order classes correctly
+// Logger
+#ifdef NDEBUG
+#define log_error(condition, message) ((void)0)
+#else
+
+#define S(x) #x
+#define S_(x) S(x)
+#define S__LINE__ S_(__LINE__)
+
+#define log_error(condition, message)   \
+if (!(condition)) {           \
+  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
+}
+#endif
 
 
 // Planet
@@ -136,18 +148,14 @@ public:
   }
 
   MapLocation get_map_location() const {
-    if (m_type != Map) {
-      // TODO: Use Logger
-    }
+    log_error(m_type != Map, "Location is not MapLocation!");
 
     return m_map_location;
   }
 
   bool is_in_garrison() const { return m_type == Garrison; }
   int get_structure() const {
-    if (m_type != Garrison) {
-      // TODO: Use Logger
-    }
+    log_error(m_type != Garrison, "Location is not Garrison!");
 
     return m_garrison;
   }
@@ -155,17 +163,13 @@ public:
   bool is_in_space() const { return m_type == Space; }
 
   bool is_adjacent_to(Location location) {
-    if (m_type != Map) {
-      // TODO: Use Logger
-    }
+    log_error(m_type != Map, "Location is not MapLocation!");
 
     return get_map_location().is_adjacent_to(location.get_map_location());
   }
 
   bool is_within_range(unsigned range, Location location) {
-    if (m_type != Map) {
-      // TODO: Use Logger
-    }
+    log_error(m_type != Map, "Location is not MapLocation!");
 
     return get_map_location().is_within_range(range, location.get_map_location());
   }
@@ -223,17 +227,13 @@ std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 using UnitType = bc_UnitType;
 
 int unittype_get_factory_cost(UnitType unit_type) {
-  if (unit_type != Factory and unit_type != Rocket) {
-    // TODO: Use Logger
-  }
+  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
 
   return bc_UnitType_factory_cost(unit_type);
 }
 
 int unittype_get_blueprint_cost(UnitType unit_type) {
-  if (unit_type != Factory and unit_type != Rocket) {
-    // TODO: Use Logger
-  }
+  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
 
   return bc_UnitType_blueprint_cost(unit_type);
 }
