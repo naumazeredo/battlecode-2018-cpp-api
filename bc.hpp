@@ -245,28 +245,6 @@ int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type)
 
 // TODO: UnitType JSON
 
-//(TODO)Unit
-//
-//(TODO)PlanetMap
-//
-//(TODO)AsteroidStrike
-//
-//(TODO)AsteroidPattern
-//
-//(TODO)OrbitPattern
-//
-//(TODO)GameMap
-//
-//(TODO)ResearchInfo
-//
-//(TODO)RocketLanding
-//
-//(TODO)RocketLandingInfo
-//
-//(TODO)GameController
-//
-
-
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
