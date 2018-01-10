@@ -15,6 +15,8 @@
 
 #include <bc.h>
 
+// TODO: Think if it's good to save the bc pointer in every class
+
 
 namespace bc {
 
@@ -35,6 +37,7 @@ if (!(condition)) {           \
 
 
 // Auxiliar function for vectors
+// TODO: Write with C++ and constexpr
 #define VEC_LEN(x) x ## _len
 #define VEC_INDEX(x) x ## _index
 #define VEC_DEL(x) delete_ ## x
@@ -166,8 +169,8 @@ private:
 
 
 // VecMapLocation
-// std::vector<MapLocation> to_vector(bc_MapLocation*);
-VEC(MapLocation, bc_MapLocation)
+// std::vector<MapLocation> to_vector(bc_VecMapLocation*);
+VEC(MapLocation, bc_VecMapLocation)
 
 
 // Location
@@ -304,8 +307,8 @@ int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type)
 
 
 // VecUnitType
-// std::vector<UnitType> to_vector(bc_UnitType*);
-VEC(UnitType, bc_UnitType)
+// std::vector<UnitType> to_vector(bc_VecUnitType*);
+VEC(UnitType, bc_VecUnitType)
 
 
 // Unit
@@ -319,6 +322,8 @@ public:
     if (m_unit)
       delete_bc_Unit(m_unit);
   }
+
+  // TODO: Copy/move semantics
 
   // NOT IMPLEMENT: bc_Unit_research_level
 
@@ -406,32 +411,25 @@ public:
 
 
 // VecUnit
-// std::vector<Unit> to_vector(bc_Unit*);
-VEC(Unit, bc_Unit)
+// std::vector<Unit> to_vector(bc_VecUnit*);
+VEC(Unit, bc_VecUnit)
 
 
 // PlanetMap
 class PlanetMap {
 public:
   PlanetMap() {}
-  PlanetMap(bc_PlanetMap* planet_map) { load(planet_map); }
+  PlanetMap(bc_PlanetMap* planet_map) : m_planet_map { planet_map } {
+    m_planet = bc_PlanetMap_planet_get(m_planet_map);
+    m_height = bc_PlanetMap_height_get(m_planet_map);
+    m_width  = bc_PlanetMap_width_get (m_planet_map);
+    m_initial_units = to_vector(bc_PlanetMap_initial_map_get(m_planet_map));
+  }
 
   ~PlanetMap() {
     // Cleanup
     if (m_planet_map)
       delete_bc_PlanetMap(m_planet_map);
-  }
-
-  // Auxiliar method
-  void load(bc_PlanetMap* planet_map) {
-    if (m_planet_map)
-      delete_bc_PlanetMap(m_planet_map);
-
-    m_planet_map = planet_map;
-    m_planet = bc_PlanetMap_planet_get(m_planet_map);
-    m_height = bc_PlanetMap_height_get(m_planet_map);
-    m_width  = bc_PlanetMap_width_get (m_planet_map);
-    m_initial_units = to_vector(bc_PlanetMap_initial_map_get(m_planet_map));
   }
 
   Planet   get_planet() const { return m_planet; }
@@ -469,6 +467,9 @@ public:
     return ans;
   }
 
+  // TODO: PlanetMap to_string
+  // TODO: PlanetMap JSON
+
 private:
   bc_PlanetMap*                      m_planet_map = nullptr;
   Planet                             m_planet;
@@ -484,38 +485,63 @@ private:
 PlanetMap EarthPlanetMap, MarsPlanetMap;
 
 
-//(TODO)AsteroidStrike - Not useful until Teh Devs explain how to use it!
+// AsteroidStrike
 
-class AsteroidStrike{
+class AsteroidStrike {
 public:
-  AsteroidStrike(unsigned karbonite, MapLocation location) :
-    karbonite_ { karbonite }
-    location_ { location }
-    {}
-  ~AsteroidStrike() = default;
-  unsigned get_karbonite() const { return karbonite_; }
-  MapLocation get_location() const { return location_; }
-  void set_karbonite(unsigned karbonite) { karbonite_ = karbonite; }
-  void set_location(MapLocation location) { location_ = location; }
+  AsteroidStrike(unsigned karbonite, const MapLocation& location) :
+    m_karbonite { karbonite }, m_location { location }
+  {}
+
+  AsteroidStrike(bc_AsteroidStrike* asteroid) {
+    m_karbonite = bc_AsteroidStrike_karbonite_get(asteroid);
+    m_location = MapLocation(bc_AsteroidStrike_location_get(asteroid));
+    delete_bc_AsteroidStrike(asteroid);
+  }
+
+  // TODO: Copy/Move semantics
+
+  unsigned get_karbonite() const { return m_karbonite; }
+  MapLocation get_map_location() const { return m_location; }
+
+  // Set methods not needed
+
+  // TODO: AsteroidStrike to_string
+  // TODO: AsteroidStrike JSON
+
 private:
-  unsigned    karbonite_;
-  MapLocation location_;
+  unsigned    m_karbonite;
+  MapLocation m_location;
 };
 
 
-//(TODO)AsteroidPattern - Not useful until Teh Devs explain how to use it!
+// AsteroidPattern
 
-/*
-class AsteroidPattern{
+class AsteroidPattern {
 public:
-  bool hasAsteroid(unsigned round);
+  AsteroidPattern(bc_AsteroidPattern* pattern) : m_pattern { pattern }
+  {}
+
+  ~AsteroidPattern() {
+    delete_bc_AsteroidPattern(m_pattern);
+  }
+
+  bool has_asteroid_on_round(unsigned round) const {
+    return bc_AsteroidPattern_has_asteroid(m_pattern, round);
+  }
+
+  AsteroidStrike get_asteroid_on_round(unsigned round) const {
+    return bc_AsteroidPattern_asteroid(m_pattern, round);
+  }
+
+  // TODO: AsteroidPattern to_string
+  // TODO: AsteroidPattern JSON
 
 private:
-
+  bc_AsteroidPattern* m_pattern;
 };
-*/
 
-//(TODO)OrbitPattern - Not useful until Teh Devs explain how to use it!
+//(TODO)OrbitPattern
 //
 //(TODO)GameMap
 //
