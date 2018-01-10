@@ -573,8 +573,28 @@ private:
 
 //(TODO)GameMap
 //
-//(TODO)ResearchInfo
-//
+//ResearchInfo
+class ResearchInfo{
+  ResearchInfo(bc_ResearchInfo* info) : m_info { info } {}
+  ~ResearchInfo(){
+     delete_bc_ResearchInfo( m_info );
+  }
+
+  // These two methods are stand-alone ones from C API, so we decided to
+  // put them into ResearchInfo class
+  unsigned max_level(UnitType branch)                 const { return ::max_level( branch ); }
+  unsigned cost_of  (UnitType branch, unsigned level) const { return ::cost_of( branch,level ); }
+
+  unsigned get_level(UnitType branch) const { return bc_ResearchInfo_get_level( m_info, branch ); }
+  std::vector<UnitType> get_queue()   const { return to_vector(bc_ResearchInfo_queue( m_info ); }
+  bool has_next_in_queue         ()   const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
+  UnitType next_in_queue         ()   const { return bc_ResearchInfo_next_in_queue( m_info ); }
+  unsigned rounds_lext           ()   const { return bc_ResearchInfo_rounds_left( m_info ); }
+
+private:
+  bc_ResearchInfo* m_info = nullptr;
+};
+
 //(TODO)RocketLanding
 //
 //(TODO)VecRocketLanding
