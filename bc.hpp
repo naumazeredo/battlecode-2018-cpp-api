@@ -133,12 +133,12 @@ public:
   }
 
   // TODO
-  Direction direction_to(MapLocation other) const;
+  Direction direction_to(MapLocation map_location) const;
 
-  Direction is_adjacent_to(MapLocation other) const {
-    return ((*this) != other and
-            std::abs(m_x - other.get_x()) <= 1 and
-            std::abs(m_y - other.get_y()) <= 1);
+  Direction is_adjacent_to(MapLocation map_location) const {
+    return ((*this) != map_location and
+            std::abs(m_x - map_location.get_x()) <= 1 and
+            std::abs(m_y - map_location.get_y()) <= 1);
 
   }
 
