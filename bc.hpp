@@ -419,6 +419,7 @@ VEC(Unit, bc_VecUnit)
 class PlanetMap {
 public:
   PlanetMap() {}
+
   PlanetMap(bc_PlanetMap* planet_map) : m_planet_map { planet_map } {
     m_planet = bc_PlanetMap_planet_get(m_planet_map);
     m_height = bc_PlanetMap_height_get(m_planet_map);
@@ -427,7 +428,6 @@ public:
   }
 
   ~PlanetMap() {
-    // Cleanup
     if (m_planet_map)
       delete_bc_PlanetMap(m_planet_map);
   }
@@ -437,9 +437,12 @@ public:
   unsigned get_width () const { return m_width; }
   const    std::vector<Unit>& get_initial_units() const { return m_initial_units; }
 
+  /*
+  // XXX: Not needed! We only need 2 planets: earth and mars. It's not needed to set stuff
   void set_planet(Planet   planet) { m_planet = planet; }
   void set_height(unsigned height) { m_height = height; }
   void set_width (unsigned width ) { m_width = width; }
+  */
 
   bool is_on_map(MapLocation location ) const {
     return (location.get_x()< m_width) &&
@@ -481,9 +484,6 @@ private:
   //std::vector<std::vector<unsigned>> m_initial_karbonite;
 };
 
-// We only need to load the planetmaps once for all
-PlanetMap EarthPlanetMap, MarsPlanetMap;
-
 
 // AsteroidStrike
 
@@ -522,10 +522,6 @@ public:
   AsteroidPattern(bc_AsteroidPattern* pattern) : m_pattern { pattern }
   {}
 
-  ~AsteroidPattern() {
-    delete_bc_AsteroidPattern(m_pattern);
-  }
-
   bool has_asteroid_on_round(unsigned round) const {
     return bc_AsteroidPattern_has_asteroid(m_pattern, round);
   }
@@ -538,6 +534,7 @@ public:
   // TODO: AsteroidPattern JSON
 
 private:
+  // IMPORTANT: weak pointer
   bc_AsteroidPattern* m_pattern;
 };
 
@@ -545,25 +542,21 @@ private:
 class OrbitPattern {
 public:
   OrbitPattern(bc_OrbitPattern* orbit_pattern) : m_orbit_pattern { orbit_pattern }{
-    m_amplitude     = bc_OrbitPattern_amplitude_get( orbit_pattern );
-    m_period        = bc_OrbitPattern_period_get( orbit_pattern );
-    m_center        = bc_OrbitPattern_center_get( orbit_pattern );
-  }
-  ~OrbitPattern(){
-    if (m_orbit_pattern)
-      delete_bc_OrbitPattern(m_orbit_pattern);
+    m_amplitude = bc_OrbitPattern_amplitude_get( orbit_pattern );
+    m_period    = bc_OrbitPattern_period_get( orbit_pattern );
+    m_center    = bc_OrbitPattern_center_get( orbit_pattern );
   }
 
   unsigned get_amplitude() const { return m_amplitude; }
   unsigned get_period   () const { return m_period; }
   unsigned get_center   () const { return m_center; }
 
-  unsigned duration(unsigned round){
+  unsigned duration(unsigned round) const {
     return bc_OrbitPattern_duration( m_orbit_pattern, round );
   }
 
-
 private:
+  // IMPORTANT: weak pointer
   bc_OrbitPattern* m_orbit_pattern;
   unsigned         m_amplitude;
   unsigned         m_period;
@@ -571,8 +564,31 @@ private:
 };
 
 
-//(TODO)GameMap
-//
+// GameMap
+class GameMap {
+public:
+  GameMap(bc_GameMap* game_map) :
+      m_game_map { game_map },
+      m_earth_map { bc_GameMap_earth_map_get(m_game_map) },
+      m_mars_map { bc_GameMap_mars_map_get(m_game_map) },
+      m_asteroid_pattern { bc_GameMap_asteroids_get(m_game_map) },
+      m_orbit_pattern { bc_GameMap_orbit_get(m_game_map) }
+  {}
+
+  const PlanetMap& get_earth_map() const { return m_earth_map; }
+  const PlanetMap& get_mars_map() const { return m_mars_map; }
+  const AsteroidPattern& get_asteroid_pattern() const { return m_asteroid_pattern; }
+  const OrbitPattern& get_orbit_pattern()       const { return m_orbit_pattern; }
+
+private:
+  bc_GameMap*     m_game_map;
+
+  PlanetMap       m_earth_map;
+  PlanetMap       m_mars_map;
+  AsteroidPattern m_asteroid_pattern;
+  OrbitPattern    m_orbit_pattern;
+};
+
 //(TODO)ResearchInfo
 //
 //(TODO)RocketLanding
