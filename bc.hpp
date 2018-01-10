@@ -4,7 +4,8 @@
  * https://github.com/naumazeredo/battlecode-2018-cpp-api
  *
  * authors:
- *   Naum Azeredo
+ *   Naum Azeredo     < naumazeredo@gmail.com  >
+ *   Luciano Barreira < luciano@roboime.com.br >
  *
  */
 
