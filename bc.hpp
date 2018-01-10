@@ -206,3 +206,27 @@ public:
 
 
 }
+
+//(TODO)UnitType
+//
+//(TODO)Unit
+//
+//(TODO)PlanetMap
+//
+//(TODO)AsteroidStrike
+//
+//(TODO)AsteroidPattern
+//
+//(TODO)OrbitPattern
+//
+//(TODO)GameMap
+//
+//(TODO)ResearchInfo
+//
+//(TODO)RocketLanding
+//
+//(TODO)RocketLandingInfo
+//
+//(TODO)GameController
+//
+
