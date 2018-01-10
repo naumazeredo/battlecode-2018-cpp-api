@@ -119,7 +119,7 @@ public:
   void    set_team()(Team team) { m_team = team; }
   void    set_planet()(Planet planet) { m_planet = planet; }
 
-  Player  operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; }
+  Player& operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; return *this; }
   bool    operator==(const Player& player) { return m_team == player.m_team and m_planet == player.m_planet; }
 
 private:
