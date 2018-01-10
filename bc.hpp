@@ -140,6 +140,9 @@ public:
   Location(MapLocation map_location) : m_type { Map }, m_map_location { map_location } {}
   Location(int garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
 
+  // TODO
+  Location(bc_Location* location) {}
+
   // TODO: Copy/move semantics
 
   bool is_on_map() const { return m_type == Map; }
@@ -148,14 +151,14 @@ public:
   }
 
   MapLocation get_map_location() const {
-    log_error(m_type != Map, "Location is not MapLocation!");
+    log_error(m_type == Map, "Location is not MapLocation!");
 
     return m_map_location;
   }
 
   bool is_in_garrison() const { return m_type == Garrison; }
   int get_structure() const {
-    log_error(m_type != Garrison, "Location is not Garrison!");
+    log_error(m_type == Garrison, "Location is not Garrison!");
 
     return m_garrison;
   }
@@ -163,13 +166,13 @@ public:
   bool is_in_space() const { return m_type == Space; }
 
   bool is_adjacent_to(Location location) {
-    log_error(m_type != Map, "Location is not MapLocation!");
+    log_error(m_type == Map, "Location is not MapLocation!");
 
     return get_map_location().is_adjacent_to(location.get_map_location());
   }
 
   bool is_within_range(unsigned range, Location location) {
-    log_error(m_type != Map, "Location is not MapLocation!");
+    log_error(m_type == Map, "Location is not MapLocation!");
 
     return get_map_location().is_within_range(range, location.get_map_location());
   }
@@ -226,14 +229,17 @@ std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 // UnitType
 using UnitType = bc_UnitType;
 
+bool is_robot(UnitType unittype) { return unittype == Factory or unittype == Rocket; }
+bool is_structure(UnitType unittype) { return !is_robot(); }
+
 int unittype_get_factory_cost(UnitType unit_type) {
-  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
+  log_error(is_robot(), "UnitType is not Robot!");
 
   return bc_UnitType_factory_cost(unit_type);
 }
 
 int unittype_get_blueprint_cost(UnitType unit_type) {
-  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
+  log_error(is_structure(), "UnitType is not Structure!");
 
   return bc_UnitType_blueprint_cost(unit_type);
 }
@@ -243,18 +249,107 @@ int unittype_get_replicate_cost() { return bc_UnitType_replicate_cost(Worker); }
 
 int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
-
 // TODO: UnitType JSON
 
-//(TODO)Unit
-//
+
+// Unit
+class Unit {
+public:
+  Unit(bc_Unit* unit) : m_unit { unit } {
+    m_unittype = bc_Unit_unit_type(unit);
+  }
+
+  // NOT IMPLEMENT: bc_Unit_research_level
+
+  // TODO: Don't use macros. Write better function names!
+
+  // Magic!
+#define F(x) bc_Unit_ ## x
+#define G(x) get_ ## x
+#define GET(ret, var) ret G(var)() const { return F(func)(m_unit); }
+#define GET_CAST(ret, var) ret G(var)() const { return ret { F(func)(m_unit) }; }
+#define GET_ERROR(ret, var, cond, err) ret G(var)() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
+#define IS_ERROR(var, cond, err) bool var() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
+
+  GET(Team, team);
+  GET_CAST(Location, location);
+
+  // All units
+  GET(unsigned, id);
+  GET(unsigned, health);
+  GET(unsigned, max_health);
+  GET(unsigned, vision_range);
+
+  // Robots
+  GET_ERROR(unsigned, damage, is_robot(m_unittype), "Not Robot!");
+
+  GET_ERROR(unsigned, movement_heat, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, movement_cooldow, is_robot(m_unittype), "Not Robot!"n);
+
+  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, attack_cooldown, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
+
+  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, attack_cooldown, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, attack_range, is_robot(m_unittype), "Not Robot!");
+
+  GET_ERROR(unsigned, ability_heat, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, ability_cooldown, is_robot(m_unittype), "Not Robot!");
+  GET_ERROR(unsigned, ability_range, is_robot(m_unittype), "Not Robot!");
+
+  IS_ERROR (is_ability_unlocked, is_robot(m_unittype), "Not Robot!");
+
+  // Worker
+  IS_ERROR (worker_has_acted, (m_unittype == Worker), "Not Worker!");
+  GET_ERROR(unsigned, worker_build_health, (m_unittype == Worker), "Not Worker!");
+  GET_ERROR(unsigned, worker_repair_health, (m_unittype == Worker), "Not Worker!");
+  GET_ERROR(unsigned, worker_harvest_amount, (m_unittype == Worker), "Not Worker!");
+
+  // Knight
+  GET_ERROR(unsigned, knight_defense, (m_unittype == Knight), "Not Knight!");
+
+  // Ranger
+  GET_ERROR(unsigned, ranger_cannot_attack_range, (m_unittype == Ranger), "Not Ranger!");
+  GET_ERROR(unsigned, ranger_max_countdown, (m_unittype == Ranger), "Not Ranger!");
+  GET_ERROR(unsigned, ranger_countdown, (m_unittype == Ranger), "Not Ranger!");
+  IS_ERROR (ranger_is_sniping, (m_unittype == Ranger), "Not Ranger!");
+  GET_ERROR(MapLocation, ranger_target_location, ranger_is_sniping(), "Ranger sniping!");
+
+  // Healer
+  GET_ERROR(unsigned, healer_self_heal_amount, (m_unittype == Healer), "Not Healer!");
+
+  // Structures
+  IS_ERROR (structure_is_build, is_structure(m_unittype), "Not Structure!");
+  GET_ERROR(unsigned, structure_max_capacity, is_structure(m_unittype), "Not Structure!");
+  // TODO: bc_Unit_structure_garrison
+
+  // Factory
+  IS_ERROR (is_factory_producting, (m_unittype == Factory), "Not Factory!");
+  GET_ERROR(UnitType, factory_unit_type, (m_unittype == Factory), "Not Factory!");
+  GET_ERROR(unsigned, factory_rounds_left, (m_unittype == Factory), "Not Factory!");
+  GET_ERROR(unsigned, factory_max_rounds_left, (m_unittype == Factory), "Not Factory!");
+
+  // Rocket
+  IS_ERROR (rocket_is_used, (m_unittype == Rocket), "Not Rocket!");
+  GET_ERROR(unsigned, rocket_blast_damage, (m_unittype == Rocket), "Not Rocket!");
+  GET_ERROR(unsigned, rocket_travel_time_decrease, (m_unittype == Rocket), "Not Rocket!");
+
+//private:
+  bc_Unit* m_unit;
+
+  // XXX: Stored because it's used for every assertion
+  UnitType m_unittype;
+};
+
+
 //(TODO)PlanetMap
 //
-//(TODO)AsteroidStrike
+//(TODO)AsteroidStrike - Not useful until Teh Devs explain how to use it!
 //
-//(TODO)AsteroidPattern
+//(TODO)AsteroidPattern - Not useful until Teh Devs explain how to use it!
 //
-//(TODO)OrbitPattern
+//(TODO)OrbitPattern - Not useful until Teh Devs explain how to use it!
 //
 //(TODO)GameMap
 //
@@ -289,21 +384,6 @@ public:
 
 
 
-// Unit
-class Unit {
-public:
-  Unit(bc_Unit* unit) : m_unit { unit }, m_id { 0 }
-  {}
-
-  inline uint16_t get_id() {
-    if (m_id) return m_id;
-    return m_id = bc_Unit_id(m_unit);
-  }
-
-//private:
-  bc_Unit* m_unit;
-  uint16_t m_id;
-};
 
 }
 
