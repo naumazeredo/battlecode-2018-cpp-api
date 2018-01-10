@@ -20,13 +20,32 @@ namespace bc {
 // Planet
 using Planet = bc_Planet;
 
+Planet planet_other(Planet p) { return bc_Planet_other(p); }
+
+string planet_debug(Planet p) { return bc_Planet_debug(p); }
+
+string planet_eq(Planet p, Planet other) { return bc_Planet_eq(p, other); }
+
+Planet planet_from_json(string s) { return bc_Planet_from_json(s); }
 
 // Direction
 using Direction = bc_Direction;
 
-inline Direction opposite_direction(Direction d) { return bc_Direction_opposite(d); }
+Direction opposite_direction(Direction d) { return bc_Direction_opposite(d); }
 
+Direction rotate_left(Direction d) { return bc_Direction_rotate_left(Direction d); }
 
+Direction rotate_right(Direction d) { return bc_Direction_rotate_right(Direction d); }
+
+Direction direction_from_json(string s) { return bc_Direction_from_json(s); }
+
+string direction_to_json(Direction d) { return bc_Direction_to_json(d); }
+
+int direction_dx(Direction d) { return bc_Direction_dx(d); }
+
+int direction_dy(Direction d) { return bc_Direction_dy(d); }
+
+bool direction_is_diagonal(Direction d) { return bc_Direction_is_diagonal(d); }
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
