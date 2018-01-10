@@ -207,26 +207,80 @@ public:
 
 }
 
-//(TODO)UnitType
+//TODO:UnitType
+using UnitType = bc_UnitType;
+
+//TODO:Unit
 //
-//(TODO)Unit
+
+//TODO:PlanetMap
+class PlanetMap{
+public:
+  PlanetMap();
+  ~PlanetMap();
+
+  Planet get_planet() const { return planet_; }
+  unsigned get_height() const { return height_; }
+  unsigned get_width() const { return width_; }
+  const vector<Unit>& get_initial_units() const { return initial_units_; }
+
+  void set_planet(Planet planet) { planet_ = planet; }
+  void set_height(unsigned height) { height_ = height; }
+  void set_width(unsigned width) { width_ = width; }
+  //TODO: void set_initial_units()
+  bool is_on_map(MapLocation location ) const {
+    return (location.get_x()< width_) &&
+           (location.get_y()< height_) &&
+           (location.get_planet() == planet_);
+  }
+  bool is_passable_terrain_at(const MapLocation& location) const {
+    return is_passable_terrain_[location.get_x()][location.get_y()];
+  }
+private:
+  Planet                      planet_;
+  unsigned                    height_,width_;
+  vector<Unit>                initial_units_;
+  vector< vector <bool> >     is_passable_terrain_;
+  vector< vector <unsigned> > initial_karbonite_;
+};
+
+//TODO:AsteroidStrike
+
+class AsteroidStrike{
+public:
+  AsteroidStrike(unsigned karbonite, MapLocation location) :
+    karbonite_ { karbonite }
+    location_ { location }
+    {}
+  ~AsteroidStrike() = default;
+  unsigned get_karbonite() const { return karbonite_; }
+  MapLocation get_location() const { return location_; }
+  void set_karbonite(unsigned karbonite) { karbonite_ = karbonite; }
+  void set_location(MapLocation location) { location_ = location; }
+private:
+  unsigned    karbonite_;
+  MapLocation location_;
+};
+
+//TODO:AsteroidPattern
+
+class AsteroidPattern{
+public:
+  bool hasAsteroid(unsigned round);
+
+private:
+
+};
+
+//TODO:OrbitPattern
 //
-//(TODO)PlanetMap
+//TODO:GameMap
 //
-//(TODO)AsteroidStrike
+//TODO:ResearchInfo
 //
-//(TODO)AsteroidPattern
+//TODO:RocketLanding
 //
-//(TODO)OrbitPattern
+//TODO:RocketLandingInfo
 //
-//(TODO)GameMap
-//
-//(TODO)ResearchInfo
-//
-//(TODO)RocketLanding
-//
-//(TODO)RocketLandingInfo
-//
-//(TODO)GameController
-//
+//TODO:GameController
 
