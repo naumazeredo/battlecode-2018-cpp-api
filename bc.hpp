@@ -22,23 +22,23 @@ namespace bc {
 // Planet
 using Planet = bc_Planet;
 
-Planet planet_other(Planet p) { return bc_Planet_other(p); }
-string planet_debug(Planet p) { return bc_Planet_debug(p); }
-string planet_eq(Planet p, Planet other) { return bc_Planet_eq(p, other); }
-Planet planet_from_json(string s) { return bc_Planet_from_json(s); }
-
+Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
+std::string planet_debug(Planet planet) { return bc_Planet_debug(planet); }
+std::string planet_eq(Planet planet, Planet other) { return bc_Planet_eq(planet, other); }
+std::string planet_to_json(Planet planet) { return bc_Planet_to_json(planet); }
+Planet      planet_from_json(std::string s) { return bc_Planet_from_json(s.c_str()); }
 
 // Direction
 using Direction = bc_Direction;
 
-Direction direction_opposite(Direction d) { return bc_Direction_opposite(d); }
-Direction direction_rotate_left(Direction d) { return bc_Direction_rotate_left(Direction d); }
-Direction direction_rotate_right(Direction d) { return bc_Direction_rotate_right(Direction d); }
-Direction direction_from_json(string s) { return bc_Direction_from_json(s); }
-string    direction_to_json(Direction d) { return bc_Direction_to_json(d); }
-int       direction_dx(Direction d) { return bc_Direction_dx(d); }
-int       direction_dy(Direction d) { return bc_Direction_dy(d); }
-bool      direction_is_diagonal(Direction d) { return bc_Direction_is_diagonal(d); }
+Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
+Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
+Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
+Direction   direction_from_json(std::string s) { return bc_Direction_from_json(s.c_str()); }
+std::string direction_to_json(Direction direction) { return bc_Direction_to_json(direction); }
+int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
+int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
+bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
 
 
 // MapLocation
@@ -101,6 +101,35 @@ private:
   int m_x;
   int m_y;
 };
+
+// TODO: Location
+
+// Team
+using Team = bc_Team;
+
+// Player
+class Player {
+public:
+  Player(Team team, Planet planet) : m_planet { planet }, m_team { team }
+  {}
+
+  Team    get_team() const { return m_team; }
+  Planet  get_planet() const { return m_planet; }
+
+  void    set_team()(Team team) { m_team = team; }
+  void    set_planet()(Planet planet) { m_planet = planet; }
+
+  Player  operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; }
+  bool    operator==(const Player& player) { return m_team == player.m_team and m_planet == player.m_planet; }
+
+private:
+  Team   m_team;
+  Planet m_planet;
+};
+
+Player      player_from_json(std::string s) { return bc_Player_from_json(s.c_str()); }
+std::string player_debug(Player player) { return bc_Player_debug(player); }
+std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
