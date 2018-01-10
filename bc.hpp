@@ -541,8 +541,36 @@ private:
   bc_AsteroidPattern* m_pattern;
 };
 
-//(TODO)OrbitPattern
-//
+// OrbitPattern
+class OrbitPattern {
+public:
+  OrbitPattern(bc_OrbitPattern* orbit_pattern) : m_orbit_pattern { orbit_pattern }{
+    m_amplitude     = bc_OrbitPattern_amplitude_get( orbit_pattern );
+    m_period        = bc_OrbitPattern_period_get( orbit_pattern );
+    m_center        = bc_OrbitPattern_center_get( orbit_pattern );
+  }
+  ~OrbitPattern(){
+    if (m_orbit_pattern)
+      delete_bc_OrbitPattern(m_orbit_pattern);
+  }
+
+  unsigned get_amplitude() const { return m_amplitude; }
+  unsigned get_period   () const { return m_period; }
+  unsigned get_center   () const { return m_center; }
+
+  unsigned duration(unsigned round){
+    return bc_OrbitPattern_duration( m_orbit_pattern, round );
+  }
+
+
+private:
+  bc_OrbitPattern* m_orbit_pattern;
+  unsigned         m_amplitude;
+  unsigned         m_period;
+  unsigned         m_center;
+};
+
+
 //(TODO)GameMap
 //
 //(TODO)ResearchInfo
