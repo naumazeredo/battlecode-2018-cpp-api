@@ -15,21 +15,35 @@
 
 namespace bc {
 
-// TODO: Implement the classes/namespaces/everything using C++11/C++14/C++17
-// TODO: Order classes correctly
+// Logger
+#ifdef NDEBUG
+#define log_error(condition, message) ((void)0)
+#else
+
+#define S(x) #x
+#define S_(x) S(x)
+#define S__LINE__ S_(__LINE__)
+
+#define log_error(condition, message)   \
+if (!(condition)) {           \
+  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
+}
+#endif
 
 
 // Planet
 using Planet = bc_Planet;
 
 Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
-std::string planet_debug(Planet planet) { return bc_Planet_debug(planet); }
 std::string planet_to_json(Planet planet) { return bc_Planet_to_json(planet); }
 Planet      planet_from_json(std::string s) { return bc_Planet_from_json(s.c_str()); }
+
+std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
 
 // Direction
 using Direction = bc_Direction;
 
+// TODO: Change direction_dx/dy to const vector of pair
 int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
 int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
 bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
@@ -39,6 +53,7 @@ Direction   direction_rotate_right(Direction direction) { return bc_Direction_ro
 
 Direction   direction_from_json(std::string s) { return bc_Direction_from_json(s.c_str()); }
 std::string direction_to_json(Direction direction) { return bc_Direction_to_json(direction); }
+// TODO: Direction to_string
 
 
 // MapLocation
@@ -46,6 +61,7 @@ class MapLocation {
 public:
   MapLocation(Planet planet, int x, int y) : m_planet { planet }, m_x { x }, m_y { y }
   {}
+  // TODO: Copy/move semantics
 
   Planet get_planet() const { return m_planet; }
   int get_x() const { return m_x; }
@@ -95,7 +111,7 @@ public:
 
   }
 
-  bool is_within_range(unsigned int range, MapLocation map_location) const {
+  bool is_within_range(unsigned range, MapLocation map_location) const {
     return range >= distance_squared_to(map_location);
   }
 
@@ -106,7 +122,8 @@ public:
   }
   bool operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
 
-  // TODO: JSON
+  // TODO: MapLocation to_string
+  // TODO: MapLocation JSON
 
 private:
   Planet m_planet;
@@ -117,6 +134,59 @@ private:
 
 // Location
 class Location {
+public:
+  Location() : m_type { Space } {}
+  Location(MapLocation map_location) : m_type { Map }, m_map_location { map_location } {}
+  Location(int garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
+
+  // TODO: Copy/move semantics
+
+  bool is_on_map() const { return m_type == Map; }
+  bool is_on_planet(Planet planet) const {
+    return (m_type == Map and m_map_location.get_planet() == planet());
+  }
+
+  MapLocation get_map_location() const {
+    log_error(m_type != Map, "Location is not MapLocation!");
+
+    return m_map_location;
+  }
+
+  bool is_in_garrison() const { return m_type == Garrison; }
+  int get_structure() const {
+    log_error(m_type != Garrison, "Location is not Garrison!");
+
+    return m_garrison;
+  }
+
+  bool is_in_space() const { return m_type == Space; }
+
+  bool is_adjacent_to(Location location) {
+    log_error(m_type != Map, "Location is not MapLocation!");
+
+    return get_map_location().is_adjacent_to(location.get_map_location());
+  }
+
+  bool is_within_range(unsigned range, Location location) {
+    log_error(m_type != Map, "Location is not MapLocation!");
+
+    return get_map_location().is_within_range(range, location.get_map_location());
+  }
+
+  // TODO: Location to_string
+  // TODO: Location JSON
+
+private:
+  enum {
+    Map,
+    Garrison,
+    Space
+  } m_type;
+
+  union {
+    MapLocation m_map_location;
+    int m_garrison_id;
+  };
 };
 
 
@@ -129,13 +199,16 @@ public:
   Player(Team team, Planet planet) : m_planet { planet }, m_team { team }
   {}
 
+  // TODO: Copy/move constructors
+  // TODO: Move operator
+  Player& operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; return *this; }
+
   Team    get_team() const { return m_team; }
   Planet  get_planet() const { return m_planet; }
 
   void    set_team()(Team team) { m_team = team; }
   void    set_planet()(Planet planet) { m_planet = planet; }
 
-  Player& operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; return *this; }
   bool    operator==(const Player& player) { return m_team == player.m_team and m_planet == player.m_planet; }
 
 private:
@@ -143,9 +216,55 @@ private:
   Planet m_planet;
 };
 
+// TODO: move to Player class
 Player      player_from_json(std::string s) { return bc_Player_from_json(s.c_str()); }
 std::string player_debug(Player player) { return bc_Player_debug(player); }
 std::string player_to_json(Player player) { return bc_Player_to_json(player); }
+
+
+// UnitType
+using UnitType = bc_UnitType;
+
+int unittype_get_factory_cost(UnitType unit_type) {
+  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
+
+  return bc_UnitType_factory_cost(unit_type);
+}
+
+int unittype_get_blueprint_cost(UnitType unit_type) {
+  log_error(unit_type != Factory and unit_type != Rocket, "UnitType is not Structure!");
+
+  return bc_UnitType_blueprint_cost(unit_type);
+}
+
+// Don't need to receive UnitType as C API, because it makes no sense...
+int unittype_get_replicate_cost() { return bc_UnitType_replicate_cost(Worker); }
+
+int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
+
+
+// TODO: UnitType JSON
+
+//(TODO)Unit
+//
+//(TODO)PlanetMap
+//
+//(TODO)AsteroidStrike
+//
+//(TODO)AsteroidPattern
+//
+//(TODO)OrbitPattern
+//
+//(TODO)GameMap
+//
+//(TODO)ResearchInfo
+//
+//(TODO)RocketLanding
+//
+//(TODO)RocketLandingInfo
+//
+//(TODO)GameController
+//
 
 
 
@@ -184,26 +303,6 @@ public:
   bc_Unit* m_unit;
   uint16_t m_id;
 };
-
-
-
-// VecUnit
-class VecUnit {
-public:
-  VecUnit() : m_vec { nullptr }
-  {}
-
-  operator =(
-
-  ~VecUnit() {
-    if (m_vec)
-      delete m_vec;
-  }
-
-//private;
-  bc_VecUnit* m_vec;
-};
-
 
 }
 
