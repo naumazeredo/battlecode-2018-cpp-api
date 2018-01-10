@@ -4,7 +4,9 @@
  * https://github.com/naumazeredo/battlecode-2018-cpp-api
  *
  * authors:
- *   Naum Azeredo
+ *   Naum Azeredo     < naumazeredo@gmail.com  >
+ *   Luciano Barreira < luciano@roboime.com.br >
+ *   Sebastien Biollo < sbiollo@gmail.com >
  *
  */
 
@@ -628,13 +630,47 @@ private:
   bc_ResearchInfo* m_info = nullptr;
 };
 
-
-//(TODO)RocketLanding
+//(TODO)ResearchInfo
 //
+
+// RocketLanding
+class RocketLanding {
+public:
+  RocketLanding(bc_RocketLanding* rocket_landing, MapLocation* destination) : 
+    m_rocket { rocket_landing }, m_destination { destination }
+  {}
+
+  ~RocketLanding(){
+      delete_bc_RocketLanding(m_rocket);
+  }
+
+  unsigned    get_rocket_id  () const { return m_rocket_id; }
+  MapLocation get_destination() const { return MapLocation(bc_RocketLanding_destination_get(m_rocket)); }
+
+private:
+  bc_RocketLanding* m_rocket;
+  MapLocation*      m_destination;
+  unsigned          m_rocket_id;
+};
+
+
 //(TODO)VecRocketLanding
 //
-//(TODO)RocketLandingInfo
-//
+
+// RocketLandingInfo
+class RocketLandingInfo {
+  RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) : m_rocket_landing_info { rocket_landing_info }
+  {}
+
+  ~RocketLandingInfo(){
+    delete_bc_RocketLandingInfo(m_rocket_landing_info);
+  }
+
+  std::vector<RocketLanding> get_landings_on(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info, round)); }
+
+private:
+  bc_RocketLandingInfo* m_rocket_landing_info;
+};
 //(TODO)GameController
 //
 
