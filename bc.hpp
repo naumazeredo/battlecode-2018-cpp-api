@@ -1,7 +1,10 @@
 /*
  * C++ API for Battlecode 2018
  *
- * created by Naum Azeredo (https://github.com/naumazeredo/battlecode-2018-cpp-api)
+ * https://github.com/naumazeredo/battlecode-2018-cpp-api
+ *
+ * authors:
+ *   Naum Azeredo
  *
  */
 
@@ -29,6 +32,26 @@ if (!(condition)) {           \
   printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
 }
 #endif
+
+
+// Auxiliar function for vectors
+#define VEC_LEN(x) x ## _len
+#define VEC_INDEX(x) x ## _index
+#define VEC_DEL(x) delete_ ## x
+#define VEC(dest, orig) \
+std::vector<dest> to_vector(orig* vec) {    \
+  std::vector<dest> ans;                    \
+  uintptr_t len = VEC_LEN(orig)(vec);       \
+  for (uintptr_t i = 0; i < len; i++)       \
+    ans.emplace_back(VEC_INDEX(orig)(vec)); \
+  VEC_DEL(orig)(vec);                       \
+  return ans;                               \
+}
+
+
+// Veci32
+// std::vector<int> to_vector(bc_Veci32*);
+VEC(int, bc_Veci32)
 
 
 // Planet
@@ -61,13 +84,21 @@ class MapLocation {
 public:
   MapLocation(Planet planet, int x, int y) : m_planet { planet }, m_x { x }, m_y { y }
   {}
+
+  MapLocation(bc_MapLocation* map_location) {
+    m_planet = bc_MapLocation_planet_get(map_location);
+    m_x      = bc_MapLocation_x_get(map_location);
+    m_y      = bc_MapLocation_y_get(map_location);
+    delete_bc_MapLocation(map_location);
+  }
+
   // TODO: Copy/move semantics
 
   Planet get_planet() const { return m_planet; }
   int get_x() const { return m_x; }
   int get_y() const { return m_y; }
 
-  void set_planet(Planet planet) { m_planet = p; }
+  void set_planet(Planet planet) { m_planet = planet; }
   void set_x(int x) { m_x = x; }
   void set_y(int y) { m_y = y; }
 
@@ -89,11 +120,11 @@ public:
                        m_y + direction_dy(direction) * multiple);
   }
 
-  MapLocation translate(Direction direction, int dx, int dy) const {
+  MapLocation translate(int dx, int dy) const {
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  int distance_squared_to(MapLocation map_location) const {
+  unsigned distance_squared_to(MapLocation map_location) const {
     if (m_planet != map_location.get_planet())
       return INT_MAX;
     int dx = m_x - map_location.get_x();
@@ -105,9 +136,9 @@ public:
   Direction direction_to(MapLocation other) const;
 
   Direction is_adjacent_to(MapLocation other) const {
-    return ((*this) != map_location and
-            std::abs(m_x - map_location.get_x()) <= 1 and
-            std::abs(m_y - map_location.get_y()) <= 1);
+    return ((*this) != other and
+            std::abs(m_x - other.get_x()) <= 1 and
+            std::abs(m_y - other.get_y()) <= 1);
 
   }
 
@@ -115,13 +146,12 @@ public:
     return range >= distance_squared_to(map_location);
   }
 
-  operator ==(cosnt MapLocation& map_location) const {
-    return (map_location.get_planet() == m_planet() and
+  bool operator ==(const MapLocation& map_location) const {
+    return (map_location.get_planet() == m_planet and
             map_location.get_x() == m_x and
             map_location.get_y() == m_y);
   }
-
-  operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
+  bool operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
 
   // TODO: MapLocation to_string
   // TODO: MapLocation JSON
@@ -131,6 +161,11 @@ private:
   int m_x;
   int m_y;
 };
+
+
+// VecMapLocation
+// std::vector<MapLocation> to_vector(bc_MapLocation*);
+VEC(MapLocation, bc_MapLocation)
 
 
 // Location
@@ -226,6 +261,11 @@ std::string player_debug(Player player) { return bc_Player_debug(player); }
 std::string player_to_json(Player player) { return bc_Player_to_json(player); }
 
 
+// VecUnitID
+// std::vector<unsigned> to_vector(bc_VecUnitID*);
+VEC(unsigned, bc_VecUnitID*)
+
+
 // UnitType
 using UnitType = bc_UnitType;
 
@@ -252,11 +292,21 @@ int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type)
 // TODO: UnitType JSON
 
 
+// VecUnitType
+// std::vector<UnitType> to_vector(bc_UnitType*);
+VEC(UnitType, bc_UnitType)
+
+
 // Unit
 class Unit {
 public:
   Unit(bc_Unit* unit) : m_unit { unit } {
     m_unittype = bc_Unit_unit_type(unit);
+  }
+
+  ~Unit() {
+    if (m_unit)
+      delete_bc_Unit(m_unit);
   }
 
   // NOT IMPLEMENT: bc_Unit_research_level
@@ -343,12 +393,95 @@ public:
 };
 
 
-//(TODO)PlanetMap
-//
+// VecUnit
+// std::vector<Unit> to_vector(bc_Unit*);
+VEC(Unit, bc_Unit)
+
+
+// PlanetMap
+class PlanetMap {
+public:
+  PlanetMap() {}
+  PlanetMap(bc_PlanetMap* planet_map) { load(planet_map); }
+
+  ~PlanetMap() {
+    // Cleanup
+    if (m_planet_map)
+      delete_bc_PlanetMap(m_planet_map);
+  }
+
+  // Auxiliar method
+  void load(bc_PlanetMap* planet_map) {
+    if (m_planet_map)
+      delete_bc_PlanetMap(m_planet_map);
+
+    m_planet_map = planet_map;
+    m_planet = bc_PlanetMap_planet_get(m_planet_map);
+    m_height = bc_PlanetMap_height_get(m_planet_map);
+    m_width  = bc_PlanetMap_width_get (m_planet_map);
+  }
+
+  Planet   get_planet() const { return m_planet; }
+  unsigned get_height() const { return m_height; }
+  unsigned get_width() const { return m_width; }
+  const    std::vector<Unit>& get_initial_units() const { return initial_units_; }
+
+  void set_planet(Planet planet) { planet_ = planet; }
+  void set_height(unsigned height) { height_ = height; }
+  void set_width(unsigned width) { width_ = width; }
+  //TODO: void set_initial_units()
+  bool is_on_map(MapLocation location ) const {
+    return (location.get_x()< width_) &&
+           (location.get_y()< height_) &&
+           (location.get_planet() == planet_);
+  }
+
+  bool is_passable_terrain_at(const MapLocation& location) const {
+    return is_passable_terrain_[location.get_x()][location.get_y()];
+  }
+
+private:
+  bc_PlanetMap*                      m_planet_map = nullptr;
+  Planet                             m_planet;
+  unsigned                           m_height, width;
+  std::vector<Unit>                  m_initial_units;
+  std::vector<std::vector<bool>>     m_is_passable_terrain;
+  std::vector<std::vector<unsigned>> m_initial_karbonite;
+};
+
+
+//TODO:AsteroidStrike
+
+class AsteroidStrike{
+public:
+  AsteroidStrike(unsigned karbonite, MapLocation location) :
+    karbonite_ { karbonite }
+    location_ { location }
+    {}
+  ~AsteroidStrike() = default;
+  unsigned get_karbonite() const { return karbonite_; }
+  MapLocation get_location() const { return location_; }
+  void set_karbonite(unsigned karbonite) { karbonite_ = karbonite; }
+  void set_location(MapLocation location) { location_ = location; }
+private:
+  unsigned    karbonite_;
+  MapLocation location_;
+};
+
 //(TODO)AsteroidStrike - Not useful until Teh Devs explain how to use it!
 //
 //(TODO)AsteroidPattern - Not useful until Teh Devs explain how to use it!
-//
+
+/*
+class AsteroidPattern{
+public:
+  bool hasAsteroid(unsigned round);
+
+private:
+
+};
+*/
+
 //(TODO)OrbitPattern - Not useful until Teh Devs explain how to use it!
 //
 //(TODO)GameMap
@@ -357,12 +490,12 @@ public:
 //
 //(TODO)RocketLanding
 //
+//(TODO)VecRocketLanding
+//
 //(TODO)RocketLandingInfo
 //
 //(TODO)GameController
 //
-
-
 
 // GameController
 // Don't instantiate twice, might fail creating multiple bc_GameController
@@ -383,7 +516,4 @@ public:
 };
 
 
-
-
 }
-
