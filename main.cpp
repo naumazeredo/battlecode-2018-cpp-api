@@ -17,9 +17,11 @@ int main() {
   std::default_random_engine generator;
   std::uniform_int_distribution<int> distribution (0,8);
   auto dice = std::bind ( distribution , generator );
-
   // Most methods return pointers; methods returning integers or enums are the only exception.
   GameController gc;
+  gc.queue_research(Knight);
+  gc.queue_research(Knight);
+  gc.queue_research(Knight);
 
   if (bc_has_err()) {
     // If there was an error creating gc, just die.

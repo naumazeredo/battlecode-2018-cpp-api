@@ -790,7 +790,7 @@ public:
   std::vector<UnitType> get_queue  () const { return to_vector(bc_ResearchInfo_queue( m_info )); }
   bool has_next_in_queue           () const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
   UnitType next_in_queue           () const { return bc_ResearchInfo_next_in_queue( m_info ); }
-  unsigned rounds_lext             () const { return bc_ResearchInfo_rounds_left( m_info ); }
+  unsigned rounds_left             () const { return bc_ResearchInfo_rounds_left( m_info ); }
 
 private:
   bc_ResearchInfo* m_info;
