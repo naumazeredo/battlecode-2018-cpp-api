@@ -247,7 +247,7 @@ public:
 
   bool is_on_map() const { return m_type == Map; }
   bool is_on_planet(Planet planet) const {
-    return (m_type == Map and m_map_location.get_planet() == planet());
+    return (m_type == Map and m_map_location.get_planet() == planet);
   }
 
   MapLocation get_map_location() const {
@@ -488,7 +488,7 @@ public:
   unsigned get_initial_karbonite_at(const MapLocation& map_location) const {
     log_error(m_planet_map, "PlanetMap not loaded!");
     auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.get_bc());
-    CHECK_ERROR();
+    CHECK_ERRORS();
     return ans;
   }
 
@@ -660,9 +660,9 @@ class GameController {
 public:
   GameController() :
       m_gc { new_bc_GameController() },
-      m_earth_map { bc_GameController_get_starting_map(m_gc, Earth) },
-      m_mars_map { bc_GameController_get_starting_map(m_gc, Mars) },
-      m_asteroid_pattern { bc_GameController_asteroids_pattern(m_gc) },
+      m_earth_map { bc_GameController_starting_map(m_gc, Earth) },
+      m_mars_map { bc_GameController_starting_map(m_gc, Mars) },
+      m_asteroid_pattern { bc_GameController_asteroid_pattern(m_gc) },
       m_orbit_pattern { bc_GameController_orbit_pattern(m_gc) }
   {}
 
