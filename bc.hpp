@@ -240,7 +240,7 @@ public:
       m_map_location = bc_Location_map_location(location);
     } else if (bc_Location_is_in_garrison(location)) {
       m_type = Garrison;
-      m_garrison = bc_Location_structure(location);
+      m_garrison_id = bc_Location_structure(location);
     } else {
       m_type = Space;
     }
@@ -263,7 +263,7 @@ public:
   int get_structure() const {
     log_error(m_type == Garrison, "Location is not Garrison!");
 
-    return m_garrison;
+    return m_garrison_id;
   }
 
   bool is_in_space() const { return m_type == Space; }
@@ -289,7 +289,7 @@ private:
     Space
   } m_type;
 
-  int         m_garrison_id;
+  unsigned    m_garrison_id;
   MapLocation m_map_location;
 };
 
@@ -380,7 +380,7 @@ public:
   GET(unsigned, damage);
 
   GET(unsigned, movement_heat);
-  GET(unsigned, movement_cooldow);
+  GET(unsigned, movement_cooldown);
 
   GET(unsigned, attack_heat);
   GET(unsigned, attack_cooldown);
@@ -451,7 +451,7 @@ public:
     m_planet = bc_PlanetMap_planet_get(m_planet_map);
     m_height = bc_PlanetMap_height_get(m_planet_map);
     m_width  = bc_PlanetMap_width_get (m_planet_map);
-    m_initial_units = to_vector(bc_PlanetMap_initial_map_get(m_planet_map));
+    m_initial_units = to_vector(bc_PlanetMap_initial_units_get(m_planet_map));
   }
 
   ~PlanetMap() {
@@ -584,6 +584,7 @@ private:
 
 //ResearchInfo
 class ResearchInfo {
+public:
   ResearchInfo(bc_ResearchInfo* info) : m_info { info } {
     log_error(info, "Null bc_ResearchInfo!");
   }
@@ -635,6 +636,7 @@ VEC(RocketLanding, bc_VecRocketLanding)
 
 // RocketLandingInfo
 class RocketLandingInfo {
+public:
   RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) :
       m_rocket_landing_info { rocket_landing_info }
   {
@@ -752,7 +754,7 @@ public:
   }
 
   bool is_occupiable(MapLocation map_location) const {
-    auto ans = bc_GameController_is_occupiable(m_gc, map_location.to_gc());
+    auto ans = bc_GameController_is_occupiable(m_gc, map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
@@ -766,7 +768,7 @@ public:
   }
 
   void move_robot(unsigned id, Direction direction) const {
-    bc_GameController_move_robot(id, direction);
+    bc_GameController_move_robot(m_gc, id, direction);
     CHECK_ERRORS();
   }
 
@@ -779,7 +781,7 @@ public:
   }
 
   void attack(unsigned id, unsigned target_id) const {
-    bc_GameController_attack(id, target_id);
+    bc_GameController_attack(m_gc, id, target_id);
     CHECK_ERRORS();
   }
 
@@ -921,7 +923,7 @@ public:
   }
 
   RocketLandingInfo get_rocket_landings() const {
-    return RocketLandingInfo { bc_GameController_rocket_landings(m_gc); };
+    return RocketLandingInfo { bc_GameController_rocket_landings(m_gc) };
   }
 
   bool can_launch_rocket(unsigned rocket_id, MapLocation map_location) const {
