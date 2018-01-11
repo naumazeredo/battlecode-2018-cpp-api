@@ -16,7 +16,7 @@
 #include <cstdlib>
 #include <climits>
 
-#include <bc.h>
+#include "bc.h"
 
 // TODO: Think if it's good to save the bc pointer in every class
 // TODO: Add get_bc() on classes to return the stored bc pointer
@@ -497,7 +497,7 @@ public:
 private:
   bc_PlanetMap*     m_planet_map = nullptr;
   Planet            m_planet;
-  unsigned          m_height, width;
+  unsigned          m_height, m_width;
   std::vector<Unit> m_initial_units;
 
   // TODO: Use the maps to store the values and never query the same position again
@@ -854,7 +854,7 @@ public:
     return bc_GameController_can_begin_snipe(m_gc, ranger_id, map_location.get_bc());
   }
 
-  void begin_snipe(unsigned ranger, MapLocation map_location) const {
+  void begin_snipe(unsigned ranger_id, MapLocation map_location) const {
     bc_GameController_begin_snipe(m_gc, ranger_id, map_location.get_bc());
     CHECK_ERRORS();
   }
