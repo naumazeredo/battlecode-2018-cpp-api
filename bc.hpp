@@ -1,15 +1,15 @@
 /*
- * C++ API for Battlecode 2018
- *
- * https://github.com/naumazeredo/battlecode-2018-cpp-api
- *
- * authors:
- *   Naum Azeredo       < naumazeredo@gmail.com  >
- *   Luciano Barreira   < luciano@roboime.com.br >
- *   João Pedro Xavier  < joaopedroxavier@gmail.com >
- *   Sebastien Biollo   < sbiollo@gmail.com >
- *
- */
+* C++ API for Battlecode 2018
+*
+* https://github.com/naumazeredo/battlecode-2018-cpp-api
+*
+* authors:
+*   Naum Azeredo       < naumazeredo@gmail.com  >
+*   Luciano Barreira   < luciano@roboime.com.br >
+*   João Pedro Xavier  < joaopedroxavier@gmail.com >
+*   Sebastien Biollo   < sbiollo@gmail.com >
+*
+*/
 
 #pragma once
 
@@ -92,35 +92,60 @@ VEC(int, bc_Veci32)
 // Planet
 using Planet = bc_Planet;
 
+/* The other planet. */
 Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
+/* Create a human-readable representation of a Planet */
 std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
 
 // Direction
 using Direction = bc_Direction;
 
 // IDEA: Add const vector of pairs for directions
+/* Returns the x displacement of this direction. */
 int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
+/* Returns the y displacement of this direction. */
 int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
+/* Whether this direction is a diagonal one. */
 bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
+/*  Returns the direction opposite this one, or Center if it's  */
 Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
+/* Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. */
 Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
+/* Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. */
 Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
 
 // TODO: Direction to_string
 
 
-// MapLocation
+/********************************************************
+ *  Two-dimensional coordinates in the Battlecode world.
+ ********************************************************/
 class MapLocation {
 public:
+  /* 
+  *  Empyt Constructor
+  */
   MapLocation() : m_map_location { nullptr } {}
 
+  /* 
+  *  Constructor
+  *
+  *  @param planet : 
+  *  @param x :
+  *  @param y :
+  */
   MapLocation(Planet planet, int x, int y) :
       m_map_location { new_bc_MapLocation(planet, x, y) },
       m_planet { planet },
       m_x { x },
       m_y { y }
   {}
-
+  
+  /* 
+  *  Constructor
+  *
+  * @param map_location :
+  */
   MapLocation(bc_MapLocation* map_location) : m_map_location { map_location } {
     log_error(map_location, "Null bc_MapLocation!");
 
@@ -129,12 +154,31 @@ public:
     m_y      = bc_MapLocation_y_get(map_location);
   }
 
+  /* 
+  *  Deconstructor 
+  */
   ~MapLocation() {
     if (m_map_location)
       delete_bc_MapLocation(m_map_location);
   }
 
-  MapLocation(const MapLocation& map_location) { *this = map_location; }
+  /* 
+  *  Constructor
+  *
+  * @param map_location :
+  */
+  MapLocation(const MapLocation& map_location) { 
+    *this = map_location; 
+  }
+
+  /* 
+  *  Overloading of the = operator
+  *  Deep-copy a MapLocation
+  *
+  * @param map_location : 
+  *
+  * return :  the value of the object, on which the member function is being called
+  */
   MapLocation& operator=(const MapLocation& map_location) {
     m_map_location = bc_MapLocation_clone(map_location.get_bc());
     m_planet = map_location.get_planet();
@@ -144,7 +188,22 @@ public:
     return *this;
   }
 
-  MapLocation(MapLocation&& map_location) { *this = map_location; }
+  /* 
+  *  Move constructor
+  *
+  * @param map_location :
+  */
+  MapLocation(MapLocation&& map_location) { 
+    *this = map_location; 
+  }
+
+  /* 
+  *  Move constructor
+  *  
+  * @param map_location : 
+  *
+  * return : the value of the object, on which the member function is being called
+  */
   MapLocation& operator=(MapLocation&& map_location) {
     m_planet       = std::move(map_location.get_planet());
     m_x            = std::move(map_location.get_x());
@@ -156,42 +215,88 @@ public:
   }
 
   // XXX: Low-level use only
+
+  /* Two-dimensional coordinates in the Battlecode world. */
   bc_MapLocation* get_bc() const { return m_map_location; }
 
+  /* The planets in the Battlecode world. */
   Planet get_planet() const { return m_planet; }
+  /* The x coordinate of the location */
   int get_x() const { return m_x; }
+  /* The y coordinate of the location */
   int get_y() const { return m_y; }
 
+  /* Set the planets in the Battlecode world. */
   void set_planet(Planet planet) { m_planet = planet; }
+  /* Set the x coordinate of the location */
   void set_x(int x) { m_x = x; }
+  /* Set the x coordinate of the location */
   void set_y(int y) { m_y = y; }
 
+  /* 
+  *  The location one square from this one in the given direction.
+  *
+  * @param direction : 
+  *
+  * return : The location one square from this one in the given direction.
+  */
   MapLocation add(Direction direction) const {
     // Hardcoded to avoid API calls
     return MapLocation(m_planet,
-                       m_x + direction_dx(direction),
-                       m_y + direction_dy(direction));
+                      m_x + direction_dx(direction),
+                      m_y + direction_dy(direction));
   }
 
+  /* 
+  *  The location one square from this one in the opposite direction.
+  *
+  * @param direction : 
+  *
+  * return : the location one square from this one in the opposite direction.
+  */
   MapLocation subtract(Direction direction) const {
     // Hardcoded to avoid API calls
     return MapLocation(m_planet,
-                       m_x - direction_dx(direction),
-                       m_y - direction_dy(direction));
+                      m_x - direction_dx(direction),
+                      m_y - direction_dy(direction));
   }
 
+  /* 
+  *  The location `multiple` squares from this one in the given direction.
+  *
+  * @param direction : 
+  *
+  * return : The location `multiple` squares from this one in the given direction.
+  */
   MapLocation add_multiple(Direction direction, int multiple) const {
     // Hardcoded to avoid API calls
     return MapLocation(m_planet,
-                       m_x + direction_dx(direction) * multiple,
-                       m_y + direction_dy(direction) * multiple);
+                      m_x + direction_dx(direction) * multiple,
+                      m_y + direction_dy(direction) * multiple);
   }
 
+  /* 
+  *  The location translated from this location by `dx` in the x direction and `dy` 
+  *  in the y direction.
+  *
+  * @param dx : 
+  * @param dy : 
+  *
+  * return : The location translated from this location by `dx` in the x direction and `dy` in the y direction.
+  */
   MapLocation translate(int dx, int dy) const {
     // Hardcoded to avoid API calls
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
+  /* 
+  *  Computes the square of the distance from this location to the specified
+  *  location. If on different planets, returns the maximum integer.
+  *
+  * @param map_location : 
+  *
+  * return : the square of the distance from this location to the specified location. If on different planets, returns the maximum integer.
+  */
   unsigned distance_squared_to(const MapLocation& map_location) const {
     // Hardcoded to avoid API calls
     if (m_planet != map_location.get_planet())
@@ -201,12 +306,29 @@ public:
     return dx * dx + dy * dy;
   }
 
+  /* 
+  *  The Direction from this location to the specified location.
+  *
+  * @param map_location : 
+  *
+  * return : The Direction from this location to the specified location.
+  * return : * DifferentPlanet - The locations are on different planets.
+  */
   Direction direction_to(const MapLocation& map_location) const {
     auto ans = bc_MapLocation_direction_to(map_location.get_bc(), map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
 
+  /* 
+  *  Determines whether this location is adjacent to the specified location,
+  *  including diagonally. Note that squares are not adjacent to themselves, 
+  *  and squares on different planets are not adjacent to each other.
+  *
+  * @param map_location : 
+  *
+  * return : if this location is adjacent to the specified location
+  */
   bool is_adjacent_to(const MapLocation& map_location) const {
     // Hardcoded to avoid API calls
     return ((*this) != map_location and
@@ -214,17 +336,42 @@ public:
             std::abs(m_y - map_location.get_y()) <= 1);
   }
 
+  /* 
+  *  Whether this location is within the distance squared range of the
+  *  specified location, inclusive. False for locations on different planets.
+  *
+  * @param range :
+  * @param map_location :
+  *
+  * return : if this location is within the distance squared range of the specified location inclusive
+  */
   bool is_within_range(unsigned range, const MapLocation& map_location) const {
     // Hardcoded to avoid API calls
     return range >= distance_squared_to(map_location);
   }
 
+  /* 
+  *  Overloading of the == operator
+  *
+  * @param map_location : 
+  *
+  * return : If the current MapLocation is equal to map_location
+  */
   bool operator ==(const MapLocation& map_location) const {
     return (map_location.get_planet() == m_planet and
             map_location.get_x() == m_x and
             map_location.get_y() == m_y);
   }
-  bool operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
+  /* 
+  *  Overloading of the != operator
+  *
+  * @param map_location : 
+  *
+  * return : If the current MapLocation is not equal to map_location
+  */
+  bool operator !=(const MapLocation& map_location) const { 
+    return !((*this) == map_location); 
+  }
 
   // TODO: MapLocation to_string
 
@@ -321,17 +468,22 @@ VEC(unsigned, bc_VecUnitID)
 
 
 // UnitType
+/*  */
 using UnitType = bc_UnitType;
 
+/*  */
 bool is_robot(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
+/*  */
 bool is_structure(UnitType unit_type) { return !is_robot(unit_type); }
 
+/*  */
 unsigned unit_type_get_factory_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_factory_cost(unit_type);
   CHECK_ERRORS();
   return ans;
 }
 
+/*  */
 unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_blueprint_cost(unit_type);
   CHECK_ERRORS();
@@ -339,12 +491,14 @@ unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
 }
 
 // Don't need to receive UnitType as C API, because it makes no sense...
+/*  */
 unsigned unit_type_get_replicate_cost() {
   unsigned ans = bc_UnitType_replicate_cost(Worker);
   CHECK_ERRORS();
   return ans;
 }
 
+/*  */
 unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
 
@@ -506,8 +660,8 @@ public:
 
   bool is_on_map(const MapLocation& location ) const {
     return (location.get_x() < m_width) and
-           (location.get_y() < m_height) and
-           (location.get_planet() == m_planet);
+          (location.get_y() < m_height) and
+          (location.get_planet() == m_planet);
   }
 
   bool is_passable_terrain_at(const MapLocation& map_location) const {
@@ -989,5 +1143,4 @@ private:
   AsteroidPattern m_asteroid_pattern;
   OrbitPattern    m_orbit_pattern;
 };
-
 }
