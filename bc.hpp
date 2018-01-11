@@ -16,13 +16,12 @@
 #include <cstdlib>
 #include <climits>
 
-//#include <bc.h>
-// XXX: DON'T COMMIT
-#include "bc.h"
+// XXX: Fix for 'this' used inside C code
+#define this it
+#include <bc.h>
+#undef this
 
-// TODO: Think if it's good to save the bc pointer in every class
-// TODO: Add get_bc() on classes to return the stored bc pointer
-// TODO: Add more constness (Vectors should be of consts, etc)
+// IDEA: Add more constness (Vectors should be of consts, etc)
 // IDEA: Create namespaces/static classes for bc enums.
 //       So we could use enum classes and functions for these times properly
 
