@@ -128,6 +128,8 @@ public:
     m_planet = map_location.get_planet();
     m_x      = map_location.get_x();
     m_y      = map_location.get_y();
+
+    return *this;
   }
 
   MapLocation(MapLocation&& map_location) { *this = map_location; }
@@ -137,6 +139,8 @@ public:
     m_y            = std::move(map_location.get_y());
     m_map_location = std::move(map_location.m_map_location);
     map_location.m_map_location = nullptr;
+
+    return *this;
   }
 
   // XXX: Low-level use only
@@ -351,6 +355,22 @@ public:
   }
 
   // TODO: Copy/move semantics
+  Unit(const Unit& unit) { *this = unit; }
+  Unit& operator=(const Unit& unit) {
+    m_unit_type = unit.get_unit_type();
+    m_unit      = bc_Unit_clone(unit.m_unit);
+
+    return *this;
+  }
+
+  Unit(Unit&& unit) { *this = unit; }
+  Unit& operator=(Unit&& unit) {
+    m_unit_type = std::move(unit.get_unit_type());
+    m_unit      = std::move(unit.m_unit);
+    unit.m_unit = nullptr;
+
+    return *this;
+  }
 
   UnitType get_unit_type() const { return m_unit_type; }
 
@@ -473,8 +493,8 @@ public:
   */
 
   bool is_on_map(const MapLocation& location ) const {
-    return (location.get_x() < m_width) &&
-           (location.get_y() < m_height) &&
+    return (location.get_x() < m_width) and
+           (location.get_y() < m_height) and
            (location.get_planet() == m_planet);
   }
 
@@ -667,6 +687,11 @@ public:
       m_asteroid_pattern { bc_GameController_asteroid_pattern(m_gc) },
       m_orbit_pattern { bc_GameController_orbit_pattern(m_gc) }
   {}
+
+  ~GameController() {
+    if (m_gc)
+      delete_bc_GameController();
+  }
 
   void next_turn() const { bc_GameController_next_turn(m_gc); }
   unsigned get_round() const { return bc_GameController_round(m_gc); }
