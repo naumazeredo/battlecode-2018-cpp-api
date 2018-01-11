@@ -1,15 +1,15 @@
-/*
-* C++ API for Battlecode 2018
-*
-* https://github.com/naumazeredo/battlecode-2018-cpp-api
-*
-* authors:
-*   Naum Azeredo       < naumazeredo@gmail.com  >
-*   Luciano Barreira   < luciano@roboime.com.br >
-*   João Pedro Xavier  < joaopedroxavier@gmail.com >
-*   Sebastien Biollo   < sbiollo@gmail.com >
-*
-*/
+  /*
+  * C++ API for Battlecode 2018
+  *
+  * https://github.com/naumazeredo/battlecode-2018-cpp-api
+  *
+  * authors:
+  *   Naum Azeredo       < naumazeredo@gmail.com  >
+  *   Luciano Barreira   < luciano@roboime.com.br >
+  *   João Pedro Xavier  < joaopedroxavier@gmail.com >
+  *   Sebastien Biollo   < sbiollo@gmail.com >
+  *
+  */
 
 #pragma once
 
