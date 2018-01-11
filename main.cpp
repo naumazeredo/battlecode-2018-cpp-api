@@ -1,4 +1,12 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <assert.h>
+
 #include "bc.hpp"
+
+using namespace bc;
 
 int main() {
   printf("Player C++ bot starting\n");

@@ -4,14 +4,16 @@
  * https://github.com/naumazeredo/battlecode-2018-cpp-api
  *
  * authors:
- *   Naum Azeredo     <naumazeredo@gmail.com>
- *   Luciano Barreira <luciano@roboime.com.br>
- *   Sebastien Biollo <sbiollo@gmail.com>
+ *   Naum Azeredo       < naumazeredo@gmail.com  >
+ *   Luciano Barreira   < luciano@roboime.com.br >
+ *   João Pedro Xavier  < joaopedroxavier@gmail.com >
+ *   Sebastien Biollo   < sbiollo@gmail.com >
  *
  */
 
 #include <vector>
 #include <string>
+#include <cstdlib>
 #include <climits>
 
 #include <bc.h>
@@ -37,7 +39,7 @@ namespace bc {
 
 #define log_error(condition, message)   \
 if (!(condition)) {           \
-  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
+  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " (message)); \
 }
 
 #define CHECK_ERRORS() \
@@ -185,7 +187,7 @@ public:
     CHECK_ERRORS()
   }
 
-  Direction is_adjacent_to(const MapLocation& map_location) const {
+  bool is_adjacent_to(const MapLocation& map_location) const {
     // Hardcoded to avoid API calls
     return ((*this) != map_location and
             std::abs(m_x - map_location.get_x()) <= 1 and
