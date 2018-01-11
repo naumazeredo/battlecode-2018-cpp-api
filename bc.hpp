@@ -307,7 +307,7 @@ VEC(unsigned, bc_VecUnitID)
 using UnitType = bc_UnitType;
 
 bool is_robot(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
-bool is_structure(UnitType unit_type) { return !is_robot(); }
+bool is_structure(UnitType unit_type) { return !is_robot(unit_type); }
 
 unsigned unit_type_get_factory_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_factory_cost(unit_type);
@@ -361,9 +361,9 @@ public:
 #define F(x) bc_Unit_ ## x
 #define G(x) get_ ## x
 #define GET(ret, var) \
-  ret G(var)() const { auto ans = ret { F(var)(m_unit) }; CHECK_ERRORS(); return ans; }
+  ret G(var)() const { auto ans = (ret)(F(var)(m_unit)); CHECK_ERRORS(); return ans; }
 #define IS(var) \
-  bool var()   const { auto ans = ret { F(var)(m_unit) }; CHECK_ERRORS(); return ans; }
+  bool var()   const { bool ans = F(var)(m_unit); CHECK_ERRORS(); return ans; }
 #define GET_FUNC(ret, var, func) \
   ret G(var)() const { auto ans = func( F(var)(m_unit) ); CHECK_ERRORS(); return ans; }
 
@@ -377,7 +377,7 @@ public:
   GET(unsigned, vision_range);
 
   // Robots
-  GET(unsigned, damage);
+  GET(int, damage);
 
   GET(unsigned, movement_heat);
   GET(unsigned, movement_cooldown);
@@ -412,19 +412,19 @@ public:
   GET(unsigned, healer_self_heal_amount);
 
   // Structures
-  IS (structure_is_build);
+  IS (structure_is_built);
   GET(unsigned, structure_max_capacity);
   GET_FUNC(std::vector<unsigned>, structure_garrison, to_vector);
 
   // Factory
-  IS (is_factory_producting);
+  IS (is_factory_producing);
   GET(UnitType, factory_unit_type);
   GET(unsigned, factory_rounds_left);
   GET(unsigned, factory_max_rounds_left);
 
   // Rocket
   IS (rocket_is_used);
-  GET(unsigned, rocket_blast_damage);
+  GET(int, rocket_blast_damage);
   GET(unsigned, rocket_travel_time_decrease);
 
 private:
