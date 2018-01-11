@@ -39,22 +39,45 @@ int main() {
     unsigned round = gc.get_round();
     printf("Round: %d\n", round);
 
+
     auto units = gc.get_my_units();
     for (const auto unit : units) {
-      // Calls on the controller take unit IDs for ownership reasons.
+      if (unit.get_unit_type() == Factory) {
+        auto garrison = unit.get_structure_garrison();
+        if (garrison.size() > 0){
+          if (gc.can_unload(unit.get_id(), North))
+            gc.unload(unit.get_id(), North);
+        } else if (gc.can_produce_robot(unit.get_id(), Knight)){
+          gc.produce_robot(unit.get_id(), Knight);
+        }
+      }
       unsigned id = unit.get_id();
-
-      if (gc.can_move(id, North) && gc.is_move_ready(id)) {
-        gc.move_robot(id, North);
+      if (unit.get_location().is_on_map()){
+      // Calls on the controller take unit IDs for ownership reasons.
+        auto locus = unit.get_location().get_map_location();
+        auto nearby = gc.sense_nearby_units( locus, 2);
+        for ( auto place : nearby ){
+          if(gc.can_build(id, place.get_id()) && unit.get_unit_type() == Worker){
+            gc.build(id, place.get_id());
+          }
+        }
+      }
+      if(gc.can_blueprint(id, Factory, North)){
+        gc.blueprint(id, Factory, Northeast);
       }
     }
+#if 0
+      if (gc.can_move(id, Northeast) && gc.is_move_ready(id)) {
+        gc.move_robot(id, Northeast);
+      }
+#else
+#endif
 
     // this line helps the output logs make more sense by forcing output to be sent
     // to the manager.
     // it's not strictly necessary, but it helps.
-    fflush(stdout);
-
     // pause and wait for the next turn.
+    fflush(stdout);
     gc.next_turn();
   }
 
