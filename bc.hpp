@@ -4,27 +4,31 @@
  * https://github.com/naumazeredo/battlecode-2018-cpp-api
  *
  * authors:
- *   Naum Azeredo     < naumazeredo@gmail.com  >
- *   Luciano Barreira < luciano@roboime.com.br >
- *   Sebastien Biollo < sbiollo@gmail.com >
+ *   Naum Azeredo     <naumazeredo@gmail.com>
+ *   Luciano Barreira <luciano@roboime.com.br>
+ *   Sebastien Biollo <sbiollo@gmail.com>
  *
  */
 
 #include <vector>
+#include <string>
 #include <climits>
 
 #include <bc.h>
 
 // TODO: Think if it's good to save the bc pointer in every class
-// TODO: Add to_bc() on classes to return the stored bc pointer
+// TODO: Add get_bc() on classes to return the stored bc pointer
+// TODO: Add more constness (Vectors should be of consts, etc)
+// IDEA: Create namespaces/static classes for bc enums.
+//       So we could use enum classes and functions for these times properly
 
 
 namespace bc {
 
 // Logger
-// TODO: Use bc_has_err and stuff
 #ifdef NDEBUG
 #define log_error(condition, message) ((void)0)
+#define CHECK_ERRORS()
 #else
 
 #define S(x) #x
@@ -35,6 +39,15 @@ namespace bc {
 if (!(condition)) {           \
   printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
 }
+
+#define CHECK_ERRORS() \
+if (has_bc_err()) { \
+  char* err; \
+  uint8_t code = bc_get_last_err(&err); \
+  printf("[ERROR](" __FILE__ ": " S__LINE__ ": " __func__ ") code %d: %s\n", code, err); \
+  bc_free_string(err); \
+}
+
 #endif
 
 
@@ -63,15 +76,12 @@ VEC(int, bc_Veci32)
 using Planet = bc_Planet;
 
 Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
-std::string planet_to_json(Planet planet) { return bc_Planet_to_json(planet); }
-Planet      planet_from_json(std::string s) { return bc_Planet_from_json(s.c_str()); }
-
 std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
 
 // Direction
 using Direction = bc_Direction;
 
-// TODO: Change direction_dx/dy to const vector of pair
+// IDEA: Add const vector of pairs for directions
 int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
 int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
 bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
@@ -79,15 +89,17 @@ Direction   direction_opposite(Direction direction) { return bc_Direction_opposi
 Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
 Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
 
-Direction   direction_from_json(std::string s) { return bc_Direction_from_json(s.c_str()); }
-std::string direction_to_json(Direction direction) { return bc_Direction_to_json(direction); }
 // TODO: Direction to_string
 
 
 // MapLocation
 class MapLocation {
 public:
-  MapLocation(Planet planet, int x, int y) : m_planet { planet }, m_x { x }, m_y { y }
+  MapLocation(Planet planet, int x, int y) :
+      m_map_location { new_bc_MapLocation(planet, x, y) },
+      m_planet { planet },
+      m_x { x },
+      m_y { y }
   {}
 
   MapLocation(bc_MapLocation* map_location) : m_map_location { map_location } {
@@ -103,11 +115,25 @@ public:
       delete_bc_MapLocation(m_map_location);
   }
 
-  // TODO: Copy/move semantics
+  MapLocation(const MapLocation& map_location) { *this = map_location; }
+  MapLocation& operator=(const MapLocation& map_location) {
+    m_map_location = bc_MapLocation_clone(map_location.get_bc());
+    m_planet = map_location.get_planet();
+    m_x      = map_location.get_x();
+    m_y      = map_location.get_y();
+  }
 
-  bc_MapLocation* to_bc() const {
-    if (!m_map_location)
-      m_map_location = new_bc_MapLocation(Planet, x, y);
+  MapLocation(MapLocation&& map_location) { *this = map_location; }
+  MapLocation& operator=(MapLocation&& map_location) {
+    m_planet       = std::move(map_location.get_planet());
+    m_x            = std::move(map_location.get_x());
+    m_y            = std::move(map_location.get_y());
+    m_map_location = std::move(map_location.m_map_location);
+    map_location.m_map_location = nullptr;
+  }
+
+  // XXX: Low-level use only
+  bc_MapLocation* get_bc() {
     return m_map_location;
   }
 
@@ -120,28 +146,33 @@ public:
   void set_y(int y) { m_y = y; }
 
   MapLocation add(Direction direction) const {
+    // Hardcoded to avoid API calls
     return MapLocation(m_planet,
                        m_x + direction_dx(direction),
                        m_y + direction_dy(direction));
   }
 
   MapLocation subtract(Direction direction) const {
+    // Hardcoded to avoid API calls
     return MapLocation(m_planet,
                        m_x - direction_dx(direction),
                        m_y - direction_dy(direction));
   }
 
   MapLocation add_multiple(Direction direction, int multiple) const {
+    // Hardcoded to avoid API calls
     return MapLocation(m_planet,
                        m_x + direction_dx(direction) * multiple,
                        m_y + direction_dy(direction) * multiple);
   }
 
   MapLocation translate(int dx, int dy) const {
+    // Hardcoded to avoid API calls
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  unsigned distance_squared_to(MapLocation map_location) const {
+  unsigned distance_squared_to(const MapLocation& map_location) const {
+    // Hardcoded to avoid API calls
     if (m_planet != map_location.get_planet())
       return INT_MAX;
     int dx = m_x - map_location.get_x();
@@ -149,17 +180,20 @@ public:
     return dx * dx + dy * dy;
   }
 
-  // TODO
-  Direction direction_to(MapLocation map_location) const;
+  Direction direction_to(const MapLocation& map_location) const {
+    Direction dir = bc_MapLocation_direction_to(map_location, map_location.get_bc());
+    CHECK_ERRORS()
+  }
 
-  Direction is_adjacent_to(MapLocation map_location) const {
+  Direction is_adjacent_to(const MapLocation& map_location) const {
+    // Hardcoded to avoid API calls
     return ((*this) != map_location and
             std::abs(m_x - map_location.get_x()) <= 1 and
             std::abs(m_y - map_location.get_y()) <= 1);
-
   }
 
-  bool is_within_range(unsigned range, MapLocation map_location) const {
+  bool is_within_range(unsigned range, const MapLocation& map_location) const {
+    // Hardcoded to avoid API calls
     return range >= distance_squared_to(map_location);
   }
 
@@ -171,10 +205,9 @@ public:
   bool operator !=(const MapLocation& map_location) const { return !((*this) == map_location); }
 
   // TODO: MapLocation to_string
-  // TODO: MapLocation JSON
 
 private:
-  bc_MapLocation* m_map_location = nullptr;
+  bc_MapLocation* m_map_location;
 
   Planet m_planet;
   int m_x;
@@ -191,8 +224,8 @@ VEC(MapLocation, bc_VecMapLocation)
 class Location {
 public:
   Location() : m_type { Space } {}
-  Location(MapLocation map_location) : m_type { Map }, m_map_location { map_location } {}
-  Location(int garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
+  Location(const MapLocation& map_location) : m_type { Map }, m_map_location { map_location } {}
+  Location(unsigned garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
 
   Location(bc_Location* location) {
     log_error(location, "Null bc_Location!");
@@ -209,8 +242,6 @@ public:
 
     delete_bc_Location(location);
   }
-
-  // TODO: Copy/move semantics
 
   bool is_on_map() const { return m_type == Map; }
   bool is_on_planet(Planet planet) const {
@@ -245,7 +276,6 @@ public:
   }
 
   // TODO: Location to_string
-  // TODO: Location JSON
 
 private:
   enum {
@@ -264,32 +294,6 @@ private:
 // Team
 using Team = bc_Team;
 
-// Player
-class Player {
-public:
-  Player(Team team, Planet planet) : m_planet { planet }, m_team { team }
-  {}
-
-  // TODO: Copy/move constructors
-  // TODO: Move operator
-  Player& operator=(const Player& player) { m_team = player.m_team; m_planet = player.m_planet; return *this; }
-
-  Team    get_team() const { return m_team; }
-  Planet  get_planet() const { return m_planet; }
-
-  void    set_team()(Team team) { m_team = team; }
-  void    set_planet()(Planet planet) { m_planet = planet; }
-
-  bool    operator==(const Player& player) { return m_team == player.m_team and m_planet == player.m_planet; }
-
-  // TODO: Player to_string
-  // TODO: Player JSON
-
-private:
-  Team   m_team;
-  Planet m_planet;
-};
-
 
 // VecUnitID
 // std::vector<unsigned> to_vector(bc_VecUnitID*);
@@ -299,27 +303,29 @@ VEC(unsigned, bc_VecUnitID*)
 // UnitType
 using UnitType = bc_UnitType;
 
-bool is_robot(UnitType unittype) { return unittype == Factory or unittype == Rocket; }
-bool is_structure(UnitType unittype) { return !is_robot(); }
+bool is_robot(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
+bool is_structure(UnitType unit_type) { return !is_robot(); }
 
-int unittype_get_factory_cost(UnitType unit_type) {
-  log_error(is_robot(), "UnitType is not Robot!");
-
-  return bc_UnitType_factory_cost(unit_type);
+unsigned unit_type_get_factory_cost(UnitType unit_type) {
+  unsigned ans = bc_UnitType_factory_cost(unit_type);
+  CHECK_ERRORS()
+  return ans;
 }
 
-int unittype_get_blueprint_cost(UnitType unit_type) {
-  log_error(is_structure(), "UnitType is not Structure!");
-
-  return bc_UnitType_blueprint_cost(unit_type);
+unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
+  unsigned ans = bc_UnitType_blueprint_cost(unit_type);
+  CHECK_ERRORS()
+  return ans;
 }
 
 // Don't need to receive UnitType as C API, because it makes no sense...
-int unittype_get_replicate_cost() { return bc_UnitType_replicate_cost(Worker); }
+unsigned unit_type_get_replicate_cost() {
+  unsigned ans = bc_UnitType_replicate_cost(Worker);
+  CHECK_ERRORS()
+  return ans;
+}
 
-int unittype_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
-
-// TODO: UnitType JSON
+unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
 
 // VecUnitType
@@ -332,7 +338,7 @@ class Unit {
 public:
   Unit(bc_Unit* unit) : m_unit { unit } {
     log_error(unit, "Null bc_Unit!");
-    m_unittype = bc_Unit_unit_type(unit);
+    m_unit_type = bc_Unit_unit_type(unit);
   }
 
   ~Unit() {
@@ -349,14 +355,15 @@ public:
   // Magic!
 #define F(x) bc_Unit_ ## x
 #define G(x) get_ ## x
-#define GET(ret, var) ret G(var)() const { return F(func)(m_unit); }
-#define GET_CAST(ret, var) ret G(var)() const { return ret { F(func)(m_unit) }; }
-#define GET_ERROR(ret, var, cond, err) ret G(var)() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
-#define IS_ERROR(var, cond, err) bool var() const { log_error((cond), (err)); return ret { F(func)(m_unit) }; }
-#define GET_FUNC(ret, var, func, cond, err) ret G(var)() const { log_error((cond), (err)); return func( F(func)(m_unit) ); }
+#define GET(ret, var) \
+  ret G(var)() const { auto ans = ret { F(func)(m_unit) }; CHECK_ERRORS(); return ans; }
+#define IS(var) \
+  bool var()   const { auto ans = ret { F(func)(m_unit) }; CHECK_ERRORS(); return ans; }
+#define GET_FUNC(ret, var, func) \
+  ret G(var)() const { auto ans = func( F(func)(m_unit) ); CHECK_ERRORS(); return ans; }
 
   GET(Team, team);
-  GET_CAST(Location, location);
+  GET(Location, location);
 
   // All units
   GET(unsigned, id);
@@ -365,65 +372,65 @@ public:
   GET(unsigned, vision_range);
 
   // Robots
-  GET_ERROR(unsigned, damage, is_robot(m_unittype), "Not Robot!");
+  GET(unsigned, damage);
 
-  GET_ERROR(unsigned, movement_heat, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, movement_cooldow, is_robot(m_unittype), "Not Robot!"n);
+  GET(unsigned, movement_heat);
+  GET(unsigned, movement_cooldow);
 
-  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, attack_cooldown, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
+  GET(unsigned, attack_heat);
+  GET(unsigned, attack_cooldown);
+  GET(unsigned, attack_heat);
 
-  GET_ERROR(unsigned, attack_heat, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, attack_cooldown, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, attack_range, is_robot(m_unittype), "Not Robot!");
+  GET(unsigned, attack_heat);
+  GET(unsigned, attack_cooldown);
+  GET(unsigned, attack_range);
 
-  GET_ERROR(unsigned, ability_heat, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, ability_cooldown, is_robot(m_unittype), "Not Robot!");
-  GET_ERROR(unsigned, ability_range, is_robot(m_unittype), "Not Robot!");
+  GET(unsigned, ability_heat);
+  GET(unsigned, ability_cooldown);
+  GET(unsigned, ability_range);
 
-  IS_ERROR (is_ability_unlocked, is_robot(m_unittype), "Not Robot!");
+  IS (is_ability_unlocked);
 
   // Worker
-  IS_ERROR (worker_has_acted, (m_unittype == Worker), "Not Worker!");
-  GET_ERROR(unsigned, worker_build_health, (m_unittype == Worker), "Not Worker!");
-  GET_ERROR(unsigned, worker_repair_health, (m_unittype == Worker), "Not Worker!");
-  GET_ERROR(unsigned, worker_harvest_amount, (m_unittype == Worker), "Not Worker!");
+  IS (worker_has_acted);
+  GET(unsigned, worker_build_health);
+  GET(unsigned, worker_repair_health);
+  GET(unsigned, worker_harvest_amount);
 
   // Knight
-  GET_ERROR(unsigned, knight_defense, (m_unittype == Knight), "Not Knight!");
+  GET(unsigned, knight_defense);
 
   // Ranger
-  GET_ERROR(unsigned, ranger_cannot_attack_range, (m_unittype == Ranger), "Not Ranger!");
-  GET_ERROR(unsigned, ranger_max_countdown, (m_unittype == Ranger), "Not Ranger!");
-  GET_ERROR(unsigned, ranger_countdown, (m_unittype == Ranger), "Not Ranger!");
-  IS_ERROR (ranger_is_sniping, (m_unittype == Ranger), "Not Ranger!");
-  GET_ERROR(MapLocation, ranger_target_location, ranger_is_sniping(), "Ranger sniping!");
+  GET(unsigned, ranger_cannot_attack_range);
+  GET(unsigned, ranger_max_countdown);
+  GET(unsigned, ranger_countdown);
+  IS (ranger_is_sniping);
+  GET(MapLocation, ranger_target_location);
 
   // Healer
-  GET_ERROR(unsigned, healer_self_heal_amount, (m_unittype == Healer), "Not Healer!");
+  GET(unsigned, healer_self_heal_amount);
 
   // Structures
-  IS_ERROR (structure_is_build, is_structure(m_unittype), "Not Structure!");
-  GET_ERROR(unsigned, structure_max_capacity, is_structure(m_unittype), "Not Structure!");
-  GET_FUNC(vector<unsigned>, structure_garrison, to_vector, is_structure(m_unittype), "Not Structure!");
+  IS (structure_is_build);
+  GET(unsigned, structure_max_capacity);
+  GET_FUNC(vector<unsigned>, structure_garrison, to_vector);
 
   // Factory
-  IS_ERROR (is_factory_producting, (m_unittype == Factory), "Not Factory!");
-  GET_ERROR(UnitType, factory_unit_type, (m_unittype == Factory), "Not Factory!");
-  GET_ERROR(unsigned, factory_rounds_left, (m_unittype == Factory), "Not Factory!");
-  GET_ERROR(unsigned, factory_max_rounds_left, (m_unittype == Factory), "Not Factory!");
+  IS (is_factory_producting);
+  GET(UnitType, factory_unit_type);
+  GET(unsigned, factory_rounds_left);
+  GET(unsigned, factory_max_rounds_left);
 
   // Rocket
-  IS_ERROR (rocket_is_used, (m_unittype == Rocket), "Not Rocket!");
-  GET_ERROR(unsigned, rocket_blast_damage, (m_unittype == Rocket), "Not Rocket!");
-  GET_ERROR(unsigned, rocket_travel_time_decrease, (m_unittype == Rocket), "Not Rocket!");
+  IS (rocket_is_used);
+  GET(unsigned, rocket_blast_damage);
+  GET(unsigned, rocket_travel_time_decrease);
 
-//private:
+private:
   bc_Unit* m_unit;
 
   // XXX: Stored because it's used for every assertion
-  UnitType m_unittype;
+  UnitType m_unit_type;
 };
 
 
@@ -435,7 +442,7 @@ VEC(Unit, bc_VecUnit)
 // PlanetMap
 class PlanetMap {
 public:
-  PlanetMap() {}
+  PlanetMap() : m_planet_map { nullptr } {}
 
   PlanetMap(bc_PlanetMap* planet_map) : m_planet_map { planet_map } {
     log_error(planet_map, "Null bc_PlanetMap!");
@@ -451,10 +458,10 @@ public:
       delete_bc_PlanetMap(m_planet_map);
   }
 
-  Planet   get_planet() const { return m_planet; }
-  unsigned get_height() const { return m_height; }
-  unsigned get_width () const { return m_width; }
-  const    std::vector<Unit>& get_initial_units() const { return m_initial_units; }
+  Planet                   get_planet()        const { return m_planet; }
+  unsigned                 get_height()        const { return m_height; }
+  unsigned                 get_width ()        const { return m_width; }
+  const std::vector<Unit>& get_initial_units() const { return m_initial_units; }
 
   /*
   // XXX: Not needed! We only need 2 planets: earth and mars. It's not needed to set stuff
@@ -463,30 +470,33 @@ public:
   void set_width (unsigned width ) { m_width = width; }
   */
 
-  bool is_on_map(MapLocation location ) const {
-    return (location.get_x()< m_width) &&
-           (location.get_y()< m_height) &&
+  bool is_on_map(const MapLocation& location ) const {
+    return (location.get_x() < m_width) &&
+           (location.get_y() < m_height) &&
            (location.get_planet() == m_planet);
   }
 
   bool is_passable_terrain_at(const MapLocation& map_location) const {
     log_error(m_planet_map, "PlanetMap not loaded!");
-    return bc_PlanetMap_is_passable_terrain_at(m_planet_map, map_location.to_bc());
+    auto ans = bc_PlanetMap_is_passable_terrain_at(m_planet_map, map_location.get_bc());
+    CHECK_ERRORS();
+    return ans;
   }
 
   unsigned get_initial_karbonite_at(const MapLocation& map_location) const {
     log_error(m_planet_map, "PlanetMap not loaded!");
-    return bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.to_bc());
+    auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.get_bc());
+    CHECK_ERROR();
+    return ans;
   }
 
   // TODO: PlanetMap to_string
-  // TODO: PlanetMap JSON
 
 private:
-  bc_PlanetMap*                      m_planet_map = nullptr;
-  Planet                             m_planet;
-  unsigned                           m_height, width;
-  std::vector<Unit>                  m_initial_units;
+  bc_PlanetMap*     m_planet_map = nullptr;
+  Planet            m_planet;
+  unsigned          m_height, width;
+  std::vector<Unit> m_initial_units;
 
   // TODO: Use the maps to store the values and never query the same position again
   //std::vector<std::vector<bool>> m_is_passable_terrain;
@@ -510,15 +520,12 @@ public:
     delete_bc_AsteroidStrike(asteroid);
   }
 
-  // TODO: Copy/Move semantics
-
   unsigned get_karbonite() const { return m_karbonite; }
   MapLocation get_map_location() const { return m_location; }
 
   // Set methods not needed
 
   // TODO: AsteroidStrike to_string
-  // TODO: AsteroidStrike JSON
 
 private:
   unsigned    m_karbonite;
@@ -542,7 +549,6 @@ public:
   }
 
   // TODO: AsteroidPattern to_string
-  // TODO: AsteroidPattern JSON
 
 private:
   // IMPORTANT: weak pointer
@@ -592,37 +598,32 @@ class ResearchInfo {
   unsigned cost_of  (UnitType branch, unsigned level) const { return ::cost_of( branch,level ); }
 
   unsigned get_level(UnitType branch) const { return bc_ResearchInfo_get_level( m_info, branch ); }
-  std::vector<UnitType> get_queue()   const { return to_vector(bc_ResearchInfo_queue( m_info )); }
-  bool has_next_in_queue         ()   const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
-  UnitType next_in_queue         ()   const { return bc_ResearchInfo_next_in_queue( m_info ); }
-  unsigned rounds_lext           ()   const { return bc_ResearchInfo_rounds_left( m_info ); }
+  std::vector<UnitType> get_queue  () const { return to_vector(bc_ResearchInfo_queue( m_info )); }
+  bool has_next_in_queue           () const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
+  UnitType next_in_queue           () const { return bc_ResearchInfo_next_in_queue( m_info ); }
+  unsigned rounds_lext             () const { return bc_ResearchInfo_rounds_left( m_info ); }
 
 private:
-  bc_ResearchInfo* m_info = nullptr;
+  bc_ResearchInfo* m_info;
 };
 
 
 // RocketLanding
 class RocketLanding {
 public:
-  RocketLanding(bc_RocketLanding* rocket_landing, MapLocation destination) :
-      m_rocket { rocket_landing }, m_destination { destination }
-  {
+  RocketLanding(bc_RocketLanding* rocket_landing) {
     log_error(rocket_landing, "Null bc_RocketLanding!");
-  }
-
-  ~RocketLanding() {
-    if (m_rocket)
-      delete_bc_RocketLanding(m_rocket);
+    m_rocket_id   = bc_RocketLanding_rocket_id_get(rocket_landing);
+    m_destination = bc_RocketLanding_destination_get(rocket_landing);
+    delete_bc_RocketLanding(rocket_landing);
   }
 
   unsigned           get_rocket_id  () const { return m_rocket_id; }
   const MapLocation& get_destination() const { return m_destination; }
 
 private:
-  bc_RocketLanding* m_rocket;
-  MapLocation       m_destination;
-  unsigned          m_rocket_id;
+  unsigned    m_rocket_id;
+  MapLocation m_destination;
 };
 
 
@@ -681,8 +682,7 @@ public:
 
   Unit get_unit(unsigned id) const {
     bc_Unit* unit = bc_GameController_unit(m_gc, id);
-    log_error(!bc_has_err(), "Incorrect Unit ID!");
-
+    CHECK_ERRORS();
     return Unit { unit };
   }
 
@@ -691,41 +691,42 @@ public:
   std::vector<Unit> get_units_in_space() const { return to_vector(bc_GameController_units_in_space(m_gc)); }
 
   unsigned get_karbonite_at(MapLocation map_location) const {
-    unsigned val = bc_GameController_karbonite_at(m_gc, map_location.to_bc());
-    log_error(!bc_has_err(), "?");
-
+    unsigned val = bc_GameController_karbonite_at(m_gc, map_location.get_bc());
+    CHECK_ERRORS();
     return val;
   }
 
   std::vector<MapLocation> get_all_locations_within(MapLocation map_location, unsigned radius_squared) const {
-    return to_vector(bc_GameController_all_locations_within(m_gc, map_location.to_bc(), radius_squared));
+    return to_vector(bc_GameController_all_locations_within(m_gc, map_location.get_bc(), radius_squared));
   }
 
   bool can_sense_location(MapLocation map_location) const {
-    return bc_GameController_can_sense_location(m_gc, map_location.to_bc());
+    return bc_GameController_can_sense_location(m_gc, map_location.get_bc());
   }
 
   bool can_sense_unit(unsigned id) const { return bc_GameController_can_sense_unit(m_gc, id); }
 
   std::vector<Unit> sense_nearby_units(MapLocation map_location, unsigned radius_squared) const {
-    return to_vector(bc_GameController_sense_nearby_units(m_gc, map_location.to_bc(), radius_squared));
+    return to_vector(bc_GameController_sense_nearby_units(m_gc, map_location.get_bc(), radius_squared));
   }
 
   std::vector<Unit> sense_nearby_units_by_team(MapLocation map_location, unsigned radius_squared, Team team) const {
-    return to_vector(bc_GameController_sense_nearby_units_by_team(m_gc, map_location.to_bc(), radius_squared, team));
+    return to_vector(bc_GameController_sense_nearby_units_by_team(m_gc, map_location.get_bc(), radius_squared, team));
   }
 
   std::vector<Unit> sense_nearby_units_by_type(MapLocation map_location, unsigned radius_squared, UnitType type) const {
-    return to_vector(bc_GameController_sense_nearby_units_by_type(m_gc, map_location.to_bc(), radius_squared, type));
+    return to_vector(bc_GameController_sense_nearby_units_by_type(m_gc, map_location.get_bc(), radius_squared, type));
   }
 
   bool has_unit_at_location(MapLocation map_location) const {
-    return bc_GameController_has_unit_at_location(m_gc, map_location.to_bc());
+    return bc_GameController_has_unit_at_location(m_gc, map_location.get_bc());
   }
 
   // XXX: Only use if after has_unit_at_location! Might crash if not
   Unit sense_unit_at_location(MapLocation map_location) const {
-    return bc_GameController_sense_unit_at_location(m_gc, map_location.to_bc());
+    auto ans = bc_GameController_sense_unit_at_location(m_gc, map_location.get_bc());
+    CHECK_ERRORS();
+    return ans;
   }
 
   const AsteroidPattern& get_asteroid_pattern() const { return m_asteroid_pattern; }
@@ -741,17 +742,17 @@ public:
 
   void write_team_array(unsigned index, int value) const {
     bc_GameController_write_team_array(m_gc, index, value);
-    log_error(!has_bc_err(), "ArrayOutOfBounds");
+    CHECK_ERRORS();
   }
 
   void disintegrate_unit(unsigned id) const {
     bc_GameController_disintegrate_unit(m_gc, id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool is_occupiable(MapLocation map_location) const {
-    bool ans = bc_GameController_is_occupiable(m_gc, map_location.to_gc());
-    log_error(!has_bc_err(), "?");
+    auto ans = bc_GameController_is_occupiable(m_gc, map_location.to_gc());
+    CHECK_ERRORS();
     return ans;
   }
 
@@ -765,7 +766,7 @@ public:
 
   void move_robot(unsigned id, Direction direction) const {
     bc_GameController_move_robot(id, direction);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool can_attack(unsigned id, unsigned target_id) const {
@@ -778,7 +779,7 @@ public:
 
   void attack(unsigned id, unsigned target_id) const {
     bc_GameController_attack(id, target_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   ResearchInfo get_research_info() const {
@@ -799,16 +800,16 @@ public:
 
   void harvest(unsigned id, Direction direction) const {
     bc_GameController_harvest(m_gc, id, direction);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
-  bool can_blueprint(unsigned id, UnitType unittype, Direction direction) const {
-    return bc_GameController_can_blueprint(m_gc, id, unittype, direction);
+  bool can_blueprint(unsigned id, UnitType unit_type, Direction direction) const {
+    return bc_GameController_can_blueprint(m_gc, id, unit_type, direction);
   }
 
-  void blueprint(unsigned id, UnitType unittype, Direction direction) const {
-    bc_GameController_blueprint(m_gc, id, unittype, direction);
-    log_error(!has_bc_err(), "?");
+  void blueprint(unsigned id, UnitType unit_type, Direction direction) const {
+    bc_GameController_blueprint(m_gc, id, unit_type, direction);
+    CHECK_ERRORS();
   }
 
   bool can_build(unsigned worker_id, unsigned blueprint_id) const {
@@ -817,7 +818,7 @@ public:
 
   void build(unsigned worker_id, unsigned blueprint_id) const {
     bc_GameController_build(m_gc, worker_id, blueprint_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool can_repair(unsigned worker_id, unsigned structure_id) const {
@@ -826,12 +827,12 @@ public:
 
   void repair(unsigned worker_id, unsigned structure_id) const {
     bc_GameController_repair(m_gc, worker_id, structure_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   void replicate(unsigned worker_id, Direction direction) const {
     bc_GameController_replicate(m_gc, worker_id, direction);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool can_javelin(unsigned knight_id, unsigned target_id) const {
@@ -844,20 +845,20 @@ public:
 
   void javelin(unsigned knight_id, unsigned target_id) const {
     bc_GameController_javelin(m_gc, knight_id, target_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool can_begin_snipe(unsigned ranger_id, MapLocation map_location) const {
-    return bc_GameController_can_begin_snipe(m_gc, ranger_id, map_location.to_bc());
+    return bc_GameController_can_begin_snipe(m_gc, ranger_id, map_location.get_bc());
   }
 
   void begin_snipe(unsigned ranger, MapLocation map_location) const {
-    bc_GameController_begin_snipe(m_gc, ranger_id, map_location.to_bc());
-    log_error(!has_bc_err(), "?");
+    bc_GameController_begin_snipe(m_gc, ranger_id, map_location.get_bc());
+    CHECK_ERRORS();
   }
 
   bool can_begin_blink(unsigned mage_id, MapLocation map_location) const {
-    return bc_GameController_can_begin_blink(m_gc, mage_id, map_location.to_bc());
+    return bc_GameController_can_begin_blink(m_gc, mage_id, map_location.get_bc());
   }
 
   bool is_blink_ready(unsigned mage_id) const {
@@ -865,8 +866,8 @@ public:
   }
 
   void blink(unsigned mage_id, MapLocation map_location) const {
-    bc_GameController_blink(m_gc, mage_id, map_location.to_bc());
-    log_error(!has_bc_err(), "?");
+    bc_GameController_blink(m_gc, mage_id, map_location.get_bc());
+    CHECK_ERRORS();
   }
 
   bool can_heal(unsigned healer_id, unsigned target_id) const {
@@ -879,7 +880,7 @@ public:
 
   void heal(unsigned healer_id, unsigned target_id) const {
     bc_GameController_heal(m_gc, healer_id, target_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool is_overcharge_ready(unsigned healer_id) const {
@@ -888,7 +889,7 @@ public:
 
   void overcharge(unsigned healer_id, unsigned target_id) const {
     bc_GameController_overcharge(m_gc, healer_id, target_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool is_load_ready(unsigned structure_id, unsigned robot_id) const {
@@ -897,7 +898,7 @@ public:
 
   void load(unsigned structure_id, unsigned robot_id) const {
     bc_GameController_load(m_gc, structure_id, robot_id);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
   bool is_unload_ready(unsigned structure_id, Direction direction) const {
@@ -906,16 +907,16 @@ public:
 
   void unload(unsigned structure_id, Direction direction) const {
     bc_GameController_unload(m_gc, structure_id, direction);
-    log_error(!has_bc_err(), "?");
+    CHECK_ERRORS();
   }
 
-  bool can_produce_robot(unsigned factory_id, UnitType unittype) const {
-    return bc_GameController_can_produce_robot(m_gc, factory_id, unittype);
+  bool can_produce_robot(unsigned factory_id, UnitType unit_type) const {
+    return bc_GameController_can_produce_robot(m_gc, factory_id, unit_type);
   }
 
-  void produce_robot(unsigned factory_id, UnitType unittype) const {
-    bc_GameController_produce_robot(m_gc, factory_id, unittype);
-    log_error(!has_bc_err(), "?");
+  void produce_robot(unsigned factory_id, UnitType unit_type) const {
+    bc_GameController_produce_robot(m_gc, factory_id, unit_type);
+    CHECK_ERRORS();
   }
 
   RocketLandingInfo get_rocket_landings() const {
@@ -923,12 +924,12 @@ public:
   }
 
   bool can_launch_rocket(unsigned rocket_id, MapLocation map_location) const {
-    return bc_GameController_can_launch_rocket(m_gc, rocket_id, map_location.to_bc());
+    return bc_GameController_can_launch_rocket(m_gc, rocket_id, map_location.get_bc());
   }
 
   void launch_rocket(unsigned rocket_id, MapLocation map_location) const {
-    bc_GameController_launch_rocket(m_gc, rocket_id, map_location.to_bc());
-    log_error(!has_bc_err(), "?");
+    bc_GameController_launch_rocket(m_gc, rocket_id, map_location.get_bc());
+    CHECK_ERRORS();
   }
 
   bool is_over() const {
@@ -947,6 +948,5 @@ private:
   AsteroidPattern m_asteroid_pattern;
   OrbitPattern    m_orbit_pattern;
 };
-
 
 }
