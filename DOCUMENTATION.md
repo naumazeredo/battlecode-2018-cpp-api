@@ -17,6 +17,7 @@
 `define `[`GET`](#bc_8hpp_1ab493377901f9e03ab1686a2cca092020)            | 
 `define `[`IS`](#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6)            | 
 `define `[`GET_FUNC`](#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f)            | 
+`public int `[`main`](#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4)`()`            | 
 `namespace `[`bc`](#namespacebc) | 
 
 ## Members
@@ -50,6 +51,8 @@
 #### `define `[`IS`](#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6) {#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6}
 
 #### `define `[`GET_FUNC`](#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f) {#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f}
+
+#### `public int `[`main`](#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4)`()` {#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4}
 
 # namespace `bc` {#namespacebc}
 
