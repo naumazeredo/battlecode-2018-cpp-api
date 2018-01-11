@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdlib>
 #include <climits>
 
 #include <bc.h>
@@ -35,7 +36,7 @@ namespace bc {
 
 #define log_error(condition, message)   \
 if (!(condition)) {           \
-  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " message); \
+  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " (message)); \
 }
 #endif
 
@@ -109,7 +110,7 @@ public:
 
   bc_MapLocation* to_bc() const {
     if (!m_map_location)
-      m_map_location = new_bc_MapLocation(Planet, x, y);
+      m_map_location = new_bc_MapLocation(m_planet, m_x, m_y);
     return m_map_location;
   }
 
@@ -154,7 +155,7 @@ public:
   // TODO
   Direction direction_to(MapLocation map_location) const;
 
-  Direction is_adjacent_to(MapLocation map_location) const {
+  bool is_adjacent_to(MapLocation map_location) const {
     return ((*this) != map_location and
             std::abs(m_x - map_location.get_x()) <= 1 and
             std::abs(m_y - map_location.get_y()) <= 1);
