@@ -14,7 +14,9 @@ toc:
 	-echo "Building TOC..."
 	wget https://raw.githubusercontent.com/ekalinin/github-markdown-toc/master/gh-md-toc
 	chmod a+x gh-md-toc
+	sed -i 's/^####/###/' $(DOC)
 	./gh-md-toc $(DOC) > toc
+	sed -i 's/^###/####/' $(DOC)
 	echo "" >> toc
 	cat $(DOC) >> toc
 	mv toc $(DOC)
