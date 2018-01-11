@@ -2,57 +2,7 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`define `[`this`](#bc_8hpp_1a50383951d2a9d4f1a855b2cec5e03274)            | 
-`define `[`S`](#bc_8hpp_1ac4a3ed3432929804c708f7760fb79e28)            | 
-`define `[`S_`](#bc_8hpp_1a25ad9822364edeeff5053f4dcc55e8ef)            | 
-`define `[`S__LINE__`](#bc_8hpp_1a35cfb3c560ad6b3dd3b545386897e1e7)            | 
-`define `[`log_error`](#bc_8hpp_1a7d3df64f0458e6907a65e5bab91b5d04)            | 
-`define `[`CHECK_ERRORS`](#bc_8hpp_1a29afae4e148f12b3be5f86b8eb556b43)            | 
-`define `[`VEC_LEN`](#bc_8hpp_1a1348ea34247f35a73df2a593e0449b3f)            | 
-`define `[`VEC_INDEX`](#bc_8hpp_1a2499513e1ba4edb7418a6cfc690269c1)            | 
-`define `[`VEC_DEL`](#bc_8hpp_1a683e2597e51bc3de1aeebb777e733bdc)            | 
-`define `[`VEC`](#bc_8hpp_1a483e50e39cf6707948ab1cec7a917ba5)            | 
-`define `[`F`](#bc_8hpp_1a203d5b93e4077aa273c7013964a31f9e)            | 
-`define `[`G`](#bc_8hpp_1a542b12af0d18d79eddffd5d5cd08617d)            | 
-`define `[`GET`](#bc_8hpp_1ab493377901f9e03ab1686a2cca092020)            | 
-`define `[`IS`](#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6)            | 
-`define `[`GET_FUNC`](#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f)            | 
-`public int `[`main`](#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4)`()`            | 
 `namespace `[`bc`](#namespacebc) | 
-
-## Members
-
-#### `define `[`this`](#bc_8hpp_1a50383951d2a9d4f1a855b2cec5e03274) {#bc_8hpp_1a50383951d2a9d4f1a855b2cec5e03274}
-
-#### `define `[`S`](#bc_8hpp_1ac4a3ed3432929804c708f7760fb79e28) {#bc_8hpp_1ac4a3ed3432929804c708f7760fb79e28}
-
-#### `define `[`S_`](#bc_8hpp_1a25ad9822364edeeff5053f4dcc55e8ef) {#bc_8hpp_1a25ad9822364edeeff5053f4dcc55e8ef}
-
-#### `define `[`S__LINE__`](#bc_8hpp_1a35cfb3c560ad6b3dd3b545386897e1e7) {#bc_8hpp_1a35cfb3c560ad6b3dd3b545386897e1e7}
-
-#### `define `[`log_error`](#bc_8hpp_1a7d3df64f0458e6907a65e5bab91b5d04) {#bc_8hpp_1a7d3df64f0458e6907a65e5bab91b5d04}
-
-#### `define `[`CHECK_ERRORS`](#bc_8hpp_1a29afae4e148f12b3be5f86b8eb556b43) {#bc_8hpp_1a29afae4e148f12b3be5f86b8eb556b43}
-
-#### `define `[`VEC_LEN`](#bc_8hpp_1a1348ea34247f35a73df2a593e0449b3f) {#bc_8hpp_1a1348ea34247f35a73df2a593e0449b3f}
-
-#### `define `[`VEC_INDEX`](#bc_8hpp_1a2499513e1ba4edb7418a6cfc690269c1) {#bc_8hpp_1a2499513e1ba4edb7418a6cfc690269c1}
-
-#### `define `[`VEC_DEL`](#bc_8hpp_1a683e2597e51bc3de1aeebb777e733bdc) {#bc_8hpp_1a683e2597e51bc3de1aeebb777e733bdc}
-
-#### `define `[`VEC`](#bc_8hpp_1a483e50e39cf6707948ab1cec7a917ba5) {#bc_8hpp_1a483e50e39cf6707948ab1cec7a917ba5}
-
-#### `define `[`F`](#bc_8hpp_1a203d5b93e4077aa273c7013964a31f9e) {#bc_8hpp_1a203d5b93e4077aa273c7013964a31f9e}
-
-#### `define `[`G`](#bc_8hpp_1a542b12af0d18d79eddffd5d5cd08617d) {#bc_8hpp_1a542b12af0d18d79eddffd5d5cd08617d}
-
-#### `define `[`GET`](#bc_8hpp_1ab493377901f9e03ab1686a2cca092020) {#bc_8hpp_1ab493377901f9e03ab1686a2cca092020}
-
-#### `define `[`IS`](#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6) {#bc_8hpp_1a9c774a8c7cfb6b0a853643800c5754b6}
-
-#### `define `[`GET_FUNC`](#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f) {#bc_8hpp_1aa1ff7cbc7eb933682855c6dd7cde948f}
-
-#### `public int `[`main`](#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4)`()` {#main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4}
 
 # namespace `bc` {#namespacebc}
 
@@ -60,75 +10,79 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`VEC`](#bc_8hpp_1a0e50ed714d9df99575157cad91cdf3a9)`(int,bc_Veci32)`            | 
-`public Planet `[`planet_other`](#bc_8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | 
-`public std::string `[`to_string`](#bc_8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | 
-`public int `[`direction_dx`](#bc_8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | 
-`public int `[`direction_dy`](#bc_8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | 
-`public bool `[`direction_is_diagonal`](#bc_8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | 
-`public Direction `[`direction_opposite`](#bc_8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | 
-`public Direction `[`direction_rotate_left`](#bc_8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | 
-`public Direction `[`direction_rotate_right`](#bc_8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | 
-`public  `[`VEC`](#bc_8hpp_1afca6fdda1013bcdd0e9cc2bb3f9f2950)`(`[`MapLocation`](#classbc_1_1MapLocation)`,bc_VecMapLocation)`            | 
-`public  `[`VEC`](#bc_8hpp_1a9817e13d079bfc1b53aee940e682df31)`(unsigned,bc_VecUnitID)`            | 
-`public bool `[`is_robot`](#bc_8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
-`public bool `[`is_structure`](#bc_8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_factory_cost`](#bc_8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_blueprint_cost`](#bc_8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_replicate_cost`](#bc_8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()`            | 
-`public unsigned `[`unit_type_get_value`](#bc_8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)`            | 
-`public  `[`VEC`](#bc_8hpp_1a01f9d163836d2d1e44f058d70ae71d37)`(UnitType,bc_VecUnitType)`            | 
-`public  `[`VEC`](#bc_8hpp_1a89f142a02e354b59d2d4fcc3ea753cb1)`(Unit,bc_VecUnit)`            | 
-`public  `[`VEC`](#bc_8hpp_1a9c34ca57cbec1a1c6c9f26f0bcae4305)`(`[`RocketLanding`](#classbc_1_1RocketLanding)`,bc_VecRocketLanding)`            | 
+`public std::vector< int > `[`to_vector`](#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8)`(bc_Veci32 * vec)`            | 
+`public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | 
+`public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | 
+`public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | 
+`public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | 
+`public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | 
+`public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | 
+`public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | 
+`public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | 
+`public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)`            | 
+`public std::vector< unsigned > `[`to_vector`](#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681)`(bc_VecUnitID * vec)`            | 
+`public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
+`public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)`            | 
+`public unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)`            | 
+`public unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)`            | 
+`public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()`            | 
+`public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)`            | 
+`public std::vector< UnitType > `[`to_vector`](#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25)`(bc_VecUnitType * vec)`            | 
+`public std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`to_vector`](#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07)`(bc_VecUnit * vec)`            | 
+`public std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`to_vector`](#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9)`(bc_VecRocketLanding * vec)`            | 
 `class `[`bc::AsteroidPattern`](#classbc_1_1AsteroidPattern) | 
 `class `[`bc::AsteroidStrike`](#classbc_1_1AsteroidStrike) | 
 `class `[`bc::GameController`](#classbc_1_1GameController) | 
+`class `[`bc::Location`](#classbc_1_1Location) | 
 `class `[`bc::MapLocation`](#classbc_1_1MapLocation) | 
 `class `[`bc::OrbitPattern`](#classbc_1_1OrbitPattern) | 
+`class `[`bc::PlanetMap`](#classbc_1_1PlanetMap) | 
 `class `[`bc::ResearchInfo`](#classbc_1_1ResearchInfo) | 
 `class `[`bc::RocketLanding`](#classbc_1_1RocketLanding) | 
+`class `[`bc::RocketLandingInfo`](#classbc_1_1RocketLandingInfo) | 
+`class `[`bc::Unit`](#classbc_1_1Unit) | 
 
 ## Members
 
-#### `public  `[`VEC`](#bc_8hpp_1a0e50ed714d9df99575157cad91cdf3a9)`(int,bc_Veci32)` {#bc_8hpp_1a0e50ed714d9df99575157cad91cdf3a9}
+#### `public std::vector< int > `[`to_vector`](#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8)`(bc_Veci32 * vec)` {#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8}
 
-#### `public Planet `[`planet_other`](#bc_8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)` {#bc_8hpp_1ab129eac4d03e8919482be61bef489a9b}
+#### `public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)` {#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b}
 
-#### `public std::string `[`to_string`](#bc_8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)` {#bc_8hpp_1a3f46915eb6cdd13b92e04d4079796c76}
+#### `public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)` {#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76}
 
-#### `public int `[`direction_dx`](#bc_8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)` {#bc_8hpp_1a376b234b3b8e965a9a8c4750bf364b8c}
+#### `public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)` {#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c}
 
-#### `public int `[`direction_dy`](#bc_8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)` {#bc_8hpp_1a3f2be7da219ee9c159eafeb922fa67e5}
+#### `public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)` {#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5}
 
-#### `public bool `[`direction_is_diagonal`](#bc_8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)` {#bc_8hpp_1a4d2d6143d7bb8e6be938069c9077083d}
+#### `public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)` {#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d}
 
-#### `public Direction `[`direction_opposite`](#bc_8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)` {#bc_8hpp_1ae56f54d1c284dcbc7954060dac51779d}
+#### `public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)` {#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d}
 
-#### `public Direction `[`direction_rotate_left`](#bc_8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)` {#bc_8hpp_1a31ad846fb08f589e3acae67d8e1b977e}
+#### `public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)` {#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e}
 
-#### `public Direction `[`direction_rotate_right`](#bc_8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)` {#bc_8hpp_1a7050792e84c83b0955b34db7d707e15d}
+#### `public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)` {#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d}
 
-#### `public  `[`VEC`](#bc_8hpp_1afca6fdda1013bcdd0e9cc2bb3f9f2950)`(`[`MapLocation`](#classbc_1_1MapLocation)`,bc_VecMapLocation)` {#bc_8hpp_1afca6fdda1013bcdd0e9cc2bb3f9f2950}
+#### `public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)` {#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15}
 
-#### `public  `[`VEC`](#bc_8hpp_1a9817e13d079bfc1b53aee940e682df31)`(unsigned,bc_VecUnitID)` {#bc_8hpp_1a9817e13d079bfc1b53aee940e682df31}
+#### `public std::vector< unsigned > `[`to_vector`](#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681)`(bc_VecUnitID * vec)` {#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681}
 
-#### `public bool `[`is_robot`](#bc_8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)` {#bc_8hpp_1a2ed320d0f77bc58e62def3a05bff51bd}
+#### `public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)` {#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd}
 
-#### `public bool `[`is_structure`](#bc_8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)` {#bc_8hpp_1a367f7b1ad4bcce27bbd94a536393a89a}
+#### `public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)` {#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a}
 
-#### `public unsigned `[`unit_type_get_factory_cost`](#bc_8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)` {#bc_8hpp_1ac2a1295865dd3ff78b0876dd8de3f353}
+#### `public unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)` {#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353}
 
-#### `public unsigned `[`unit_type_get_blueprint_cost`](#bc_8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)` {#bc_8hpp_1a772eff6f3ed29a705f5d0a49774281ee}
+#### `public unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)` {#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee}
 
-#### `public unsigned `[`unit_type_get_replicate_cost`](#bc_8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()` {#bc_8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b}
+#### `public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()` {#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b}
 
-#### `public unsigned `[`unit_type_get_value`](#bc_8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)` {#bc_8hpp_1a31345858842950badc7c9e191ba5fa5b}
+#### `public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)` {#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b}
 
-#### `public  `[`VEC`](#bc_8hpp_1a01f9d163836d2d1e44f058d70ae71d37)`(UnitType,bc_VecUnitType)` {#bc_8hpp_1a01f9d163836d2d1e44f058d70ae71d37}
+#### `public std::vector< UnitType > `[`to_vector`](#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25)`(bc_VecUnitType * vec)` {#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25}
 
-#### `public  `[`VEC`](#bc_8hpp_1a89f142a02e354b59d2d4fcc3ea753cb1)`(Unit,bc_VecUnit)` {#bc_8hpp_1a89f142a02e354b59d2d4fcc3ea753cb1}
+#### `public std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`to_vector`](#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07)`(bc_VecUnit * vec)` {#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07}
 
-#### `public  `[`VEC`](#bc_8hpp_1a9c34ca57cbec1a1c6c9f26f0bcae4305)`(`[`RocketLanding`](#classbc_1_1RocketLanding)`,bc_VecRocketLanding)` {#bc_8hpp_1a9c34ca57cbec1a1c6c9f26f0bcae4305}
+#### `public std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`to_vector`](#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9)`(bc_VecRocketLanding * vec)` {#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9}
 
 # class `bc::AsteroidPattern` {#classbc_1_1AsteroidPattern}
 
@@ -181,23 +135,23 @@
 `public inline unsigned `[`get_round`](#classbc_1_1GameController_1a1d5f54077115253ef2a4a3185b563b25)`() const` | 
 `public inline Planet `[`get_planet`](#classbc_1_1GameController_1ad50934738b703c0dac02fc2a85a72a10)`() const` | 
 `public inline Team `[`get_team`](#classbc_1_1GameController_1a5254f80cb4350fb98ddf0ba4fafb036d)`() const` | 
-`public inline const PlanetMap & `[`get_starting_planet`](#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973)`(Planet planet)` | 
-`public inline const PlanetMap & `[`get_earth_map`](#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51)`() const` | 
-`public inline const PlanetMap & `[`get_mars_map`](#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e)`() const` | 
+`public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_starting_planet`](#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973)`(Planet planet)` | 
+`public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_earth_map`](#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51)`() const` | 
+`public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_mars_map`](#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e)`() const` | 
 `public inline unsigned `[`get_karbonite`](#classbc_1_1GameController_1a54f8745e7fcf48c796689381c2177f36)`() const` | 
-`public inline Unit `[`get_unit`](#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47)`(unsigned id) const` | 
-`public inline std::vector< Unit > `[`get_units`](#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619)`() const` | 
-`public inline std::vector< Unit > `[`get_my_units`](#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0)`() const` | 
-`public inline std::vector< Unit > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` | 
+`public inline `[`Unit`](#classbc_1_1Unit)` `[`get_unit`](#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47)`(unsigned id) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units`](#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619)`() const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_my_units`](#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0)`() const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` | 
 `public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
 `public inline std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`get_all_locations_within`](#classbc_1_1GameController_1a4e45a2febc2700e6cb50b98a692530fb)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` | 
 `public inline bool `[`can_sense_location`](#classbc_1_1GameController_1a77f912c59dac7c56000b06ff6166feb7)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
 `public inline bool `[`can_sense_unit`](#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27)`(unsigned id) const` | 
-`public inline std::vector< Unit > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` | 
-`public inline std::vector< Unit > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` | 
-`public inline std::vector< Unit > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` | 
 `public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline Unit `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
 `public inline const `[`AsteroidPattern`](#classbc_1_1AsteroidPattern)` & `[`get_asteroid_pattern`](#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607)`() const` | 
 `public inline const `[`OrbitPattern`](#classbc_1_1OrbitPattern)` & `[`get_orbit_pattern`](#classbc_1_1GameController_1aff7c9034b27f65de970dd175c0d594c2)`() const` | 
 `public inline unsigned `[`get_current_duration_of_flight`](#classbc_1_1GameController_1a360710a324bc0ad53186ba0946a1e661)`() const` | 
@@ -242,7 +196,7 @@
 `public inline void `[`unload`](#classbc_1_1GameController_1a2cfce8136583d6c5049355b3f8d5086f)`(unsigned structure_id,Direction direction) const` | 
 `public inline bool `[`can_produce_robot`](#classbc_1_1GameController_1a1b2f66ca3750889f429f2784dd2d2fa1)`(unsigned factory_id,UnitType unit_type) const` | 
 `public inline void `[`produce_robot`](#classbc_1_1GameController_1ad23baf92fdaa8b0a971ba0cf921046f6)`(unsigned factory_id,UnitType unit_type) const` | 
-`public inline RocketLandingInfo `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` | 
+`public inline `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo)` `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` | 
 `public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
 `public inline void `[`launch_rocket`](#classbc_1_1GameController_1ad7730457a175c0e02b673e9048ce9c84)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
 `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` | 
@@ -262,21 +216,21 @@
 
 #### `public inline Team `[`get_team`](#classbc_1_1GameController_1a5254f80cb4350fb98ddf0ba4fafb036d)`() const` {#classbc_1_1GameController_1a5254f80cb4350fb98ddf0ba4fafb036d}
 
-#### `public inline const PlanetMap & `[`get_starting_planet`](#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973)`(Planet planet)` {#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973}
+#### `public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_starting_planet`](#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973)`(Planet planet)` {#classbc_1_1GameController_1a0ebb9fbc48d6022fd636f258e9679973}
 
-#### `public inline const PlanetMap & `[`get_earth_map`](#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51)`() const` {#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51}
+#### `public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_earth_map`](#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51)`() const` {#classbc_1_1GameController_1a79693f1105a141212b52126a1fa0de51}
 
-#### `public inline const PlanetMap & `[`get_mars_map`](#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e)`() const` {#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e}
+#### `public inline const `[`PlanetMap`](#classbc_1_1PlanetMap)` & `[`get_mars_map`](#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e)`() const` {#classbc_1_1GameController_1a000f53d4e933b19d2432fd734ffa4c9e}
 
 #### `public inline unsigned `[`get_karbonite`](#classbc_1_1GameController_1a54f8745e7fcf48c796689381c2177f36)`() const` {#classbc_1_1GameController_1a54f8745e7fcf48c796689381c2177f36}
 
-#### `public inline Unit `[`get_unit`](#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47)`(unsigned id) const` {#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47}
+#### `public inline `[`Unit`](#classbc_1_1Unit)` `[`get_unit`](#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47)`(unsigned id) const` {#classbc_1_1GameController_1a53cb3fc02161c27e54edd14269c0fe47}
 
-#### `public inline std::vector< Unit > `[`get_units`](#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619)`() const` {#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units`](#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619)`() const` {#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619}
 
-#### `public inline std::vector< Unit > `[`get_my_units`](#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0)`() const` {#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_my_units`](#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0)`() const` {#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0}
 
-#### `public inline std::vector< Unit > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` {#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` {#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53}
 
 #### `public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` {#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691}
 
@@ -286,15 +240,15 @@
 
 #### `public inline bool `[`can_sense_unit`](#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27)`(unsigned id) const` {#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27}
 
-#### `public inline std::vector< Unit > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` {#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` {#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a}
 
-#### `public inline std::vector< Unit > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` {#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` {#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1}
 
-#### `public inline std::vector< Unit > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` {#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2}
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` {#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2}
 
 #### `public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` {#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107}
 
-#### `public inline Unit `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` {#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2}
+#### `public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` {#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2}
 
 #### `public inline const `[`AsteroidPattern`](#classbc_1_1AsteroidPattern)` & `[`get_asteroid_pattern`](#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607)`() const` {#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607}
 
@@ -384,7 +338,7 @@
 
 #### `public inline void `[`produce_robot`](#classbc_1_1GameController_1ad23baf92fdaa8b0a971ba0cf921046f6)`(unsigned factory_id,UnitType unit_type) const` {#classbc_1_1GameController_1ad23baf92fdaa8b0a971ba0cf921046f6}
 
-#### `public inline RocketLandingInfo `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` {#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3}
+#### `public inline `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo)` `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` {#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3}
 
 #### `public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` {#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f}
 
@@ -393,6 +347,51 @@
 #### `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` {#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b}
 
 #### `public inline Team `[`get_winning_team`](#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7)`() const` {#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7}
+
+# class `bc::Location` {#classbc_1_1Location}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`Location`](#classbc_1_1Location_1a43ba54b5f426dd24fd7fea853ce5c317)`()` | 
+`public inline  `[`Location`](#classbc_1_1Location_1add423c24b5c085f94566eb11deedb5eb)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | 
+`public inline  `[`Location`](#classbc_1_1Location_1a92c667b813c9cfa4098cebaa302734c5)`(unsigned garrison_id)` | 
+`public inline  `[`Location`](#classbc_1_1Location_1afe850c4a72ca963384f83acbcdfb741c)`(bc_Location * location)` | 
+`public inline bool `[`is_on_map`](#classbc_1_1Location_1a015b69417ffccdc52a83b564629969d2)`() const` | 
+`public inline bool `[`is_on_planet`](#classbc_1_1Location_1a55c0cfb8c723796f9b599f2f221c73ed)`(Planet planet) const` | 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`get_map_location`](#classbc_1_1Location_1a4f808381446b013ff22abe857069ad23)`() const` | 
+`public inline bool `[`is_in_garrison`](#classbc_1_1Location_1ab20057515771adf0f40f1a5a7adb9dee)`() const` | 
+`public inline int `[`get_structure`](#classbc_1_1Location_1aa5f04b7a6068504184c119bbfd9ea18f)`() const` | 
+`public inline bool `[`is_in_space`](#classbc_1_1Location_1aadb76f4fe212663cfe7f5c7a850bc12f)`() const` | 
+`public inline bool `[`is_adjacent_to`](#classbc_1_1Location_1a43d991642f7b8792cd28ae8a8d5a6a76)`(`[`Location`](#classbc_1_1Location)` location)` | 
+`public inline bool `[`is_within_range`](#classbc_1_1Location_1a1e32ea6b52c81b834b0c4588c451457f)`(unsigned range,`[`Location`](#classbc_1_1Location)` location)` | 
+
+## Members
+
+#### `public inline  `[`Location`](#classbc_1_1Location_1a43ba54b5f426dd24fd7fea853ce5c317)`()` {#classbc_1_1Location_1a43ba54b5f426dd24fd7fea853ce5c317}
+
+#### `public inline  `[`Location`](#classbc_1_1Location_1add423c24b5c085f94566eb11deedb5eb)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` {#classbc_1_1Location_1add423c24b5c085f94566eb11deedb5eb}
+
+#### `public inline  `[`Location`](#classbc_1_1Location_1a92c667b813c9cfa4098cebaa302734c5)`(unsigned garrison_id)` {#classbc_1_1Location_1a92c667b813c9cfa4098cebaa302734c5}
+
+#### `public inline  `[`Location`](#classbc_1_1Location_1afe850c4a72ca963384f83acbcdfb741c)`(bc_Location * location)` {#classbc_1_1Location_1afe850c4a72ca963384f83acbcdfb741c}
+
+#### `public inline bool `[`is_on_map`](#classbc_1_1Location_1a015b69417ffccdc52a83b564629969d2)`() const` {#classbc_1_1Location_1a015b69417ffccdc52a83b564629969d2}
+
+#### `public inline bool `[`is_on_planet`](#classbc_1_1Location_1a55c0cfb8c723796f9b599f2f221c73ed)`(Planet planet) const` {#classbc_1_1Location_1a55c0cfb8c723796f9b599f2f221c73ed}
+
+#### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`get_map_location`](#classbc_1_1Location_1a4f808381446b013ff22abe857069ad23)`() const` {#classbc_1_1Location_1a4f808381446b013ff22abe857069ad23}
+
+#### `public inline bool `[`is_in_garrison`](#classbc_1_1Location_1ab20057515771adf0f40f1a5a7adb9dee)`() const` {#classbc_1_1Location_1ab20057515771adf0f40f1a5a7adb9dee}
+
+#### `public inline int `[`get_structure`](#classbc_1_1Location_1aa5f04b7a6068504184c119bbfd9ea18f)`() const` {#classbc_1_1Location_1aa5f04b7a6068504184c119bbfd9ea18f}
+
+#### `public inline bool `[`is_in_space`](#classbc_1_1Location_1aadb76f4fe212663cfe7f5c7a850bc12f)`() const` {#classbc_1_1Location_1aadb76f4fe212663cfe7f5c7a850bc12f}
+
+#### `public inline bool `[`is_adjacent_to`](#classbc_1_1Location_1a43d991642f7b8792cd28ae8a8d5a6a76)`(`[`Location`](#classbc_1_1Location)` location)` {#classbc_1_1Location_1a43d991642f7b8792cd28ae8a8d5a6a76}
+
+#### `public inline bool `[`is_within_range`](#classbc_1_1Location_1a1e32ea6b52c81b834b0c4588c451457f)`(unsigned range,`[`Location`](#classbc_1_1Location)` location)` {#classbc_1_1Location_1a1e32ea6b52c81b834b0c4588c451457f}
 
 # class `bc::MapLocation` {#classbc_1_1MapLocation}
 
@@ -502,6 +501,45 @@
 
 #### `public inline unsigned `[`duration`](#classbc_1_1OrbitPattern_1ae51c9df8b7562b3963a13ad45b14a101)`(unsigned round) const` {#classbc_1_1OrbitPattern_1ae51c9df8b7562b3963a13ad45b14a101}
 
+# class `bc::PlanetMap` {#classbc_1_1PlanetMap}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`PlanetMap`](#classbc_1_1PlanetMap_1adbb40a38be6b197ff711ed727c1d9ef4)`()` | 
+`public inline  `[`PlanetMap`](#classbc_1_1PlanetMap_1a3b970b469fc63b69d712425c2c6e534e)`(bc_PlanetMap * planet_map)` | 
+`public inline  `[`~PlanetMap`](#classbc_1_1PlanetMap_1a23993bb2f191fdf2e7067c6d5fb5b515)`()` | 
+`public inline Planet `[`get_planet`](#classbc_1_1PlanetMap_1ad4f666a39d7d1a67150562901e457a6f)`() const` | 
+`public inline unsigned `[`get_height`](#classbc_1_1PlanetMap_1a0075bdf4c8363229047875317dc5ff35)`() const` | 
+`public inline unsigned `[`get_width`](#classbc_1_1PlanetMap_1ae58125fd7979ac1f5ee215ac7785a572)`() const` | 
+`public inline const std::vector< `[`Unit`](#classbc_1_1Unit)` > & `[`get_initial_units`](#classbc_1_1PlanetMap_1ae8f7ff10beed0194b6ce49ec8286a55f)`() const` | 
+`public inline bool `[`is_on_map`](#classbc_1_1PlanetMap_1aeff5395b01ec946b0337e148fd33caec)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & location) const` | 
+`public inline bool `[`is_passable_terrain_at`](#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline unsigned `[`get_initial_karbonite_at`](#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+
+## Members
+
+#### `public inline  `[`PlanetMap`](#classbc_1_1PlanetMap_1adbb40a38be6b197ff711ed727c1d9ef4)`()` {#classbc_1_1PlanetMap_1adbb40a38be6b197ff711ed727c1d9ef4}
+
+#### `public inline  `[`PlanetMap`](#classbc_1_1PlanetMap_1a3b970b469fc63b69d712425c2c6e534e)`(bc_PlanetMap * planet_map)` {#classbc_1_1PlanetMap_1a3b970b469fc63b69d712425c2c6e534e}
+
+#### `public inline  `[`~PlanetMap`](#classbc_1_1PlanetMap_1a23993bb2f191fdf2e7067c6d5fb5b515)`()` {#classbc_1_1PlanetMap_1a23993bb2f191fdf2e7067c6d5fb5b515}
+
+#### `public inline Planet `[`get_planet`](#classbc_1_1PlanetMap_1ad4f666a39d7d1a67150562901e457a6f)`() const` {#classbc_1_1PlanetMap_1ad4f666a39d7d1a67150562901e457a6f}
+
+#### `public inline unsigned `[`get_height`](#classbc_1_1PlanetMap_1a0075bdf4c8363229047875317dc5ff35)`() const` {#classbc_1_1PlanetMap_1a0075bdf4c8363229047875317dc5ff35}
+
+#### `public inline unsigned `[`get_width`](#classbc_1_1PlanetMap_1ae58125fd7979ac1f5ee215ac7785a572)`() const` {#classbc_1_1PlanetMap_1ae58125fd7979ac1f5ee215ac7785a572}
+
+#### `public inline const std::vector< `[`Unit`](#classbc_1_1Unit)` > & `[`get_initial_units`](#classbc_1_1PlanetMap_1ae8f7ff10beed0194b6ce49ec8286a55f)`() const` {#classbc_1_1PlanetMap_1ae8f7ff10beed0194b6ce49ec8286a55f}
+
+#### `public inline bool `[`is_on_map`](#classbc_1_1PlanetMap_1aeff5395b01ec946b0337e148fd33caec)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & location) const` {#classbc_1_1PlanetMap_1aeff5395b01ec946b0337e148fd33caec}
+
+#### `public inline bool `[`is_passable_terrain_at`](#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` {#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224}
+
+#### `public inline unsigned `[`get_initial_karbonite_at`](#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` {#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234}
+
 # class `bc::ResearchInfo` {#classbc_1_1ResearchInfo}
 
 ## Summary
@@ -555,5 +593,164 @@
 #### `public inline unsigned `[`get_rocket_id`](#classbc_1_1RocketLanding_1a8a4261266192a1bc6320da13d7fc18ce)`() const` {#classbc_1_1RocketLanding_1a8a4261266192a1bc6320da13d7fc18ce}
 
 #### `public inline const `[`MapLocation`](#classbc_1_1MapLocation)` & `[`get_destination`](#classbc_1_1RocketLanding_1a90655bf5123e039b607c930dd1f48a1e)`() const` {#classbc_1_1RocketLanding_1a90655bf5123e039b607c930dd1f48a1e}
+
+# class `bc::RocketLandingInfo` {#classbc_1_1RocketLandingInfo}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo_1afc3c4a4358f025f2489b1240fccbc00a)`(bc_RocketLandingInfo * rocket_landing_info)` | 
+`public inline  `[`~RocketLandingInfo`](#classbc_1_1RocketLandingInfo_1a340b47ce391d7ce1b531ba54c35433da)`()` | 
+`public inline std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`get_landings_on_round`](#classbc_1_1RocketLandingInfo_1ada1ff7da67865d9fb919f2f974f1d724)`(unsigned round)` | 
+
+## Members
+
+#### `public inline  `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo_1afc3c4a4358f025f2489b1240fccbc00a)`(bc_RocketLandingInfo * rocket_landing_info)` {#classbc_1_1RocketLandingInfo_1afc3c4a4358f025f2489b1240fccbc00a}
+
+#### `public inline  `[`~RocketLandingInfo`](#classbc_1_1RocketLandingInfo_1a340b47ce391d7ce1b531ba54c35433da)`()` {#classbc_1_1RocketLandingInfo_1a340b47ce391d7ce1b531ba54c35433da}
+
+#### `public inline std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`get_landings_on_round`](#classbc_1_1RocketLandingInfo_1ada1ff7da67865d9fb919f2f974f1d724)`(unsigned round)` {#classbc_1_1RocketLandingInfo_1ada1ff7da67865d9fb919f2f974f1d724}
+
+# class `bc::Unit` {#classbc_1_1Unit}
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`Unit`](#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20)`(bc_Unit * unit)` | 
+`public inline  `[`~Unit`](#classbc_1_1Unit_1a97390e2a82681e3b6f0197b1ff6bf253)`()` | 
+`public inline  `[`Unit`](#classbc_1_1Unit_1abbd01a2f8804a90592f98a8f2011123d)`(const `[`Unit`](#classbc_1_1Unit)` & unit)` | 
+`public inline `[`Unit`](#classbc_1_1Unit)` & `[`operator=`](#classbc_1_1Unit_1a4ef7b8486af4cbb33688a4027015ee3c)`(const `[`Unit`](#classbc_1_1Unit)` & unit)` | 
+`public inline  `[`Unit`](#classbc_1_1Unit_1aa5a179321e59b42a0c070146dd0ee069)`(`[`Unit`](#classbc_1_1Unit)` && unit)` | 
+`public inline `[`Unit`](#classbc_1_1Unit)` & `[`operator=`](#classbc_1_1Unit_1a81c518e519ebb7a85ad5f46a4232737a)`(`[`Unit`](#classbc_1_1Unit)` && unit)` | 
+`public inline UnitType `[`get_unit_type`](#classbc_1_1Unit_1a2895d7f4687e1db8ad427a47ff709f5e)`() const` | 
+`public inline Team `[`get_team`](#classbc_1_1Unit_1ac12f4a7ed90083f5e94276433dbf2fe1)`() const` | 
+`public inline `[`Location`](#classbc_1_1Location)` `[`get_location`](#classbc_1_1Unit_1a6e02bd4fd491a7fdc698d2b64f485e37)`() const` | 
+`public inline unsigned `[`get_id`](#classbc_1_1Unit_1a0651ba67f733ebc6974e5eda99e69d82)`() const` | 
+`public inline unsigned `[`get_health`](#classbc_1_1Unit_1a87a7228914b309722d455328ef668fe0)`() const` | 
+`public inline unsigned `[`get_max_health`](#classbc_1_1Unit_1a2331dcd04bbe2fd2484a7722352774d5)`() const` | 
+`public inline unsigned `[`get_vision_range`](#classbc_1_1Unit_1a8685f362be1643863207fc39c0c0e24e)`() const` | 
+`public inline int `[`get_damage`](#classbc_1_1Unit_1a19096593adc701760c2e80a17c2ae3c9)`() const` | 
+`public inline unsigned `[`get_movement_heat`](#classbc_1_1Unit_1a8123c09b7340e2ff4f579467810c8093)`() const` | 
+`public inline unsigned `[`get_movement_cooldown`](#classbc_1_1Unit_1a48d43363f0f177f2fd2d3cd5f1323af4)`() const` | 
+`public inline unsigned `[`get_attack_heat`](#classbc_1_1Unit_1add0f7bf216e63d40ea24f02f2da9295e)`() const` | 
+`public inline unsigned `[`get_attack_cooldown`](#classbc_1_1Unit_1ab2e4c013c576fad6c409380935e9217f)`() const` | 
+`public inline unsigned `[`get_attack_range`](#classbc_1_1Unit_1a477039dce8a9f8786ede9c4b7d007248)`() const` | 
+`public inline unsigned `[`get_ability_heat`](#classbc_1_1Unit_1a452e5a308876d03b4f351181ef67df98)`() const` | 
+`public inline unsigned `[`get_ability_cooldown`](#classbc_1_1Unit_1a4238419858b61b0b40ae6d082bf4e7f2)`() const` | 
+`public inline unsigned `[`get_ability_range`](#classbc_1_1Unit_1abd3162f3e9de901318dd34b23a71f691)`() const` | 
+`public inline bool `[`is_ability_unlocked`](#classbc_1_1Unit_1a67299f3a941b7ea1224e247235a87de8)`() const` | 
+`public inline bool `[`worker_has_acted`](#classbc_1_1Unit_1aeb00fdbf8583d58bb0a2ee6929a9188c)`() const` | 
+`public inline unsigned `[`get_worker_build_health`](#classbc_1_1Unit_1ae22bd1a4a036a61c6195e68dad0bf871)`() const` | 
+`public inline unsigned `[`get_worker_repair_health`](#classbc_1_1Unit_1a9fa7747b481c880afe6b70966fa0b756)`() const` | 
+`public inline unsigned `[`get_worker_harvest_amount`](#classbc_1_1Unit_1aa50fa48bccd3cd30361249680d054fb7)`() const` | 
+`public inline unsigned `[`get_knight_defense`](#classbc_1_1Unit_1a2e1e57d82edb483233dff0c5fea0a0ea)`() const` | 
+`public inline unsigned `[`get_ranger_cannot_attack_range`](#classbc_1_1Unit_1ace00cd7b45f9a8d439b9b3341bb7f0bb)`() const` | 
+`public inline unsigned `[`get_ranger_max_countdown`](#classbc_1_1Unit_1ad76f2c791d62c1edc7a409826ba82d7f)`() const` | 
+`public inline unsigned `[`get_ranger_countdown`](#classbc_1_1Unit_1aaa13e6f01577032471caaeb32bdc54e1)`() const` | 
+`public inline bool `[`ranger_is_sniping`](#classbc_1_1Unit_1a1681c51a005c3271248804331b8b59bd)`() const` | 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`get_ranger_target_location`](#classbc_1_1Unit_1a4fa10106b45c19ae124b92e102d4dbd9)`() const` | 
+`public inline unsigned `[`get_healer_self_heal_amount`](#classbc_1_1Unit_1a0ae50e9b417de1ffc12b793ed60bfbfb)`() const` | 
+`public inline bool `[`structure_is_built`](#classbc_1_1Unit_1ac907166215faf9372a9f2cc7a0a2ce35)`() const` | 
+`public inline unsigned `[`get_structure_max_capacity`](#classbc_1_1Unit_1a5c507cf496f05ef159912e7b8e6b193c)`() const` | 
+`public inline std::vector< unsigned > `[`get_structure_garrison`](#classbc_1_1Unit_1a426a6f40cf51cd868de044156e3081af)`() const` | 
+`public inline bool `[`is_factory_producing`](#classbc_1_1Unit_1a6ffbd965a8a67b737b864001f5b48b28)`() const` | 
+`public inline UnitType `[`get_factory_unit_type`](#classbc_1_1Unit_1aee3e3badc7a2669b58924cf95d2a883b)`() const` | 
+`public inline unsigned `[`get_factory_rounds_left`](#classbc_1_1Unit_1a1e0eb59e5af3a75b8314ae154ab81db7)`() const` | 
+`public inline unsigned `[`get_factory_max_rounds_left`](#classbc_1_1Unit_1a933aca6455be358cb1f70422ccb9c94d)`() const` | 
+`public inline bool `[`rocket_is_used`](#classbc_1_1Unit_1ac661e30c2538cd5543c60a84c3bb5cd8)`() const` | 
+`public inline int `[`get_rocket_blast_damage`](#classbc_1_1Unit_1abdb17ac7cf496f5e29718474b348bcbd)`() const` | 
+`public inline unsigned `[`get_rocket_travel_time_decrease`](#classbc_1_1Unit_1ab0b2b8ea6b1035d2ba68f6f1474594c8)`() const` | 
+
+## Members
+
+#### `public inline  `[`Unit`](#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20)`(bc_Unit * unit)` {#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20}
+
+#### `public inline  `[`~Unit`](#classbc_1_1Unit_1a97390e2a82681e3b6f0197b1ff6bf253)`()` {#classbc_1_1Unit_1a97390e2a82681e3b6f0197b1ff6bf253}
+
+#### `public inline  `[`Unit`](#classbc_1_1Unit_1abbd01a2f8804a90592f98a8f2011123d)`(const `[`Unit`](#classbc_1_1Unit)` & unit)` {#classbc_1_1Unit_1abbd01a2f8804a90592f98a8f2011123d}
+
+#### `public inline `[`Unit`](#classbc_1_1Unit)` & `[`operator=`](#classbc_1_1Unit_1a4ef7b8486af4cbb33688a4027015ee3c)`(const `[`Unit`](#classbc_1_1Unit)` & unit)` {#classbc_1_1Unit_1a4ef7b8486af4cbb33688a4027015ee3c}
+
+#### `public inline  `[`Unit`](#classbc_1_1Unit_1aa5a179321e59b42a0c070146dd0ee069)`(`[`Unit`](#classbc_1_1Unit)` && unit)` {#classbc_1_1Unit_1aa5a179321e59b42a0c070146dd0ee069}
+
+#### `public inline `[`Unit`](#classbc_1_1Unit)` & `[`operator=`](#classbc_1_1Unit_1a81c518e519ebb7a85ad5f46a4232737a)`(`[`Unit`](#classbc_1_1Unit)` && unit)` {#classbc_1_1Unit_1a81c518e519ebb7a85ad5f46a4232737a}
+
+#### `public inline UnitType `[`get_unit_type`](#classbc_1_1Unit_1a2895d7f4687e1db8ad427a47ff709f5e)`() const` {#classbc_1_1Unit_1a2895d7f4687e1db8ad427a47ff709f5e}
+
+#### `public inline Team `[`get_team`](#classbc_1_1Unit_1ac12f4a7ed90083f5e94276433dbf2fe1)`() const` {#classbc_1_1Unit_1ac12f4a7ed90083f5e94276433dbf2fe1}
+
+#### `public inline `[`Location`](#classbc_1_1Location)` `[`get_location`](#classbc_1_1Unit_1a6e02bd4fd491a7fdc698d2b64f485e37)`() const` {#classbc_1_1Unit_1a6e02bd4fd491a7fdc698d2b64f485e37}
+
+#### `public inline unsigned `[`get_id`](#classbc_1_1Unit_1a0651ba67f733ebc6974e5eda99e69d82)`() const` {#classbc_1_1Unit_1a0651ba67f733ebc6974e5eda99e69d82}
+
+#### `public inline unsigned `[`get_health`](#classbc_1_1Unit_1a87a7228914b309722d455328ef668fe0)`() const` {#classbc_1_1Unit_1a87a7228914b309722d455328ef668fe0}
+
+#### `public inline unsigned `[`get_max_health`](#classbc_1_1Unit_1a2331dcd04bbe2fd2484a7722352774d5)`() const` {#classbc_1_1Unit_1a2331dcd04bbe2fd2484a7722352774d5}
+
+#### `public inline unsigned `[`get_vision_range`](#classbc_1_1Unit_1a8685f362be1643863207fc39c0c0e24e)`() const` {#classbc_1_1Unit_1a8685f362be1643863207fc39c0c0e24e}
+
+#### `public inline int `[`get_damage`](#classbc_1_1Unit_1a19096593adc701760c2e80a17c2ae3c9)`() const` {#classbc_1_1Unit_1a19096593adc701760c2e80a17c2ae3c9}
+
+#### `public inline unsigned `[`get_movement_heat`](#classbc_1_1Unit_1a8123c09b7340e2ff4f579467810c8093)`() const` {#classbc_1_1Unit_1a8123c09b7340e2ff4f579467810c8093}
+
+#### `public inline unsigned `[`get_movement_cooldown`](#classbc_1_1Unit_1a48d43363f0f177f2fd2d3cd5f1323af4)`() const` {#classbc_1_1Unit_1a48d43363f0f177f2fd2d3cd5f1323af4}
+
+#### `public inline unsigned `[`get_attack_heat`](#classbc_1_1Unit_1add0f7bf216e63d40ea24f02f2da9295e)`() const` {#classbc_1_1Unit_1add0f7bf216e63d40ea24f02f2da9295e}
+
+#### `public inline unsigned `[`get_attack_cooldown`](#classbc_1_1Unit_1ab2e4c013c576fad6c409380935e9217f)`() const` {#classbc_1_1Unit_1ab2e4c013c576fad6c409380935e9217f}
+
+#### `public inline unsigned `[`get_attack_range`](#classbc_1_1Unit_1a477039dce8a9f8786ede9c4b7d007248)`() const` {#classbc_1_1Unit_1a477039dce8a9f8786ede9c4b7d007248}
+
+#### `public inline unsigned `[`get_ability_heat`](#classbc_1_1Unit_1a452e5a308876d03b4f351181ef67df98)`() const` {#classbc_1_1Unit_1a452e5a308876d03b4f351181ef67df98}
+
+#### `public inline unsigned `[`get_ability_cooldown`](#classbc_1_1Unit_1a4238419858b61b0b40ae6d082bf4e7f2)`() const` {#classbc_1_1Unit_1a4238419858b61b0b40ae6d082bf4e7f2}
+
+#### `public inline unsigned `[`get_ability_range`](#classbc_1_1Unit_1abd3162f3e9de901318dd34b23a71f691)`() const` {#classbc_1_1Unit_1abd3162f3e9de901318dd34b23a71f691}
+
+#### `public inline bool `[`is_ability_unlocked`](#classbc_1_1Unit_1a67299f3a941b7ea1224e247235a87de8)`() const` {#classbc_1_1Unit_1a67299f3a941b7ea1224e247235a87de8}
+
+#### `public inline bool `[`worker_has_acted`](#classbc_1_1Unit_1aeb00fdbf8583d58bb0a2ee6929a9188c)`() const` {#classbc_1_1Unit_1aeb00fdbf8583d58bb0a2ee6929a9188c}
+
+#### `public inline unsigned `[`get_worker_build_health`](#classbc_1_1Unit_1ae22bd1a4a036a61c6195e68dad0bf871)`() const` {#classbc_1_1Unit_1ae22bd1a4a036a61c6195e68dad0bf871}
+
+#### `public inline unsigned `[`get_worker_repair_health`](#classbc_1_1Unit_1a9fa7747b481c880afe6b70966fa0b756)`() const` {#classbc_1_1Unit_1a9fa7747b481c880afe6b70966fa0b756}
+
+#### `public inline unsigned `[`get_worker_harvest_amount`](#classbc_1_1Unit_1aa50fa48bccd3cd30361249680d054fb7)`() const` {#classbc_1_1Unit_1aa50fa48bccd3cd30361249680d054fb7}
+
+#### `public inline unsigned `[`get_knight_defense`](#classbc_1_1Unit_1a2e1e57d82edb483233dff0c5fea0a0ea)`() const` {#classbc_1_1Unit_1a2e1e57d82edb483233dff0c5fea0a0ea}
+
+#### `public inline unsigned `[`get_ranger_cannot_attack_range`](#classbc_1_1Unit_1ace00cd7b45f9a8d439b9b3341bb7f0bb)`() const` {#classbc_1_1Unit_1ace00cd7b45f9a8d439b9b3341bb7f0bb}
+
+#### `public inline unsigned `[`get_ranger_max_countdown`](#classbc_1_1Unit_1ad76f2c791d62c1edc7a409826ba82d7f)`() const` {#classbc_1_1Unit_1ad76f2c791d62c1edc7a409826ba82d7f}
+
+#### `public inline unsigned `[`get_ranger_countdown`](#classbc_1_1Unit_1aaa13e6f01577032471caaeb32bdc54e1)`() const` {#classbc_1_1Unit_1aaa13e6f01577032471caaeb32bdc54e1}
+
+#### `public inline bool `[`ranger_is_sniping`](#classbc_1_1Unit_1a1681c51a005c3271248804331b8b59bd)`() const` {#classbc_1_1Unit_1a1681c51a005c3271248804331b8b59bd}
+
+#### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`get_ranger_target_location`](#classbc_1_1Unit_1a4fa10106b45c19ae124b92e102d4dbd9)`() const` {#classbc_1_1Unit_1a4fa10106b45c19ae124b92e102d4dbd9}
+
+#### `public inline unsigned `[`get_healer_self_heal_amount`](#classbc_1_1Unit_1a0ae50e9b417de1ffc12b793ed60bfbfb)`() const` {#classbc_1_1Unit_1a0ae50e9b417de1ffc12b793ed60bfbfb}
+
+#### `public inline bool `[`structure_is_built`](#classbc_1_1Unit_1ac907166215faf9372a9f2cc7a0a2ce35)`() const` {#classbc_1_1Unit_1ac907166215faf9372a9f2cc7a0a2ce35}
+
+#### `public inline unsigned `[`get_structure_max_capacity`](#classbc_1_1Unit_1a5c507cf496f05ef159912e7b8e6b193c)`() const` {#classbc_1_1Unit_1a5c507cf496f05ef159912e7b8e6b193c}
+
+#### `public inline std::vector< unsigned > `[`get_structure_garrison`](#classbc_1_1Unit_1a426a6f40cf51cd868de044156e3081af)`() const` {#classbc_1_1Unit_1a426a6f40cf51cd868de044156e3081af}
+
+#### `public inline bool `[`is_factory_producing`](#classbc_1_1Unit_1a6ffbd965a8a67b737b864001f5b48b28)`() const` {#classbc_1_1Unit_1a6ffbd965a8a67b737b864001f5b48b28}
+
+#### `public inline UnitType `[`get_factory_unit_type`](#classbc_1_1Unit_1aee3e3badc7a2669b58924cf95d2a883b)`() const` {#classbc_1_1Unit_1aee3e3badc7a2669b58924cf95d2a883b}
+
+#### `public inline unsigned `[`get_factory_rounds_left`](#classbc_1_1Unit_1a1e0eb59e5af3a75b8314ae154ab81db7)`() const` {#classbc_1_1Unit_1a1e0eb59e5af3a75b8314ae154ab81db7}
+
+#### `public inline unsigned `[`get_factory_max_rounds_left`](#classbc_1_1Unit_1a933aca6455be358cb1f70422ccb9c94d)`() const` {#classbc_1_1Unit_1a933aca6455be358cb1f70422ccb9c94d}
+
+#### `public inline bool `[`rocket_is_used`](#classbc_1_1Unit_1ac661e30c2538cd5543c60a84c3bb5cd8)`() const` {#classbc_1_1Unit_1ac661e30c2538cd5543c60a84c3bb5cd8}
+
+#### `public inline int `[`get_rocket_blast_damage`](#classbc_1_1Unit_1abdb17ac7cf496f5e29718474b348bcbd)`() const` {#classbc_1_1Unit_1abdb17ac7cf496f5e29718474b348bcbd}
+
+#### `public inline unsigned `[`get_rocket_travel_time_decrease`](#classbc_1_1Unit_1ab0b2b8ea6b1035d2ba68f6f1474594c8)`() const` {#classbc_1_1Unit_1ab0b2b8ea6b1035d2ba68f6f1474594c8}
 
 Generated by [Moxygen](https://sourcey.com/moxygen)
