@@ -1,2 +1,3 @@
 docs:
-	moxygen -aq -o DOCUMENTATION.md -l cpp xml/
+	doxygen Doxyfile
+	moxygen -a -o DOCUMENTATION.md -l cpp xml/
