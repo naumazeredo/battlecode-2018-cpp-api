@@ -16,6 +16,8 @@
 #include <cstdlib>
 #include <climits>
 
+//#include <bc.h>
+// XXX: DON'T COMMIT
 #include "bc.h"
 
 // TODO: Think if it's good to save the bc pointer in every class
@@ -30,7 +32,7 @@ namespace bc {
 // Logger
 #ifdef NDEBUG
 #define log_error(condition, message) ((void)0)
-#define CHECK_ERRORS()
+#define CHECK_ERRORS() ((void)0)
 #else
 
 #define S(x) #x
@@ -39,14 +41,14 @@ namespace bc {
 
 #define log_error(condition, message)   \
 if (!(condition)) {           \
-  printf("[info] " __FILE__ ": " S__LINE__ ": " __func__ ": " (message)); \
+  printf("[info] " __FILE__ ": " S__LINE__ ": " message); \
 }
 
 #define CHECK_ERRORS() \
-if (has_bc_err()) { \
+if (bc_has_err()) { \
   char* err; \
   uint8_t code = bc_get_last_err(&err); \
-  printf("[ERROR](" __FILE__ ": " S__LINE__ ": " __func__ ") code %d: %s\n", code, err); \
+  printf("[ERROR](" __FILE__ ": " S__LINE__ ") code %d: %s\n", code, err); \
   bc_free_string(err); \
 }
 
@@ -59,13 +61,13 @@ if (has_bc_err()) { \
 #define VEC_INDEX(x) x ## _index
 #define VEC_DEL(x) delete_ ## x
 #define VEC(dest, orig) \
-std::vector<dest> to_vector(orig* vec) {    \
-  std::vector<dest> ans;                    \
-  uintptr_t len = VEC_LEN(orig)(vec);       \
-  for (uintptr_t i = 0; i < len; i++)       \
-    ans.emplace_back(VEC_INDEX(orig)(vec)); \
-  VEC_DEL(orig)(vec);                       \
-  return ans;                               \
+std::vector<dest> to_vector(orig* vec) {       \
+  std::vector<dest> ans;                       \
+  uintptr_t len = VEC_LEN(orig)(vec);          \
+  for (uintptr_t i = 0; i < len; i++)          \
+    ans.emplace_back(VEC_INDEX(orig)(vec, i)); \
+  VEC_DEL(orig)(vec);                          \
+  return ans;                                  \
 }
 
 
@@ -97,6 +99,8 @@ Direction   direction_rotate_right(Direction direction) { return bc_Direction_ro
 // MapLocation
 class MapLocation {
 public:
+  MapLocation() : m_map_location { nullptr } {}
+
   MapLocation(Planet planet, int x, int y) :
       m_map_location { new_bc_MapLocation(planet, x, y) },
       m_planet { planet },
@@ -135,9 +139,7 @@ public:
   }
 
   // XXX: Low-level use only
-  bc_MapLocation* get_bc() {
-    return m_map_location;
-  }
+  bc_MapLocation* get_bc() const { return m_map_location; }
 
   Planet get_planet() const { return m_planet; }
   int get_x() const { return m_x; }
@@ -183,8 +185,9 @@ public:
   }
 
   Direction direction_to(const MapLocation& map_location) const {
-    Direction dir = bc_MapLocation_direction_to(map_location, map_location.get_bc());
-    CHECK_ERRORS()
+    auto ans = bc_MapLocation_direction_to(map_location.get_bc(), map_location.get_bc());
+    CHECK_ERRORS();
+    return ans;
   }
 
   bool is_adjacent_to(const MapLocation& map_location) const {
@@ -286,10 +289,8 @@ private:
     Space
   } m_type;
 
-  union {
-    MapLocation m_map_location;
-    int m_garrison_id;
-  };
+  int         m_garrison_id;
+  MapLocation m_map_location;
 };
 
 
@@ -299,7 +300,7 @@ using Team = bc_Team;
 
 // VecUnitID
 // std::vector<unsigned> to_vector(bc_VecUnitID*);
-VEC(unsigned, bc_VecUnitID*)
+VEC(unsigned, bc_VecUnitID)
 
 
 // UnitType
@@ -310,20 +311,20 @@ bool is_structure(UnitType unit_type) { return !is_robot(); }
 
 unsigned unit_type_get_factory_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_factory_cost(unit_type);
-  CHECK_ERRORS()
+  CHECK_ERRORS();
   return ans;
 }
 
 unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_blueprint_cost(unit_type);
-  CHECK_ERRORS()
+  CHECK_ERRORS();
   return ans;
 }
 
 // Don't need to receive UnitType as C API, because it makes no sense...
 unsigned unit_type_get_replicate_cost() {
   unsigned ans = bc_UnitType_replicate_cost(Worker);
-  CHECK_ERRORS()
+  CHECK_ERRORS();
   return ans;
 }
 
@@ -350,6 +351,8 @@ public:
 
   // TODO: Copy/move semantics
 
+  UnitType get_unit_type() const { return m_unit_type; }
+
   // NOT IMPLEMENT: bc_Unit_research_level
 
   // FIXME: Don't use macros. Write better function names!
@@ -358,11 +361,11 @@ public:
 #define F(x) bc_Unit_ ## x
 #define G(x) get_ ## x
 #define GET(ret, var) \
-  ret G(var)() const { auto ans = ret { F(func)(m_unit) }; CHECK_ERRORS(); return ans; }
+  ret G(var)() const { auto ans = ret { F(var)(m_unit) }; CHECK_ERRORS(); return ans; }
 #define IS(var) \
-  bool var()   const { auto ans = ret { F(func)(m_unit) }; CHECK_ERRORS(); return ans; }
+  bool var()   const { auto ans = ret { F(var)(m_unit) }; CHECK_ERRORS(); return ans; }
 #define GET_FUNC(ret, var, func) \
-  ret G(var)() const { auto ans = func( F(func)(m_unit) ); CHECK_ERRORS(); return ans; }
+  ret G(var)() const { auto ans = func( F(var)(m_unit) ); CHECK_ERRORS(); return ans; }
 
   GET(Team, team);
   GET(Location, location);
@@ -378,10 +381,6 @@ public:
 
   GET(unsigned, movement_heat);
   GET(unsigned, movement_cooldow);
-
-  GET(unsigned, attack_heat);
-  GET(unsigned, attack_cooldown);
-  GET(unsigned, attack_heat);
 
   GET(unsigned, attack_heat);
   GET(unsigned, attack_cooldown);
@@ -415,7 +414,7 @@ public:
   // Structures
   IS (structure_is_build);
   GET(unsigned, structure_max_capacity);
-  GET_FUNC(vector<unsigned>, structure_garrison, to_vector);
+  GET_FUNC(std::vector<unsigned>, structure_garrison, to_vector);
 
   // Factory
   IS (is_factory_producting);
@@ -894,8 +893,8 @@ public:
     CHECK_ERRORS();
   }
 
-  bool is_load_ready(unsigned structure_id, unsigned robot_id) const {
-    return bc_GameController_is_load_ready(m_gc, structure_id, robot_id);
+  bool can_load(unsigned structure_id, unsigned robot_id) const {
+    return bc_GameController_can_load(m_gc, structure_id, robot_id);
   }
 
   void load(unsigned structure_id, unsigned robot_id) const {
@@ -903,8 +902,8 @@ public:
     CHECK_ERRORS();
   }
 
-  bool is_unload_ready(unsigned structure_id, Direction direction) const {
-    return bc_GameController_is_unload_ready(m_gc, structure_id, direction);
+  bool can_unload(unsigned structure_id, Direction direction) const {
+    return bc_GameController_can_unload(m_gc, structure_id, direction);
   }
 
   void unload(unsigned structure_id, Direction direction) const {
