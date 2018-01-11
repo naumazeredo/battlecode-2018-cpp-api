@@ -4,13 +4,15 @@
  * https://github.com/naumazeredo/battlecode-2018-cpp-api
  *
  * authors:
- *   Naum Azeredo     < naumazeredo@gmail.com  >
- *   Luciano Barreira < luciano@roboime.com.br >
- *   Sebastien Biollo < sbiollo@gmail.com >
+ *   Naum Azeredo       < naumazeredo@gmail.com  >
+ *   Luciano Barreira   < luciano@roboime.com.br >
+ *   João Pedro Xavier  < joaopedroxavier@gmail.com >
+ *   Sebastien Biollo   < sbiollo@gmail.com >
  *
  */
 
 #include <vector>
+#include <string>
 #include <climits>
 
 #include <bc.h>
