@@ -690,7 +690,7 @@ public:
 
   ~GameController() {
     if (m_gc)
-      delete_bc_GameController();
+      delete_bc_GameController(m_gc);
   }
 
   void next_turn() const { bc_GameController_next_turn(m_gc); }
