@@ -7,7 +7,7 @@ docs:
 	g++ -C -E bc_p.hpp > bc_.hpp
 	doxygen Doxyfile
 	moxygen -a -o $(DOC) -l cpp xml/
-	#sed -i 's/{[^}]*}//' DOCUMENTATION.md
+	sed -i 's/{[^}]*}//' DOCUMENTATION.md
 	rm bc_*.hpp
 
 toc:
