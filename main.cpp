@@ -26,9 +26,8 @@ int main() {
 
   // Most methods return pointers; methods returning integers or enums are the only exception.
   GameController gc;
-  bc_GameController *gc = new_bc_GameController();
 
-  if (has_bc_err()) {
+  if (bc_has_err()) {
     // If there was an error creating gc, just die.
     printf("Failed, dying.\n");
     exit(1);

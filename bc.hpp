@@ -861,7 +861,7 @@ public:
   }
 
   bool can_begin_blink(unsigned mage_id, MapLocation map_location) const {
-    return bc_GameController_can_begin_blink(m_gc, mage_id, map_location.get_bc());
+    return bc_GameController_can_blink(m_gc, mage_id, map_location.get_bc());
   }
 
   bool is_blink_ready(unsigned mage_id) const {
