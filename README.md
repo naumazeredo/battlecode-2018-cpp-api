@@ -8,7 +8,7 @@ If contributing, try to maintain the performance as much as possible.
 Clone this repository into `bc18-scaffold` folder:
 
 ```
-bc18-scaffold/ $ git clone https://github.com/naumazeredo/battlecode-2018-cpp-api examplefuncsplayer.cpp
+bc18-scaffold/ $ git clone https://github.com/naumazeredo/battlecode-2018-cpp-api.git examplefuncsplayer-cpp
 ```
 
 Run the client to test if `examplefuncsplayer.cpp` is working correctly.
