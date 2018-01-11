@@ -23,6 +23,18 @@
 #include <bc.h>
 #undef this
 
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+
 // IDEA: Add more constness (Vectors should be of consts, etc)
 // IDEA: Create namespaces/static classes for bc enums.
 //       So we could use enum classes and functions for these times properly
