@@ -827,7 +827,7 @@ public:
   std::vector<UnitType> get_queue  () const { return to_vector(bc_ResearchInfo_queue( m_info )); }
   bool has_next_in_queue           () const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
   UnitType next_in_queue           () const { return bc_ResearchInfo_next_in_queue( m_info ); }
-  unsigned rounds_lext             () const { return bc_ResearchInfo_rounds_left( m_info ); }
+  unsigned rounds_left             () const { return bc_ResearchInfo_rounds_left( m_info ); }
 
 private:
   bc_ResearchInfo* m_info;
@@ -889,7 +889,9 @@ public:
       m_mars_map { bc_GameController_starting_map(m_gc, Mars) },
       m_asteroid_pattern { bc_GameController_asteroid_pattern(m_gc) },
       m_orbit_pattern { bc_GameController_orbit_pattern(m_gc) }
-  {}
+  {
+    CHECK_ERRORS();
+  }
 
   ~GameController() {
     if (m_gc)
