@@ -6,15 +6,30 @@ Table of Contents
    * [namespace bc](#namespace-bc)
       * [Summary](#summary-1)
       * [Members](#members)
-         * [public std::vector&lt; int &gt;<a href="#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8"><code>to_vector</code></a><code>(bc_Veci32 * vec)</code>](#public-stdvector-int-to_vectorbc_veci32--vec)
          * [public Planet<a href="#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b"><code>planet_other</code></a><code>(Planet planet)</code>](#public-planetplanet_otherplanet-planet)
+         * [Parameters](#parameters)
+         * [Returns](#returns)
          * [public std::string<a href="#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76"><code>to_string</code></a><code>(Planet planet)</code>](#public-stdstringto_stringplanet-planet)
+         * [Parameters](#parameters-1)
+         * [Returns](#returns-1)
          * [public int<a href="#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c"><code>direction_dx</code></a><code>(Direction direction)</code>](#public-intdirection_dxdirection-direction)
+         * [Parameters](#parameters-2)
+         * [Returns](#returns-2)
          * [public int<a href="#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5"><code>direction_dy</code></a><code>(Direction direction)</code>](#public-intdirection_dydirection-direction)
+         * [Parameters](#parameters-3)
+         * [Returns](#returns-3)
          * [public bool<a href="#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d"><code>direction_is_diagonal</code></a><code>(Direction direction)</code>](#public-booldirection_is_diagonaldirection-direction)
+         * [Parameters](#parameters-4)
+         * [Returns](#returns-4)
          * [public Direction<a href="#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d"><code>direction_opposite</code></a><code>(Direction direction)</code>](#public-directiondirection_oppositedirection-direction)
+         * [Parameters](#parameters-5)
+         * [Returns](#returns-5)
          * [public Direction<a href="#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e"><code>direction_rotate_left</code></a><code>(Direction direction)</code>](#public-directiondirection_rotate_leftdirection-direction)
+         * [Parameters](#parameters-6)
+         * [Returns](#returns-6)
          * [public Direction<a href="#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d"><code>direction_rotate_right</code></a><code>(Direction direction)</code>](#public-directiondirection_rotate_rightdirection-direction)
+         * [Parameters](#parameters-7)
+         * [Returns](#returns-7)
          * [public std::vector&lt;<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&gt;</code><a href="#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15"><code>to_vector</code></a><code>(bc_VecMapLocation * vec)</code>](#public-stdvectormaplocationto_vectorbc_vecmaplocation--vec)
          * [public std::vector&lt; unsigned &gt;<a href="#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681"><code>to_vector</code></a><code>(bc_VecUnitID * vec)</code>](#public-stdvector-unsigned-to_vectorbc_vecunitid--vec)
          * [public bool<a href="#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd"><code>is_robot</code></a><code>(UnitType unit_type)</code>](#public-boolis_robotunittype-unit_type)
@@ -134,16 +149,24 @@ Table of Contents
       * [Members](#members-5)
          * [public inline<a href="#classbc_1_1MapLocation_1ab313f647684390e3e78ec9fc26999305"><code>MapLocation</code></a><code>()</code>](#public-inlinemaplocation)
          * [public inline<a href="#classbc_1_1MapLocation_1aee5b70cc3589b43b42996e8f55c12e5b"><code>MapLocation</code></a><code>(Planet planet,int x,int y)</code>](#public-inlinemaplocationplanet-planetint-xint-y)
-         * [public inline<a href="#classbc_1_1MapLocation_1a2a428a7d66834f1dfa64174c81031064"><code>MapLocation</code></a><code>(bc_MapLocation * map_location)</code>](#public-inlinemaplocationbc_maplocation--map_location)
-         * [public inline<a href="#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5"><code>~MapLocation</code></a><code>()</code>](#public-inlinemaplocation-1)
+         * [Parameters](#parameters-8)
          * [public inline<a href="#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50"><code>MapLocation</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location)</code>](#public-inlinemaplocationconstmaplocation-map_location)
-         * [public inline<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp;</code><a href="#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1"><code>operator=</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location)</code>](#public-inlinemaplocationoperatorconstmaplocation-map_location)
+         * [Parameters](#parameters-9)
          * [public inline<a href="#classbc_1_1MapLocation_1a2d59a82c59b9aa251b8327bb71445a0c"><code>MapLocation</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp;&amp; map_location)</code>](#public-inlinemaplocationmaplocation-map_location)
+         * [Parameters](#parameters-10)
+         * [public inline<a href="#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5"><code>~MapLocation</code></a><code>()</code>](#public-inlinemaplocation-1)
+         * [public inline<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp;</code><a href="#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1"><code>operator=</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location)</code>](#public-inlinemaplocationoperatorconstmaplocation-map_location)
+         * [Parameters](#parameters-11)
+         * [Returns](#returns-8)
          * [public inline<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp;</code><a href="#classbc_1_1MapLocation_1a64755bb8a2b3ac27bb6cb8eac5ac4c0f"><code>operator=</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp;&amp; map_location)</code>](#public-inlinemaplocationoperatormaplocation-map_location)
-         * [public inline bc_MapLocation *<a href="#classbc_1_1MapLocation_1a0cecbbadfe4cf90de047eaeea8e6ecd7"><code>get_bc</code></a><code>() const</code>](#public-inline-bc_maplocation-get_bc-const)
+         * [Parameters](#parameters-12)
+         * [Returns](#returns-9)
          * [public inline Planet<a href="#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54"><code>get_planet</code></a><code>() const</code>](#public-inline-planetget_planet-const-1)
+         * [Returns](#returns-10)
          * [public inline int<a href="#classbc_1_1MapLocation_1a3e06a1063a6d1215b05eb395ba3657f5"><code>get_x</code></a><code>() const</code>](#public-inline-intget_x-const)
+         * [Returns](#returns-11)
          * [public inline int<a href="#classbc_1_1MapLocation_1a06dbaa3ed5a43c024dfa5125c634a35c"><code>get_y</code></a><code>() const</code>](#public-inline-intget_y-const)
+         * [Returns](#returns-12)
          * [public inline void<a href="#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00"><code>set_planet</code></a><code>(Planet planet)</code>](#public-inline-voidset_planetplanet-planet)
          * [public inline void<a href="#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706"><code>set_x</code></a><code>(int x)</code>](#public-inline-voidset_xint-x)
          * [public inline void<a href="#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908"><code>set_y</code></a><code>(int y)</code>](#public-inline-voidset_yint-y)
@@ -264,15 +287,14 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public std::vector< int > `[`to_vector`](#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8)`(bc_Veci32 * vec)`            | 
-`public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | 
-`public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | 
-`public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | 
-`public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | 
-`public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | 
-`public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | 
-`public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | 
-`public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | 
+`public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | Get other planet. 
+`public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | Create a human-readable representation of a Planet 
+`public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | Returns the x displacement of this direction. 
+`public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | Returns the y displacement of this direction. 
+`public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | Returns whether this direction is a diagonal one. 
+`public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | Returns the direction opposite this one, or Center if it's Center 
+`public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
+`public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
 `public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)`            | 
 `public std::vector< unsigned > `[`to_vector`](#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681)`(bc_VecUnitID * vec)`            | 
 `public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
@@ -288,7 +310,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 `class `[`bc::AsteroidStrike`](#classbc_1_1AsteroidStrike) | 
 `class `[`bc::GameController`](#classbc_1_1GameController) | 
 `class `[`bc::Location`](#classbc_1_1Location) | 
-`class `[`bc::MapLocation`](#classbc_1_1MapLocation) | 
+`class `[`bc::MapLocation`](#classbc_1_1MapLocation) | Two-dimensional coordinates in the Battlecode world.
 `class `[`bc::OrbitPattern`](#classbc_1_1OrbitPattern) | 
 `class `[`bc::PlanetMap`](#classbc_1_1PlanetMap) | 
 `class `[`bc::ResearchInfo`](#classbc_1_1ResearchInfo) | 
@@ -298,23 +320,77 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ## Members
 
-#### `public std::vector< int > `[`to_vector`](#bc___8hpp_1a797801b6557219af30d83f363cf7c5b8)`(bc_Veci32 * vec)` 
-
 #### `public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)` 
+
+Get other planet. 
+#### Parameters
+* `planet` 
+
+#### Returns
+the other planet
 
 #### `public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)` 
 
+Create a human-readable representation of a Planet 
+#### Parameters
+* `planet` 
+
+#### Returns
+the human-readable string
+
 #### `public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)` 
+
+Returns the x displacement of this direction. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the x displacement
 
 #### `public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)` 
 
+Returns the y displacement of this direction. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the y displacement
+
 #### `public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)` 
+
+Returns whether this direction is a diagonal one. 
+#### Parameters
+* `direction` 
+
+#### Returns
+bool if the direction is diagonal or not
 
 #### `public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)` 
 
+Returns the direction opposite this one, or Center if it's Center 
+#### Parameters
+* `direction` 
+
+#### Returns
+the opposite direction
+
 #### `public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)` 
 
+Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the direction 45 degrees to the left
+
 #### `public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)` 
+
+Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the direction 45 degrees to the right
 
 #### `public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)` 
 
@@ -649,22 +725,22 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 # class `bc::MapLocation` 
 
+Two-dimensional coordinates in the Battlecode world.
+
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1ab313f647684390e3e78ec9fc26999305)`()` | 
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1aee5b70cc3589b43b42996e8f55c12e5b)`(Planet planet,int x,int y)` | 
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a2a428a7d66834f1dfa64174c81031064)`(bc_MapLocation * map_location)` | 
-`public inline  `[`~MapLocation`](#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5)`()` | 
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | 
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a2d59a82c59b9aa251b8327bb71445a0c)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` | 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a64755bb8a2b3ac27bb6cb8eac5ac4c0f)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` | 
-`public inline bc_MapLocation * `[`get_bc`](#classbc_1_1MapLocation_1a0cecbbadfe4cf90de047eaeea8e6ecd7)`() const` | 
-`public inline Planet `[`get_planet`](#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54)`() const` | 
-`public inline int `[`get_x`](#classbc_1_1MapLocation_1a3e06a1063a6d1215b05eb395ba3657f5)`() const` | 
-`public inline int `[`get_y`](#classbc_1_1MapLocation_1a06dbaa3ed5a43c024dfa5125c634a35c)`() const` | 
+`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1ab313f647684390e3e78ec9fc26999305)`()` | Empty Constructor
+`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1aee5b70cc3589b43b42996e8f55c12e5b)`(Planet planet,int x,int y)` | Constructor 
+`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | Copy constructor 
+`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a2d59a82c59b9aa251b8327bb71445a0c)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` | Move constructor 
+`public inline  `[`~MapLocation`](#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5)`()` | Deconstructor
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | Assignment operator (deep copy) 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a64755bb8a2b3ac27bb6cb8eac5ac4c0f)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` | Assignment operator (move) 
+`public inline Planet `[`get_planet`](#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54)`() const` | Returns the planet the MapLocation is at 
+`public inline int `[`get_x`](#classbc_1_1MapLocation_1a3e06a1063a6d1215b05eb395ba3657f5)`() const` | Returns the x coordinate 
+`public inline int `[`get_y`](#classbc_1_1MapLocation_1a06dbaa3ed5a43c024dfa5125c634a35c)`() const` | Returns the y coordinate 
 `public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` | 
 `public inline void `[`set_x`](#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706)`(int x)` | 
 `public inline void `[`set_y`](#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908)`(int y)` | 
@@ -683,27 +759,69 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 #### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1ab313f647684390e3e78ec9fc26999305)`()` 
 
+Empty Constructor
+
 #### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1aee5b70cc3589b43b42996e8f55c12e5b)`(Planet planet,int x,int y)` 
 
-#### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a2a428a7d66834f1dfa64174c81031064)`(bc_MapLocation * map_location)` 
+Constructor 
+#### Parameters
+* `planet` 
 
-#### `public inline  `[`~MapLocation`](#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5)`()` 
+* `x` 
+
+* `y`
 
 #### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` 
 
-#### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` 
+Copy constructor 
+#### Parameters
+* `map_location`
 
 #### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a2d59a82c59b9aa251b8327bb71445a0c)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` 
 
+Move constructor 
+#### Parameters
+* `map_location`
+
+#### `public inline  `[`~MapLocation`](#classbc_1_1MapLocation_1acd3a96f437d8511659def5078b58e0d5)`()` 
+
+Deconstructor
+
+#### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` 
+
+Assignment operator (deep copy) 
+#### Parameters
+* `map_location` 
+
+#### Returns
+the assigned MapLocation
+
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a64755bb8a2b3ac27bb6cb8eac5ac4c0f)`(`[`MapLocation`](#classbc_1_1MapLocation)` && map_location)` 
 
-#### `public inline bc_MapLocation * `[`get_bc`](#classbc_1_1MapLocation_1a0cecbbadfe4cf90de047eaeea8e6ecd7)`() const` 
+Assignment operator (move) 
+#### Parameters
+* `map_location` 
+
+#### Returns
+the assigned MapLocation
 
 #### `public inline Planet `[`get_planet`](#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54)`() const` 
 
+Returns the planet the MapLocation is at 
+#### Returns
+the planet the MapLocation is at
+
 #### `public inline int `[`get_x`](#classbc_1_1MapLocation_1a3e06a1063a6d1215b05eb395ba3657f5)`() const` 
 
+Returns the x coordinate 
+#### Returns
+the x coordinate
+
 #### `public inline int `[`get_y`](#classbc_1_1MapLocation_1a06dbaa3ed5a43c024dfa5125c634a35c)`() const` 
+
+Returns the y coordinate 
+#### Returns
+the y coordinate
 
 #### `public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` 
 
