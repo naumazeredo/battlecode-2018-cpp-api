@@ -421,9 +421,12 @@ private:
 };
 
 
-// VecMapLocation
-// std::vector<MapLocation> to_vector(bc_VecMapLocation*);
+/** @cond PRIVATE
+ * VecMapLocation
+ * std::vector<MapLocation> to_vector(bc_VecMapLocation*);
+ */
 VEC(MapLocation, bc_VecMapLocation)
+/** @endcond */
 
 
 // Location
@@ -499,9 +502,12 @@ private:
 using Team = bc_Team;
 
 
-// VecUnitID
-// std::vector<unsigned> to_vector(bc_VecUnitID*);
+/** @cond PRIVATE
+ * VecUnitID
+ * std::vector<unsigned> to_vector(bc_VecUnitID*);
+ */
 VEC(unsigned, bc_VecUnitID)
+/** @endcond */
 
 
 // UnitType
@@ -539,9 +545,12 @@ unsigned unit_type_get_replicate_cost() {
 unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
 
-// VecUnitType
-// std::vector<UnitType> to_vector(bc_VecUnitType*);
+/** @cond PRIVATE
+ * VecUnitType
+ * std::vector<UnitType> to_vector(bc_VecUnitType*);
+ */
 VEC(UnitType, bc_VecUnitType)
+/** @endcond */
 
 
 // Unit
@@ -659,9 +668,12 @@ private:
 };
 
 
-// VecUnit
-// std::vector<Unit> to_vector(bc_VecUnit*);
+/** @cond PRIVATE
+ * VecUnit
+ * std::vector<Unit> to_vector(bc_VecUnit*);
+ */
 VEC(Unit, bc_VecUnit)
+/** @endcond */
 
 
 // PlanetMap
@@ -853,9 +865,12 @@ private:
 };
 
 
-// VecRocketLanding
-// std::vector<RocketLanding> to_vector(bc_VecRocketLanding*);
+/** @cond PRIVATE
+ * VecRocketLanding
+ * std::vector<RocketLanding> to_vector(bc_VecRocketLanding*);
+ */
 VEC(RocketLanding, bc_VecRocketLanding)
+/** @endcond */
 
 
 // RocketLandingInfo
