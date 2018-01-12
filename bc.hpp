@@ -707,7 +707,7 @@ public:
   void set_width (unsigned width ) { m_width = width; }
   */
 
-  bool is_on_map(const MapLocation& location ) const {
+  bool is_on_map(const MapLocation& location) const {
     return (location.get_x() < m_width) and
           (location.get_y() < m_height) and
           (location.get_planet() == m_planet);
@@ -724,6 +724,28 @@ public:
     log_error(m_planet_map, "PlanetMap not loaded!");
     auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.get_bc());
     CHECK_ERRORS();
+    return ans;
+  }
+
+  /**
+   * Get the initial map passable and karbonite values.
+   * This information is constant, so it's useful to have it since the beginning and never use the
+   * API for this.
+   *
+   * @return the matrix of pair (is passable cell, initial karbonite at cell)
+   */
+  std::vector<std::vector<std::pair<bool, unsigned>>> get_initial_map() const {
+    std::vector<std::vector<std::pair<bool, unsigned>>> ans { m_height, std::vector<std::pair<bool, unsigned>> { m_width } };
+
+    for (int i = 0; i < m_height; i++) {
+      for (int j = 0; j < m_width; j++) {
+        MapLocation mp { m_planet, i, j };
+        bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map, mp.get_bc());
+        auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map, mp.get_bc());
+        ans[i][j] = { passable, karbonite };
+      }
+    }
+
     return ans;
   }
 
