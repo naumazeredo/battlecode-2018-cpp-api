@@ -101,7 +101,7 @@ std::vector<dest> to_vector(orig* vec) {       \
 template<class T, void(*F)(T*)>
 struct Deleter {
   void operator()(T* loc) {
-    F(loc);
+    if (loc) F(loc);
   }
 };
 
@@ -237,6 +237,7 @@ public:
    */
   MapLocation& operator=(const MapLocation& map_location) {
     *this = std::move(MapLocation(map_location));
+    return *this;
   }
 
   MapLocation& operator=(MapLocation&&) = default;
@@ -439,7 +440,7 @@ public:
   Location(const MapLocation& map_location) : m_type { Map }, m_map_location { map_location } {}
   Location(unsigned garrison_id) : m_type { Garrison }, m_garrison_id { garrison_id } {}
 
-  Location(bc_Location* location) {
+  explicit Location(bc_Location* location) {
     log_error(location, "Null bc_Location!");
 
     if (bc_Location_is_on_map(location)) {
@@ -559,33 +560,22 @@ VEC(UnitType, bc_VecUnitType)
 // Unit
 class Unit {
 public:
-  Unit(bc_Unit* unit) : m_unit { unit } {
+  explicit Unit(bc_Unit* unit) : m_unit { unit } {
     log_error(unit, "Null bc_Unit!");
     m_unit_type = bc_Unit_unit_type(unit);
   }
 
-  ~Unit() {
-    if (m_unit)
-      delete_bc_Unit(m_unit);
-  }
+  Unit(const Unit& unit) :
+    m_unit { bc_Unit_clone(unit.m_unit.get()) },
+    m_unit_type { bc_Unit_unit_type(unit.m_unit.get()) }
+  {}
+  Unit(Unit&& unit) = default;
 
-  // TODO: Copy/move semantics
-  Unit(const Unit& unit) { *this = unit; }
   Unit& operator=(const Unit& unit) {
-    m_unit_type = unit.get_unit_type();
-    m_unit      = bc_Unit_clone(unit.m_unit);
-
+    *this = std::move(Unit(unit));
     return *this;
   }
-
-  Unit(Unit&& unit) { *this = unit; }
-  Unit& operator=(Unit&& unit) {
-    m_unit_type = std::move(unit.get_unit_type());
-    m_unit      = std::move(unit.m_unit);
-    unit.m_unit = nullptr;
-
-    return *this;
-  }
+  Unit& operator=(Unit&& unit) = default;
 
   UnitType get_unit_type() const { return m_unit_type; }
 
@@ -597,11 +587,11 @@ public:
 #define F(x) bc_Unit_ ## x
 #define G(x) get_ ## x
 #define GET(ret, var) \
-  ret G(var)() const { auto ans = (ret)(F(var)(m_unit)); CHECK_ERRORS(); return ans; }
+  ret G(var)() const { auto ans = static_cast<ret>(F(var)(m_unit.get())); CHECK_ERRORS(); return ans; }
 #define IS(var) \
-  bool var()   const { bool ans = F(var)(m_unit); CHECK_ERRORS(); return ans; }
+  bool var()   const { bool ans = F(var)(m_unit.get()); CHECK_ERRORS(); return ans; }
 #define GET_FUNC(ret, var, func) \
-  ret G(var)() const { auto ans = func( F(var)(m_unit) ); CHECK_ERRORS(); return ans; }
+  ret G(var)() const { auto ans = func( F(var)(m_unit.get()) ); CHECK_ERRORS(); return ans; }
 
   GET(Team, team);
   GET(Location, location);
@@ -666,7 +656,7 @@ public:
   GET(unsigned, rocket_travel_time_decrease);
 
 private:
-  bc_Unit* m_unit;
+  UniquePtr<bc_Unit, delete_bc_Unit> m_unit;
 
   // XXX: Stored because it's used for every assertion
   UnitType m_unit_type;
@@ -689,20 +679,28 @@ public:
   PlanetMap(bc_PlanetMap* planet_map) : m_planet_map { planet_map } {
     log_error(planet_map, "Null bc_PlanetMap!");
 
-    m_planet = bc_PlanetMap_planet_get(m_planet_map);
-    m_height = bc_PlanetMap_height_get(m_planet_map);
-    m_width  = bc_PlanetMap_width_get (m_planet_map);
-    m_initial_units = to_vector(bc_PlanetMap_initial_units_get(m_planet_map));
+    m_planet = bc_PlanetMap_planet_get(m_planet_map.get());
+    m_height = bc_PlanetMap_height_get(m_planet_map.get());
+    m_width  = bc_PlanetMap_width_get (m_planet_map.get());
+    m_initial_units = to_vector(bc_PlanetMap_initial_units_get(m_planet_map.get()));
   }
 
-  // Delete the copy constructor as otherwise we might be able to use an object
-  // after the delete_bc_PlanetMap method has run
-  PlanetMap(const PlanetMap& that) = delete;
+  PlanetMap(const PlanetMap& planet_map) :
+    m_planet_map { bc_PlanetMap_clone(planet_map.m_planet_map.get()) },
+    m_planet { planet_map.m_planet },
+    m_height { planet_map.m_height },
+    m_width { planet_map.m_width },
+    m_initial_units { planet_map.m_initial_units }
+  {}
 
-  ~PlanetMap() {
-    if (m_planet_map)
-      delete_bc_PlanetMap(m_planet_map);
+  PlanetMap(PlanetMap&& planet_map) = default;
+
+  PlanetMap& operator=(const PlanetMap& planet_map) {
+    *this = std::move(PlanetMap(planet_map));
+    return *this;
   }
+
+  PlanetMap& operator=(PlanetMap&& planet_map) = default;
 
   Planet                   get_planet()        const { return m_planet; }
   unsigned                 get_height()        const { return m_height; }
@@ -717,21 +715,21 @@ public:
   */
 
   bool is_on_map(const MapLocation& location) const {
-    return (location.get_x() < m_width) and
-          (location.get_y() < m_height) and
+    return (location.get_x() < (int)m_width) and
+          (location.get_y() < (int)m_height) and
           (location.get_planet() == m_planet);
   }
 
   bool is_passable_terrain_at(const MapLocation& map_location) const {
     log_error(m_planet_map, "PlanetMap not loaded!");
-    auto ans = bc_PlanetMap_is_passable_terrain_at(m_planet_map, map_location.get_bc());
+    auto ans = bc_PlanetMap_is_passable_terrain_at(m_planet_map.get(), map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
 
   unsigned get_initial_karbonite_at(const MapLocation& map_location) const {
     log_error(m_planet_map, "PlanetMap not loaded!");
-    auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.get_bc());
+    auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map.get(), map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
@@ -746,11 +744,11 @@ public:
   std::vector<std::vector<std::pair<bool, unsigned>>> get_initial_map() const {
     std::vector<std::vector<std::pair<bool, unsigned>>> ans { m_height, std::vector<std::pair<bool, unsigned>> { m_width } };
 
-    for (int i = 0; i < m_height; i++) {
-      for (int j = 0; j < m_width; j++) {
+    for (int i = 0; i < (int)m_height; i++) {
+      for (int j = 0; j < (int)m_width; j++) {
         MapLocation mp { m_planet, i, j };
-        bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map, mp.get_bc());
-        auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map, mp.get_bc());
+        bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map.get(), mp.get_bc());
+        auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map.get(), mp.get_bc());
         ans[i][j] = { passable, karbonite };
       }
     }
@@ -761,7 +759,7 @@ public:
   // TODO: PlanetMap to_string
 
 private:
-  bc_PlanetMap*     m_planet_map = nullptr;
+  UniquePtr<bc_PlanetMap, delete_bc_PlanetMap> m_planet_map;
   Planet            m_planet;
   unsigned          m_height, m_width;
   std::vector<Unit> m_initial_units;
@@ -871,34 +869,19 @@ public:
     log_error(info, "Null bc_ResearchInfo!");
   }
 
-  ~ResearchInfo(){
-    if (m_info) {
-      printf("BLAH\n");
-      delete_bc_ResearchInfo( m_info );
-    }
-  }
-
-  // Delete the copy constructor as otherwise we might be able to use an object
-  // after the delete_bc_ResearchInfo method has run
-  ResearchInfo(const ResearchInfo& that) = delete;
-  // Move constructor!
-  ResearchInfo(ResearchInfo&& that) : m_info(that.m_info) {
-    that.m_info = nullptr;
-  }
-
   // These two methods are stand-alone ones from C API, so we decided to
   // put them into ResearchInfo class
   unsigned max_level(UnitType branch)                 const { return ::max_level( branch ); }
   unsigned cost_of  (UnitType branch, unsigned level) const { return ::cost_of( branch,level ); }
 
-  unsigned get_level(UnitType branch) const { auto r = bc_ResearchInfo_get_level( m_info, branch ); CHECK_ERRORS(); return r; }
-  std::vector<UnitType> get_queue  () const { auto r = to_vector(bc_ResearchInfo_queue( m_info )); CHECK_ERRORS(); return r; }
-  bool has_next_in_queue           () const { auto r = bc_ResearchInfo_has_next_in_queue( m_info ); CHECK_ERRORS(); return r; }
-  UnitType next_in_queue           () const { auto r = bc_ResearchInfo_next_in_queue( m_info ); CHECK_ERRORS(); return r; }
-  unsigned rounds_left             () const { auto r = bc_ResearchInfo_rounds_left( m_info ); CHECK_ERRORS(); return r; }
+  unsigned get_level(UnitType branch) const { auto r = bc_ResearchInfo_get_level( m_info.get(), branch ); CHECK_ERRORS(); return r; }
+  std::vector<UnitType> get_queue  () const { auto r = to_vector(bc_ResearchInfo_queue( m_info.get() )); CHECK_ERRORS(); return r; }
+  bool has_next_in_queue           () const { auto r = bc_ResearchInfo_has_next_in_queue( m_info.get() ); CHECK_ERRORS(); return r; }
+  UnitType next_in_queue           () const { auto r = bc_ResearchInfo_next_in_queue( m_info.get() ); CHECK_ERRORS(); return r; }
+  unsigned rounds_left             () const { auto r = bc_ResearchInfo_rounds_left( m_info.get() ); CHECK_ERRORS(); return r; }
 
 private:
-  bc_ResearchInfo* m_info;
+  UniquePtr<bc_ResearchInfo, delete_bc_ResearchInfo> m_info;
 };
 
 
@@ -932,25 +915,16 @@ VEC(RocketLanding, bc_VecRocketLanding)
 // RocketLandingInfo
 class RocketLandingInfo {
 public:
-  RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) :
+  explicit RocketLandingInfo(bc_RocketLandingInfo* rocket_landing_info) :
       m_rocket_landing_info { rocket_landing_info }
   {
     log_error(rocket_landing_info, "Null bc_RocketLandingInfo!");
   }
 
-  ~RocketLandingInfo(){
-    if (m_rocket_landing_info)
-      delete_bc_RocketLandingInfo(m_rocket_landing_info);
-  }
-
-  // Delete the copy constructor as otherwise we might be able to use an object
-  // after the delete_bc_PlanetMap method has run
-  //RocketLandingInfo(const RocketLandingInfo& that) = delete;
-
-  std::vector<RocketLanding> get_landings_on_round(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info, round)); }
+  std::vector<RocketLanding> get_landings_on_round(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info.get(), round)); }
 
 private:
-  bc_RocketLandingInfo* m_rocket_landing_info;
+  UniquePtr<bc_RocketLandingInfo, delete_bc_RocketLandingInfo> m_rocket_landing_info;
 };
 
 
@@ -973,9 +947,8 @@ public:
       delete_bc_GameController(m_gc);
   }
 
-  // Delete the copy constructor as otherwise we might be able to use an object
-  // after the delete_bc_GameController method has run
   GameController(const GameController& that) = delete;
+  GameController& operator=(const GameController& that) = delete;
 
   void next_turn() const { bc_GameController_next_turn(m_gc); }
   unsigned get_round() const { return bc_GameController_round(m_gc); }
@@ -1039,7 +1012,7 @@ public:
   Unit sense_unit_at_location(MapLocation map_location) const {
     auto ans = bc_GameController_sense_unit_at_location(m_gc, map_location.get_bc());
     CHECK_ERRORS();
-    return ans;
+    return Unit(ans);
   }
 
   const AsteroidPattern& get_asteroid_pattern() const { return m_asteroid_pattern; }
