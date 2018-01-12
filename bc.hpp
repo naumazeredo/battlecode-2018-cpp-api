@@ -213,16 +213,16 @@ public:
    * Copy constructor
    * @param map_location
    */
-  MapLocation(const MapLocation& map_location) { 
-    *this = map_location; 
+  MapLocation(const MapLocation& map_location) {
+    *this = map_location;
   }
 
   /**
    * Move constructor
    * @param map_location
    */
-  MapLocation(MapLocation&& map_location) { 
-    *this = map_location; 
+  MapLocation(MapLocation&& map_location) {
+    *this = map_location;
   }
 
   /**
@@ -295,10 +295,10 @@ public:
   /* Set the x coordinate of the location */
   void set_y(int y) { m_y = y; }
 
-  /* 
+  /*
   *  The location one square from this one in the given direction.
   *
-  * @param direction : 
+  * @param direction :
   *
   * return : The location one square from this one in the given direction.
   */
@@ -309,10 +309,10 @@ public:
                       m_y + direction_dy(direction));
   }
 
-  /* 
+  /*
   *  The location one square from this one in the opposite direction.
   *
-  * @param direction : 
+  * @param direction :
   *
   * return : the location one square from this one in the opposite direction.
   */
@@ -323,10 +323,10 @@ public:
                       m_y - direction_dy(direction));
   }
 
-  /* 
+  /*
   *  The location `multiple` squares from this one in the given direction.
   *
-  * @param direction : 
+  * @param direction :
   *
   * return : The location `multiple` squares from this one in the given direction.
   */
@@ -337,12 +337,12 @@ public:
                       m_y + direction_dy(direction) * multiple);
   }
 
-  /* 
-  *  The location translated from this location by `dx` in the x direction and `dy` 
+  /*
+  *  The location translated from this location by `dx` in the x direction and `dy`
   *  in the y direction.
   *
-  * @param dx : 
-  * @param dy : 
+  * @param dx :
+  * @param dy :
   *
   * return : The location translated from this location by `dx` in the x direction and `dy` in the y direction.
   */
@@ -351,11 +351,11 @@ public:
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  /* 
+  /*
   *  Computes the square of the distance from this location to the specified
   *  location. If on different planets, returns the maximum integer.
   *
-  * @param map_location : 
+  * @param map_location :
   *
   * return : the square of the distance from this location to the specified location. If on different planets, returns the maximum integer.
   */
@@ -368,10 +368,10 @@ public:
     return dx * dx + dy * dy;
   }
 
-  /* 
+  /*
   *  The Direction from this location to the specified location.
   *
-  * @param map_location : 
+  * @param map_location :
   *
   * return : The Direction from this location to the specified location.
   * return : * DifferentPlanet - The locations are on different planets.
@@ -382,12 +382,12 @@ public:
     return ans;
   }
 
-  /* 
+  /*
   *  Determines whether this location is adjacent to the specified location,
-  *  including diagonally. Note that squares are not adjacent to themselves, 
+  *  including diagonally. Note that squares are not adjacent to themselves,
   *  and squares on different planets are not adjacent to each other.
   *
-  * @param map_location : 
+  * @param map_location :
   *
   * return : if this location is adjacent to the specified location
   */
@@ -398,7 +398,7 @@ public:
             std::abs(m_y - map_location.get_y()) <= 1);
   }
 
-  /* 
+  /*
   *  Whether this location is within the distance squared range of the
   *  specified location, inclusive. False for locations on different planets.
   *
@@ -412,10 +412,10 @@ public:
     return range >= distance_squared_to(map_location);
   }
 
-  /* 
+  /*
   *  Overloading of the == operator
   *
-  * @param map_location : 
+  * @param map_location :
   *
   * return : If the current MapLocation is equal to map_location
   */
@@ -424,15 +424,15 @@ public:
             map_location.get_x() == m_x and
             map_location.get_y() == m_y);
   }
-  /* 
+  /*
   *  Overloading of the != operator
   *
-  * @param map_location : 
+  * @param map_location :
   *
   * return : If the current MapLocation is not equal to map_location
   */
-  bool operator !=(const MapLocation& map_location) const { 
-    return !((*this) == map_location); 
+  bool operator !=(const MapLocation& map_location) const {
+    return !((*this) == map_location);
   }
 
   // TODO: MapLocation to_string
@@ -715,6 +715,10 @@ public:
     m_initial_units = to_vector(bc_PlanetMap_initial_units_get(m_planet_map));
   }
 
+  // Delete the copy constructor as otherwise we might be able to use an object
+  // after the delete_bc_PlanetMap method has run
+  PlanetMap(const PlanetMap& that) = delete;
+
   ~PlanetMap() {
     if (m_planet_map)
       delete_bc_PlanetMap(m_planet_map);
@@ -888,8 +892,18 @@ public:
   }
 
   ~ResearchInfo(){
-    if (m_info)
+    if (m_info) {
+      printf("BLAH\n");
       delete_bc_ResearchInfo( m_info );
+    }
+  }
+
+  // Delete the copy constructor as otherwise we might be able to use an object
+  // after the delete_bc_ResearchInfo method has run
+  ResearchInfo(const ResearchInfo& that) = delete;
+  // Move constructor!
+  ResearchInfo(ResearchInfo&& that) : m_info(that.m_info) {
+    that.m_info = nullptr;
   }
 
   // These two methods are stand-alone ones from C API, so we decided to
@@ -897,11 +911,11 @@ public:
   unsigned max_level(UnitType branch)                 const { return ::max_level( branch ); }
   unsigned cost_of  (UnitType branch, unsigned level) const { return ::cost_of( branch,level ); }
 
-  unsigned get_level(UnitType branch) const { return bc_ResearchInfo_get_level( m_info, branch ); }
-  std::vector<UnitType> get_queue  () const { return to_vector(bc_ResearchInfo_queue( m_info )); }
-  bool has_next_in_queue           () const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
-  UnitType next_in_queue           () const { return bc_ResearchInfo_next_in_queue( m_info ); }
-  unsigned rounds_left             () const { return bc_ResearchInfo_rounds_left( m_info ); }
+  unsigned get_level(UnitType branch) const { auto r = bc_ResearchInfo_get_level( m_info, branch ); CHECK_ERRORS(); return r; }
+  std::vector<UnitType> get_queue  () const { auto r = to_vector(bc_ResearchInfo_queue( m_info )); CHECK_ERRORS(); return r; }
+  bool has_next_in_queue           () const { auto r = bc_ResearchInfo_has_next_in_queue( m_info ); CHECK_ERRORS(); return r; }
+  UnitType next_in_queue           () const { auto r = bc_ResearchInfo_next_in_queue( m_info ); CHECK_ERRORS(); return r; }
+  unsigned rounds_left             () const { auto r = bc_ResearchInfo_rounds_left( m_info ); CHECK_ERRORS(); return r; }
 
 private:
   bc_ResearchInfo* m_info;
@@ -949,6 +963,10 @@ public:
       delete_bc_RocketLandingInfo(m_rocket_landing_info);
   }
 
+  // Delete the copy constructor as otherwise we might be able to use an object
+  // after the delete_bc_PlanetMap method has run
+  //RocketLandingInfo(const RocketLandingInfo& that) = delete;
+
   std::vector<RocketLanding> get_landings_on_round(unsigned round) { return to_vector(bc_RocketLandingInfo_landings_on(m_rocket_landing_info, round)); }
 
 private:
@@ -974,6 +992,10 @@ public:
     if (m_gc)
       delete_bc_GameController(m_gc);
   }
+
+  // Delete the copy constructor as otherwise we might be able to use an object
+  // after the delete_bc_GameController method has run
+  GameController(const GameController& that) = delete;
 
   void next_turn() const { bc_GameController_next_turn(m_gc); }
   unsigned get_round() const { return bc_GameController_round(m_gc); }
