@@ -41,6 +41,7 @@ namespace bc {
 #define log_error(condition, message) ((void)0)
 #define CHECK_ERRORS() ((void)0)
 #else
+#ifdef BACKTRACE
 #include <execinfo.h>
 #include <signal.h>
 #include <unistd.h>
@@ -57,6 +58,11 @@ void print_trace() {
   backtrace_symbols_fd(array, size, STDOUT_FILENO);
   exit(1);
 }
+#else
+void print_trace() {
+  printf("Compile with -DBACKTRACE to see a backtrace\n");
+}
+#endif
 
 #define S(x) #x
 #define S_(x) S(x)
