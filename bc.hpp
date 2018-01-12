@@ -17,6 +17,7 @@
 #include <string>
 #include <cstdlib>
 #include <climits>
+#include <unordered_map>
 
 // XXX: Fix for 'this' used inside C code
 #define this it
@@ -770,6 +771,7 @@ private:
 
 class AsteroidStrike {
 public:
+  AsteroidStrike() = default;
   AsteroidStrike(unsigned karbonite, const MapLocation& location) :
     m_karbonite { karbonite }, m_location { location }
   {}
@@ -819,7 +821,7 @@ public:
     std::unordered_map < unsigned , AsteroidStrike> ans;
     for (int i = 0 ; i < MAX_ROUNDS ; ++i){
       if (has_asteroid_on_round(i))
-        ans[i] = AsteroidStrike{ get_asteroid_on_round(i) };
+        ans[i] = get_asteroid_on_round(i);
     }
     return ans;
   }
