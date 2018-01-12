@@ -81,6 +81,15 @@ if (bc_has_err()) { \
 
 #endif
 
+bool clear_error() {
+  if (bc_has_err()) {
+    char* err;
+    bc_get_last_err(&err);
+    bc_free_string(err);
+    return true;
+  }
+  return false;
+}
 
 // Auxiliar function for vectors
 // TODO: Write with C++ and constexpr
@@ -965,6 +974,15 @@ public:
   const PlanetMap& get_mars_map()  const { return m_mars_map; }
 
   unsigned get_karbonite() const { return bc_GameController_karbonite(m_gc); }
+
+  // Not in C API
+  bool has_unit(unsigned id) const {
+    clear_error();
+    bc_Unit* unit = bc_GameController_unit(m_gc, id);
+    bool ret = clear_error();
+    delete_bc_Unit(unit);
+    return ret;
+  }
 
   Unit get_unit(unsigned id) const {
     bc_Unit* unit = bc_GameController_unit(m_gc, id);
