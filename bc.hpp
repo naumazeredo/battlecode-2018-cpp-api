@@ -14,6 +14,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include <string>
 #include <cstdlib>
 #include <climits>
@@ -95,6 +96,18 @@ std::vector<dest> to_vector(orig* vec) {       \
   VEC_DEL(orig)(vec);                          \
   return ans;                                  \
 }
+
+/** @cond PRIVATE */
+template<class T, void(*F)(T*)>
+struct Deleter {
+  void operator()(T* loc) {
+    F(loc);
+  }
+};
+
+/** @cond PRIVATE */
+template<class T, void(*F)(T*)>
+using UniquePtr = std::unique_ptr<T, Deleter<T, F>>;
 
 
 /** @cond PRIVATE
@@ -199,7 +212,7 @@ public:
    * Constructor used internally
    * @param map_location
    */
-  MapLocation(bc_MapLocation* map_location) : m_map_location { map_location } {
+  explicit MapLocation(bc_MapLocation* map_location) : m_map_location { map_location } {
     log_error(map_location, "Null bc_MapLocation!");
 
     m_planet = bc_MapLocation_planet_get(map_location);
@@ -208,29 +221,14 @@ public:
   }
   /** @endcond */
 
-  /**
-   * Copy constructor
-   * @param map_location
-   */
-  MapLocation(const MapLocation& map_location) {
-    *this = map_location;
-  }
+  MapLocation(const MapLocation& map_location) :
+      m_map_location { bc_MapLocation_clone(map_location.get_bc()) },
+      m_planet       { map_location.get_planet() },
+      m_x            { map_location.get_x() },
+      m_y            { map_location.get_y() }
+  {}
 
-  /**
-   * Move constructor
-   * @param map_location
-   */
-  MapLocation(MapLocation&& map_location) {
-    *this = map_location;
-  }
-
-  /**
-   *  Deconstructor
-   */
-  ~MapLocation() {
-    if (m_map_location)
-      delete_bc_MapLocation(m_map_location);
-  }
+  MapLocation(MapLocation&&) = default;
 
   /**
    * Assignment operator (deep copy)
@@ -238,35 +236,16 @@ public:
    * @return the assigned MapLocation
    */
   MapLocation& operator=(const MapLocation& map_location) {
-    m_map_location = bc_MapLocation_clone(map_location.get_bc());
-    m_planet = map_location.get_planet();
-    m_x      = map_location.get_x();
-    m_y      = map_location.get_y();
-
-    return *this;
+    *this = std::move(MapLocation(map_location));
   }
 
-
-  /**
-   * Assignment operator (move)
-   * @param map_location
-   * @return the assigned MapLocation
-   */
-  MapLocation& operator=(MapLocation&& map_location) {
-    m_planet       = std::move(map_location.get_planet());
-    m_x            = std::move(map_location.get_x());
-    m_y            = std::move(map_location.get_y());
-    m_map_location = std::move(map_location.m_map_location);
-    map_location.m_map_location = nullptr;
-
-    return *this;
-  }
+  MapLocation& operator=(MapLocation&&) = default;
 
   // XXX: Low-level use only
   /** @cond PRIVATE
    * Two-dimensional coordinates in the Battlecode world.
    */
-  bc_MapLocation* get_bc() const { return m_map_location; }
+  bc_MapLocation* get_bc() const { return m_map_location.get(); }
   /** @endcond */
 
   /**
@@ -437,7 +416,7 @@ public:
   // TODO: MapLocation to_string
 
 private:
-  bc_MapLocation* m_map_location;
+  UniquePtr<bc_MapLocation, delete_bc_MapLocation> m_map_location;
 
   Planet m_planet;
   int m_x;
@@ -465,7 +444,7 @@ public:
 
     if (bc_Location_is_on_map(location)) {
       m_type = Map;
-      m_map_location = bc_Location_map_location(location);
+      m_map_location = MapLocation(bc_Location_map_location(location));
     } else if (bc_Location_is_in_garrison(location)) {
       m_type = Garrison;
       m_garrison_id = bc_Location_structure(location);
@@ -929,7 +908,7 @@ public:
   RocketLanding(bc_RocketLanding* rocket_landing) {
     log_error(rocket_landing, "Null bc_RocketLanding!");
     m_rocket_id   = bc_RocketLanding_rocket_id_get(rocket_landing);
-    m_destination = bc_RocketLanding_destination_get(rocket_landing);
+    m_destination = MapLocation(bc_RocketLanding_destination_get(rocket_landing));
     delete_bc_RocketLanding(rocket_landing);
   }
 
