@@ -1164,6 +1164,10 @@ public:
     CHECK_ERRORS();
   }
 
+  bool can_replicate(unsigned worker_id, Direction direction) const {
+    return bc_GameController_can_replicate(m_gc, worker_id, direction);
+  }
+
   void replicate(unsigned worker_id, Direction direction) const {
     bc_GameController_replicate(m_gc, worker_id, direction);
     CHECK_ERRORS();
