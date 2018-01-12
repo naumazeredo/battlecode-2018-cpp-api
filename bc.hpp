@@ -90,8 +90,8 @@ if (bc_has_err()) { \
 #define VEC(dest, orig) \
 std::vector<dest> to_vector(orig* vec) {       \
   std::vector<dest> ans;                       \
-  uintptr_t len = VEC_LEN(orig)(vec);          \
-  for (uintptr_t i = 0; i < len; i++)          \
+  size_t len = VEC_LEN(orig)(vec);             \
+  for (size_t i = 0; i < len; i++)             \
     ans.emplace_back(VEC_INDEX(orig)(vec, i)); \
   VEC_DEL(orig)(vec);                          \
   return ans;                                  \
@@ -627,6 +627,8 @@ public:
 
   GET(Team, team);
   GET(Location, location);
+  bool is_on_map() const { return get_location().is_on_map(); }
+  MapLocation get_map_location() const { return get_location().get_map_location(); }
 
   // All units
   GET(unsigned, id);
