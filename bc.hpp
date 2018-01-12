@@ -889,7 +889,9 @@ public:
       m_mars_map { bc_GameController_starting_map(m_gc, Mars) },
       m_asteroid_pattern { bc_GameController_asteroid_pattern(m_gc) },
       m_orbit_pattern { bc_GameController_orbit_pattern(m_gc) }
-  {}
+  {
+    CHECK_ERRORS();
+  }
 
   ~GameController() {
     if (m_gc)
