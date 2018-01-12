@@ -528,9 +528,9 @@ VEC(unsigned, bc_VecUnitID)
 using UnitType = bc_UnitType;
 
 /*  */
-bool is_robot(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
+bool is_structure(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
 /*  */
-bool is_structure(UnitType unit_type) { return !is_robot(unit_type); }
+bool is_robot(UnitType unit_type) { return !is_structure(unit_type); }
 
 /*  */
 unsigned unit_type_get_factory_cost(UnitType unit_type) {
