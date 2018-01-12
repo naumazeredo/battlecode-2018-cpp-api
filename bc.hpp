@@ -377,7 +377,7 @@ public:
   * return : * DifferentPlanet - The locations are on different planets.
   */
   Direction direction_to(const MapLocation& map_location) const {
-    auto ans = bc_MapLocation_direction_to(map_location.get_bc(), map_location.get_bc());
+    auto ans = bc_MapLocation_direction_to(get_bc(), map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
