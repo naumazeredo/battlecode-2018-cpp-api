@@ -170,6 +170,7 @@ Table of Contents
          * [public inline bool<a href="#classbc_1_1PlanetMap_1aeff5395b01ec946b0337e148fd33caec"><code>is_on_map</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; location) const</code>](#public-inline-boolis_on_mapconstmaplocation-location-const)
          * [public inline bool<a href="#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224"><code>is_passable_terrain_at</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolis_passable_terrain_atconstmaplocation-map_location-const)
          * [public inline unsigned<a href="#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234"><code>get_initial_karbonite_at</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-unsignedget_initial_karbonite_atconstmaplocation-map_location-const)
+         * [public inline std::vector&lt; std::vector&lt; std::pair&lt; bool, unsigned &gt; &gt; &gt;<a href="#classbc_1_1PlanetMap_1a63bdc1578d81eaf2a63b77755a49a3f4"><code>get_initial_map</code></a><code>() const</code>](#public-inline-stdvector-stdvector-stdpair-bool-unsigned---get_initial_map-const)
    * [class bc::ResearchInfo](#class-bcresearchinfo)
       * [Summary](#summary-9)
       * [Members](#members-8)
@@ -843,6 +844,7 @@ the y coordinate
 `public inline bool `[`is_on_map`](#classbc_1_1PlanetMap_1aeff5395b01ec946b0337e148fd33caec)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & location) const` | 
 `public inline bool `[`is_passable_terrain_at`](#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline unsigned `[`get_initial_karbonite_at`](#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline std::vector< std::vector< std::pair< bool, unsigned > > > `[`get_initial_map`](#classbc_1_1PlanetMap_1a63bdc1578d81eaf2a63b77755a49a3f4)`() const` | Get the initial map passable and karbonite values. This information is constant, so it's useful to have it since the beginning and never use the API for this.
 
 ## Members
 
@@ -865,6 +867,13 @@ the y coordinate
 #### `public inline bool `[`is_passable_terrain_at`](#classbc_1_1PlanetMap_1a2b416adb3155fc7964cf570f20f97224)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline unsigned `[`get_initial_karbonite_at`](#classbc_1_1PlanetMap_1a39d912a61d2668da5262e7f564c55234)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
+
+#### `public inline std::vector< std::vector< std::pair< bool, unsigned > > > `[`get_initial_map`](#classbc_1_1PlanetMap_1a63bdc1578d81eaf2a63b77755a49a3f4)`() const` 
+
+Get the initial map passable and karbonite values. This information is constant, so it's useful to have it since the beginning and never use the API for this.
+
+#### Returns
+the matrix of pair (is passable cell, initial karbonite at cell)
 
 # class `bc::ResearchInfo` 
 
