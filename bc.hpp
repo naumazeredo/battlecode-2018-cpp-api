@@ -237,6 +237,7 @@ public:
    */
   MapLocation& operator=(const MapLocation& map_location) {
     *this = std::move(MapLocation(map_location));
+    return *this;
   }
 
   MapLocation& operator=(MapLocation&&) = default;
@@ -572,6 +573,7 @@ public:
 
   Unit& operator=(const Unit& unit) {
     *this = std::move(Unit(unit));
+    return *this;
   }
   Unit& operator=(Unit&& unit) = default;
 
@@ -695,6 +697,7 @@ public:
 
   PlanetMap& operator=(const PlanetMap& planet_map) {
     *this = std::move(PlanetMap(planet_map));
+    return *this;
   }
 
   PlanetMap& operator=(PlanetMap&& planet_map) = default;
@@ -712,8 +715,8 @@ public:
   */
 
   bool is_on_map(const MapLocation& location) const {
-    return (location.get_x() < m_width) and
-          (location.get_y() < m_height) and
+    return (location.get_x() < (int)m_width) and
+          (location.get_y() < (int)m_height) and
           (location.get_planet() == m_planet);
   }
 
@@ -741,8 +744,8 @@ public:
   std::vector<std::vector<std::pair<bool, unsigned>>> get_initial_map() const {
     std::vector<std::vector<std::pair<bool, unsigned>>> ans { m_height, std::vector<std::pair<bool, unsigned>> { m_width } };
 
-    for (int i = 0; i < m_height; i++) {
-      for (int j = 0; j < m_width; j++) {
+    for (int i = 0; i < (int)m_height; i++) {
+      for (int j = 0; j < (int)m_width; j++) {
         MapLocation mp { m_planet, i, j };
         bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map.get(), mp.get_bc());
         auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map.get(), mp.get_bc());
