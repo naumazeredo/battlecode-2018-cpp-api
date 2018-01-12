@@ -53,8 +53,7 @@ void print_trace() {
   size = backtrace(array, 10);
 
   // print out all the frames to stderr
-  backtrace_symbols_fd(array, size, STDERR_FILENO);
-  fflush(stdout);
+  backtrace_symbols_fd(array, size, STDOUT_FILENO);
   exit(1);
 }
 
