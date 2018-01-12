@@ -20,6 +20,11 @@ See documentation [here](https://github.com/naumazeredo/battlecode-2018-cpp-api/
 
 _Still a WIP._
 
+## TODO
+
+- [ ] Documentation links are broken _(Moxygen issue, actually)_.
+- [ ] Add documentation to all classes
+
 ## Contributing
 
 - Use C++11 or newer when possible
