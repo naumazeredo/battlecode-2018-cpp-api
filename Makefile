@@ -16,6 +16,8 @@ toc:
 	chmod a+x gh-md-toc
 	sed -i 's/^####/###/' $(DOC)
 	./gh-md-toc $(DOC) > toc
+	sed -i '/Parameters/d' toc
+	sed -i '/Returns/d' toc
 	sed -i 's/^###/####/' $(DOC)
 	echo "" >> toc
 	cat $(DOC) >> toc
