@@ -1151,6 +1151,11 @@ public:
     bc_GameController_replicate(m_gc, worker_id, direction);
     CHECK_ERRORS();
   }
+  
+  bool can_replicate(unsigned worker_id, Direction direction) const {
+    bc_GameController_can_replicate(m_gc, worker_id, direction);
+    CHECK_ERRORS();
+  }
 
   bool can_javelin(unsigned knight_id, unsigned target_id) const {
     return bc_GameController_can_javelin(m_gc, knight_id, target_id);
