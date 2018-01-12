@@ -23,6 +23,9 @@
 #include <bc.h>
 #undef this
 
+#ifndef MAX_ROUNDS
+#define MAX_ROUNDS 1000
+#endif
 
 // IDEA: Add more constness (Vectors should be of consts, etc)
 // IDEA: Create namespaces/static classes for bc enums.
@@ -805,6 +808,20 @@ public:
 
   AsteroidStrike get_asteroid_on_round(unsigned round) const {
     return bc_AsteroidPattern_asteroid(m_pattern, round);
+  }
+
+  /**
+   * Utility function for gathering all strikes info rather than consulting
+   * for each round (they don't change the whole game)
+   * @return the map strikes for each round
+   */
+  std::unordered_map< unsigned , AsteroidStrike>  get_all_strikes() {
+    std::unordered_map < unsigned , AsteroidStrike> ans;
+    for (int i = 0 ; i < MAX_ROUNDS ; ++i){
+      if (has_asteroid_on_round(i))
+        ans[i] = AsteroidStrike{ get_asteroid_on_round(i) };
+    }
+    return ans;
   }
 
   // TODO: AsteroidPattern to_string
