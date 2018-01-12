@@ -13,11 +13,12 @@ using namespace bc;
 
 int main() {
   printf("Player C++ bot starting\n");
-  printf("Connecting to manager...\n");
+
   std::default_random_engine generator;
   std::uniform_int_distribution<int> distribution (0,8);
   auto dice = std::bind ( distribution , generator );
-  // Most methods return pointers; methods returning integers or enums are the only exception.
+
+  printf("Connecting to manager...\n");
   GameController gc;
   gc.queue_research(Knight);
   gc.queue_research(Knight);
@@ -59,34 +60,37 @@ int main() {
       // Calls on the controller take unit IDs for ownership reasons.
         const auto locus = unit.get_location().get_map_location();
         const auto nearby = gc.sense_nearby_units(locus, 2);
-        for ( auto place : nearby ){
-          //Building 'em blueprints
-          if(gc.can_build(id, place.get_id()) && unit.get_unit_type() == Worker){
+
+        for (auto place : nearby) {
+          //Building blueprints
+          if (gc.can_build(id, place.get_id()) && unit.get_unit_type() == Worker) {
             gc.build(id, place.get_id());
             continue;
           }
-          //Attacking 'em enemies
-          if( place.get_team() != unit.get_team() and
+
+          // Attacking enemies
+          if (place.get_team() != unit.get_team() and
               gc.is_attack_ready(id) and
-              gc.can_attack(id, place.get_id()) ){
-              gc.attack(id, place.get_id());
-              continue;
+              gc.can_attack(id, place.get_id())) {
+            gc.attack(id, place.get_id());
+            continue;
           }
         }
       }
 
       Direction d = (Direction) dice();
-      // Placing 'em blueprints
-      if(gc.can_blueprint(id, Factory, d) and gc.get_karbonite() > unit_type_get_blueprint_cost(Factory)){
+      // Placing blueprints
+      if (gc.can_blueprint(id, Factory, d) and
+          gc.get_karbonite() > unit_type_get_blueprint_cost(Factory)) {
         gc.blueprint(id, Factory, d);
-      } else if (gc.is_move_ready(id) && gc.can_move(id,d)){ // Moving otherwise (if possible)
+      } else if (gc.is_move_ready(id) && gc.can_move(id,d)){
+        // Moving otherwise (if possible)
         gc.move_robot(id,d);
       }
     }
-    // this line helps the output logs make more sense by forcing output to be sent
-    // to the manager.
-    // it's not strictly necessary, but it helps.
-    // pause and wait for the next turn.
+
+    // this line helps the output logs make more sense by forcing output to be sent to the manager.
+    // it's not strictly necessary, but it helps.  pause and wait for the next turn.
     fflush(stdout);
     gc.next_turn();
   }
