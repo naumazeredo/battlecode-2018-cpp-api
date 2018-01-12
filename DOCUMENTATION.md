@@ -30,17 +30,12 @@ Table of Contents
          * [public Direction<a href="#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d"><code>direction_rotate_right</code></a><code>(Direction direction)</code>](#public-directiondirection_rotate_rightdirection-direction)
          * [Parameters](#parameters-7)
          * [Returns](#returns-7)
-         * [public std::vector&lt;<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&gt;</code><a href="#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15"><code>to_vector</code></a><code>(bc_VecMapLocation * vec)</code>](#public-stdvectormaplocationto_vectorbc_vecmaplocation--vec)
-         * [public std::vector&lt; unsigned &gt;<a href="#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681"><code>to_vector</code></a><code>(bc_VecUnitID * vec)</code>](#public-stdvector-unsigned-to_vectorbc_vecunitid--vec)
          * [public bool<a href="#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd"><code>is_robot</code></a><code>(UnitType unit_type)</code>](#public-boolis_robotunittype-unit_type)
          * [public bool<a href="#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a"><code>is_structure</code></a><code>(UnitType unit_type)</code>](#public-boolis_structureunittype-unit_type)
          * [public unsigned<a href="#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353"><code>unit_type_get_factory_cost</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_factory_costunittype-unit_type)
          * [public unsigned<a href="#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee"><code>unit_type_get_blueprint_cost</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_blueprint_costunittype-unit_type)
          * [public unsigned<a href="#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b"><code>unit_type_get_replicate_cost</code></a><code>()</code>](#public-unsignedunit_type_get_replicate_cost)
          * [public unsigned<a href="#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b"><code>unit_type_get_value</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_valueunittype-unit_type)
-         * [public std::vector&lt; UnitType &gt;<a href="#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25"><code>to_vector</code></a><code>(bc_VecUnitType * vec)</code>](#public-stdvector-unittype-to_vectorbc_vecunittype--vec)
-         * [public std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07"><code>to_vector</code></a><code>(bc_VecUnit * vec)</code>](#public-stdvectorunitto_vectorbc_vecunit--vec)
-         * [public std::vector&lt;<a href="#classbc_1_1RocketLanding"><code>RocketLanding</code></a><code>&gt;</code><a href="#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9"><code>to_vector</code></a><code>(bc_VecRocketLanding * vec)</code>](#public-stdvectorrocketlandingto_vectorbc_vecrocketlanding--vec)
    * [class bc::AsteroidPattern](#class-bcasteroidpattern)
       * [Summary](#summary-2)
       * [Members](#members-1)
@@ -212,7 +207,7 @@ Table of Contents
          * [public inline std::vector&lt; UnitType &gt;<a href="#classbc_1_1ResearchInfo_1a939db9bb1af916c07079143d45071aa8"><code>get_queue</code></a><code>() const</code>](#public-inline-stdvector-unittype-get_queue-const)
          * [public inline bool<a href="#classbc_1_1ResearchInfo_1adaa6e9a78008146f11ffb75945b806b2"><code>has_next_in_queue</code></a><code>() const</code>](#public-inline-boolhas_next_in_queue-const)
          * [public inline UnitType<a href="#classbc_1_1ResearchInfo_1af2730634f508ffe66a9e0779cc45a42d"><code>next_in_queue</code></a><code>() const</code>](#public-inline-unittypenext_in_queue-const)
-         * [public inline unsigned<a href="#classbc_1_1ResearchInfo_1aa3b80632a6c005579c6ff860b8d9db77"><code>rounds_lext</code></a><code>() const</code>](#public-inline-unsignedrounds_lext-const)
+         * [public inline unsigned<a href="#classbc_1_1ResearchInfo_1a52e6329380f88b46425dc0ede5ad37f1"><code>rounds_left</code></a><code>() const</code>](#public-inline-unsignedrounds_left-const)
    * [class bc::RocketLanding](#class-bcrocketlanding)
       * [Summary](#summary-10)
       * [Members](#members-9)
@@ -295,17 +290,12 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 `public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | Returns the direction opposite this one, or Center if it's Center 
 `public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
 `public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
-`public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)`            | 
-`public std::vector< unsigned > `[`to_vector`](#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681)`(bc_VecUnitID * vec)`            | 
 `public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
 `public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)`            | 
 `public unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)`            | 
 `public unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)`            | 
 `public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()`            | 
 `public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)`            | 
-`public std::vector< UnitType > `[`to_vector`](#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25)`(bc_VecUnitType * vec)`            | 
-`public std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`to_vector`](#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07)`(bc_VecUnit * vec)`            | 
-`public std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`to_vector`](#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9)`(bc_VecRocketLanding * vec)`            | 
 `class `[`bc::AsteroidPattern`](#classbc_1_1AsteroidPattern) | 
 `class `[`bc::AsteroidStrike`](#classbc_1_1AsteroidStrike) | 
 `class `[`bc::GameController`](#classbc_1_1GameController) | 
@@ -392,10 +382,6 @@ Returns the direction 45 degrees to the right (clockwise) of this one, or Center
 #### Returns
 the direction 45 degrees to the right
 
-#### `public std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`to_vector`](#bc___8hpp_1a37c3a6ff7f923821d9871f7cff4daf15)`(bc_VecMapLocation * vec)` 
-
-#### `public std::vector< unsigned > `[`to_vector`](#bc___8hpp_1a049a32b0d722318b4ecb5bdcf0346681)`(bc_VecUnitID * vec)` 
-
 #### `public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)` 
 
 #### `public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)` 
@@ -407,12 +393,6 @@ the direction 45 degrees to the right
 #### `public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()` 
 
 #### `public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)` 
-
-#### `public std::vector< UnitType > `[`to_vector`](#bc___8hpp_1a926b587d5f3426f83b9362b8dfd9ec25)`(bc_VecUnitType * vec)` 
-
-#### `public std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`to_vector`](#bc___8hpp_1abb74bc3933ffb4a6bac16bf142634c07)`(bc_VecUnit * vec)` 
-
-#### `public std::vector< `[`RocketLanding`](#classbc_1_1RocketLanding)` > `[`to_vector`](#bc___8hpp_1a7b87d700e5f16b9b0509e34a057cadd9)`(bc_VecRocketLanding * vec)` 
 
 # class `bc::AsteroidPattern` 
 
@@ -926,7 +906,7 @@ the y coordinate
 `public inline std::vector< UnitType > `[`get_queue`](#classbc_1_1ResearchInfo_1a939db9bb1af916c07079143d45071aa8)`() const` | 
 `public inline bool `[`has_next_in_queue`](#classbc_1_1ResearchInfo_1adaa6e9a78008146f11ffb75945b806b2)`() const` | 
 `public inline UnitType `[`next_in_queue`](#classbc_1_1ResearchInfo_1af2730634f508ffe66a9e0779cc45a42d)`() const` | 
-`public inline unsigned `[`rounds_lext`](#classbc_1_1ResearchInfo_1aa3b80632a6c005579c6ff860b8d9db77)`() const` | 
+`public inline unsigned `[`rounds_left`](#classbc_1_1ResearchInfo_1a52e6329380f88b46425dc0ede5ad37f1)`() const` | 
 
 ## Members
 
@@ -946,7 +926,7 @@ the y coordinate
 
 #### `public inline UnitType `[`next_in_queue`](#classbc_1_1ResearchInfo_1af2730634f508ffe66a9e0779cc45a42d)`() const` 
 
-#### `public inline unsigned `[`rounds_lext`](#classbc_1_1ResearchInfo_1aa3b80632a6c005579c6ff860b8d9db77)`() const` 
+#### `public inline unsigned `[`rounds_left`](#classbc_1_1ResearchInfo_1a52e6329380f88b46425dc0ede5ad37f1)`() const` 
 
 # class `bc::RocketLanding` 
 
