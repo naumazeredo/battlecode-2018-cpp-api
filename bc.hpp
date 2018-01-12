@@ -1,15 +1,15 @@
 /*
- * C++ API for Battlecode 2018
- *
- * https://github.com/naumazeredo/battlecode-2018-cpp-api
- *
- * authors:
- *   Naum Azeredo       < naumazeredo@gmail.com  >
- *   Luciano Barreira   < luciano@roboime.com.br >
- *   João Pedro Xavier  < joaopedroxavier@gmail.com >
- *   Sebastien Biollo   < sbiollo@gmail.com >
- *
- */
+  * C++ API for Battlecode 2018
+  *
+  * https://github.com/naumazeredo/battlecode-2018-cpp-api
+  *
+  * authors:
+  *   Naum Azeredo       < naumazeredo@gmail.com  >
+  *   Luciano Barreira   < luciano@roboime.com.br >
+  *   João Pedro Xavier  < joaopedroxavier@gmail.com >
+  *   Sebastien Biollo   < sbiollo@gmail.com >
+  *
+  */
 
 #pragma once
 
@@ -17,16 +17,23 @@
 #include <string>
 #include <cstdlib>
 #include <climits>
-#include <unordered_map>
 
 // XXX: Fix for 'this' used inside C code
 #define this it
 #include <bc.h>
 #undef this
 
-#ifndef MAX_ROUNDS
-#define MAX_ROUNDS 1000
-#endif
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
+// TODO: DOCUMENTATION!!!
 
 // IDEA: Add more constness (Vectors should be of consts, etc)
 // IDEA: Create namespaces/static classes for bc enums.
@@ -77,108 +84,68 @@ std::vector<dest> to_vector(orig* vec) {       \
 }
 
 
-/** @cond PRIVATE
- * Veci32
- * std::vector<int> to_vector(bc_Veci32*);
- */
+// Veci32
+// std::vector<int> to_vector(bc_Veci32*);
 VEC(int, bc_Veci32)
-/** @endcond */
 
 
 // Planet
 using Planet = bc_Planet;
 
-/**
- * Get other planet.
- * @param planet
- * @return the other planet
- */
+/* The other planet. */
 Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
-
-/**
- * Create a human-readable representation of a Planet
- * @param planet
- * @return the human-readable string
- */
+/* Create a human-readable representation of a Planet */
 std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
 
 // Direction
 using Direction = bc_Direction;
 
 // IDEA: Add const vector of pairs for directions
-
-/**
- * Returns the x displacement of this direction.
- * @param direction
- * @return the x displacement
- */
+/* Returns the x displacement of this direction. */
 int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
-
-/**
- * Returns the y displacement of this direction.
- * @param direction
- * @return the y displacement
- */
+/* Returns the y displacement of this direction. */
 int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
-
-/**
- * Returns whether this direction is a diagonal one.
- * @param direction
- * @return bool if the direction is diagonal or not
- */
+/* Whether this direction is a diagonal one. */
 bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
-
-/**
- * Returns the direction opposite this one, or Center if it's Center
- * @param direction
- * @return the opposite direction
- */
+/*  Returns the direction opposite this one, or Center if it's  */
 Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
-
-/**
- * Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center.
- * @param direction
- * @return the direction 45 degrees to the left
- */
+/* Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. */
 Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
-
-/**
- * Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center.
- * @param direction
- * @return the direction 45 degrees to the right
- */
+/* Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. */
 Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
 
 // TODO: Direction to_string
 
 
-/****************************************************//**
+/********************************************************
  *  Two-dimensional coordinates in the Battlecode world.
- *******************************************************/
+ ********************************************************/
 class MapLocation {
 public:
-  /**
-   *  Empty Constructor
-   */
+  /* 
+  *  Empyt Constructor
+  */
   MapLocation() : m_map_location { nullptr } {}
 
-  /**
-   *  Constructor
-   *  @param planet
-   *  @param x
-   *  @param y
-   */
+  /* 
+  *  Constructor
+  *
+  *  @param planet : 
+  *  @param x :
+  *  @param y :
+  */
   MapLocation(Planet planet, int x, int y) :
       m_map_location { new_bc_MapLocation(planet, x, y) },
       m_planet { planet },
       m_x { x },
       m_y { y }
   {}
-
-  /** @cond PRIVATE
-   * Constructor used internally
-   * @param map_location
-   */
+  
+  /* 
+  *  Constructor
+  *
+  * @param map_location :
+  */
   MapLocation(bc_MapLocation* map_location) : m_map_location { map_location } {
     log_error(map_location, "Null bc_MapLocation!");
 
@@ -186,37 +153,32 @@ public:
     m_x      = bc_MapLocation_x_get(map_location);
     m_y      = bc_MapLocation_y_get(map_location);
   }
-  /** @endcond */
 
-  /**
-   * Copy constructor
-   * @param map_location
-   */
-  MapLocation(const MapLocation& map_location) { 
-    *this = map_location; 
-  }
-
-  /**
-   * Move constructor
-   * @param map_location
-   */
-  MapLocation(MapLocation&& map_location) { 
-    *this = map_location; 
-  }
-
-  /**
-   *  Deconstructor
-   */
+  /* 
+  *  Deconstructor 
+  */
   ~MapLocation() {
     if (m_map_location)
       delete_bc_MapLocation(m_map_location);
   }
 
-  /**
-   * Assignment operator (deep copy)
-   * @param map_location
-   * @return the assigned MapLocation
-   */
+  /* 
+  *  Constructor
+  *
+  * @param map_location :
+  */
+  MapLocation(const MapLocation& map_location) { 
+    *this = map_location; 
+  }
+
+  /* 
+  *  Overloading of the = operator
+  *  Deep-copy a MapLocation
+  *
+  * @param map_location : 
+  *
+  * return :  the value of the object, on which the member function is being called
+  */
   MapLocation& operator=(const MapLocation& map_location) {
     m_map_location = bc_MapLocation_clone(map_location.get_bc());
     m_planet = map_location.get_planet();
@@ -226,12 +188,22 @@ public:
     return *this;
   }
 
+  /* 
+  *  Move constructor
+  *
+  * @param map_location :
+  */
+  MapLocation(MapLocation&& map_location) { 
+    *this = map_location; 
+  }
 
-  /**
-   * Assignment operator (move)
-   * @param map_location
-   * @return the assigned MapLocation
-   */
+  /* 
+  *  Move constructor
+  *  
+  * @param map_location : 
+  *
+  * return : the value of the object, on which the member function is being called
+  */
   MapLocation& operator=(MapLocation&& map_location) {
     m_planet       = std::move(map_location.get_planet());
     m_x            = std::move(map_location.get_x());
@@ -243,28 +215,15 @@ public:
   }
 
   // XXX: Low-level use only
-  /** @cond PRIVATE
-   * Two-dimensional coordinates in the Battlecode world.
-   */
+
+  /* Two-dimensional coordinates in the Battlecode world. */
   bc_MapLocation* get_bc() const { return m_map_location; }
-  /** @endcond */
 
-  /**
-   * Returns the planet the MapLocation is at
-   * @return the planet the MapLocation is at
-   */
+  /* The planets in the Battlecode world. */
   Planet get_planet() const { return m_planet; }
-
-  /**
-   * Returns the x coordinate
-   * @return the x coordinate
-   */
+  /* The x coordinate of the location */
   int get_x() const { return m_x; }
-
-  /**
-   * Returns the y coordinate
-   * @return the y coordinate
-   */
+  /* The y coordinate of the location */
   int get_y() const { return m_y; }
 
   /* Set the planets in the Battlecode world. */
@@ -425,12 +384,9 @@ private:
 };
 
 
-/** @cond PRIVATE
- * VecMapLocation
- * std::vector<MapLocation> to_vector(bc_VecMapLocation*);
- */
+// VecMapLocation
+// std::vector<MapLocation> to_vector(bc_VecMapLocation*);
 VEC(MapLocation, bc_VecMapLocation)
-/** @endcond */
 
 
 // Location
@@ -506,12 +462,9 @@ private:
 using Team = bc_Team;
 
 
-/** @cond PRIVATE
- * VecUnitID
- * std::vector<unsigned> to_vector(bc_VecUnitID*);
- */
+// VecUnitID
+// std::vector<unsigned> to_vector(bc_VecUnitID*);
 VEC(unsigned, bc_VecUnitID)
-/** @endcond */
 
 
 // UnitType
@@ -549,12 +502,9 @@ unsigned unit_type_get_replicate_cost() {
 unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
 
-/** @cond PRIVATE
- * VecUnitType
- * std::vector<UnitType> to_vector(bc_VecUnitType*);
- */
+// VecUnitType
+// std::vector<UnitType> to_vector(bc_VecUnitType*);
 VEC(UnitType, bc_VecUnitType)
-/** @endcond */
 
 
 // Unit
@@ -672,12 +622,9 @@ private:
 };
 
 
-/** @cond PRIVATE
- * VecUnit
- * std::vector<Unit> to_vector(bc_VecUnit*);
- */
+// VecUnit
+// std::vector<Unit> to_vector(bc_VecUnit*);
 VEC(Unit, bc_VecUnit)
-/** @endcond */
 
 
 // PlanetMap
@@ -711,7 +658,7 @@ public:
   void set_width (unsigned width ) { m_width = width; }
   */
 
-  bool is_on_map(const MapLocation& location) const {
+  bool is_on_map(const MapLocation& location ) const {
     return (location.get_x() < m_width) and
           (location.get_y() < m_height) and
           (location.get_planet() == m_planet);
@@ -728,28 +675,6 @@ public:
     log_error(m_planet_map, "PlanetMap not loaded!");
     auto ans = bc_PlanetMap_initial_karbonite_at(m_planet_map, map_location.get_bc());
     CHECK_ERRORS();
-    return ans;
-  }
-
-  /**
-   * Get the initial map passable and karbonite values.
-   * This information is constant, so it's useful to have it since the beginning and never use the
-   * API for this.
-   *
-   * @return the matrix of pair (is passable cell, initial karbonite at cell)
-   */
-  std::vector<std::vector<std::pair<bool, unsigned>>> get_initial_map() const {
-    std::vector<std::vector<std::pair<bool, unsigned>>> ans { m_height, std::vector<std::pair<bool, unsigned>> { m_width } };
-
-    for (int i = 0; i < m_height; i++) {
-      for (int j = 0; j < m_width; j++) {
-        MapLocation mp { m_planet, i, j };
-        bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map, mp.get_bc());
-        auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map, mp.get_bc());
-        ans[i][j] = { passable, karbonite };
-      }
-    }
-
     return ans;
   }
 
@@ -771,7 +696,6 @@ private:
 
 class AsteroidStrike {
 public:
-  AsteroidStrike() = default;
   AsteroidStrike(unsigned karbonite, const MapLocation& location) :
     m_karbonite { karbonite }, m_location { location }
   {}
@@ -810,20 +734,6 @@ public:
 
   AsteroidStrike get_asteroid_on_round(unsigned round) const {
     return bc_AsteroidPattern_asteroid(m_pattern, round);
-  }
-
-  /**
-   * Utility function for gathering all strikes info rather than consulting
-   * for each round (they don't change the whole game)
-   * @return the map strikes for each round
-   */
-  std::unordered_map< unsigned , AsteroidStrike>  get_all_strikes() {
-    std::unordered_map < unsigned , AsteroidStrike> ans;
-    for (int i = 0 ; i < MAX_ROUNDS ; ++i){
-      if (has_asteroid_on_round(i))
-        ans[i] = get_asteroid_on_round(i);
-    }
-    return ans;
   }
 
   // TODO: AsteroidPattern to_string
@@ -880,7 +790,7 @@ public:
   std::vector<UnitType> get_queue  () const { return to_vector(bc_ResearchInfo_queue( m_info )); }
   bool has_next_in_queue           () const { return bc_ResearchInfo_has_next_in_queue( m_info ); }
   UnitType next_in_queue           () const { return bc_ResearchInfo_next_in_queue( m_info ); }
-  unsigned rounds_left             () const { return bc_ResearchInfo_rounds_left( m_info ); }
+  unsigned rounds_lext             () const { return bc_ResearchInfo_rounds_left( m_info ); }
 
 private:
   bc_ResearchInfo* m_info;
@@ -906,12 +816,9 @@ private:
 };
 
 
-/** @cond PRIVATE
- * VecRocketLanding
- * std::vector<RocketLanding> to_vector(bc_VecRocketLanding*);
- */
+// VecRocketLanding
+// std::vector<RocketLanding> to_vector(bc_VecRocketLanding*);
 VEC(RocketLanding, bc_VecRocketLanding)
-/** @endcond */
 
 
 // RocketLandingInfo
@@ -945,9 +852,7 @@ public:
       m_mars_map { bc_GameController_starting_map(m_gc, Mars) },
       m_asteroid_pattern { bc_GameController_asteroid_pattern(m_gc) },
       m_orbit_pattern { bc_GameController_orbit_pattern(m_gc) }
-  {
-    CHECK_ERRORS();
-  }
+  {}
 
   ~GameController() {
     if (m_gc)
@@ -1124,10 +1029,9 @@ public:
     bc_GameController_replicate(m_gc, worker_id, direction);
     CHECK_ERRORS();
   }
-  
+
   bool can_replicate(unsigned worker_id, Direction direction) const {
-    bc_GameController_can_replicate(m_gc, worker_id, direction);
-    CHECK_ERRORS();
+    return bc_GameController_can_replicate(m_gc, worker_id, direction);
   }
 
   bool can_javelin(unsigned knight_id, unsigned target_id) const {
