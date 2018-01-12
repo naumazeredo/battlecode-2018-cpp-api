@@ -979,9 +979,9 @@ public:
   bool has_unit(unsigned id) const {
     clear_error();
     bc_Unit* unit = bc_GameController_unit(m_gc, id);
-    bool ret = clear_error();
-    delete_bc_Unit(unit);
-    return ret;
+    bool exists = !clear_error();
+    if (exists) delete_bc_Unit(unit);
+    return exists;
   }
 
   Unit get_unit(unsigned id) const {
