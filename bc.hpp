@@ -674,6 +674,10 @@ public:
   GET(int, rocket_blast_damage);
   GET(unsigned, rocket_travel_time_decrease);
 
+  // C++ API
+  bool is_structure() const { return m_unit_type == Factory or m_unit_type == Rocket; }
+  bool is_robot    () const { return !is_structure(); }
+
 private:
   UniquePtr<bc_Unit, delete_bc_Unit> m_unit;
 
