@@ -119,10 +119,12 @@ struct Deleter {
     if (loc) F(loc);
   }
 };
+/** @endcond */
 
 /** @cond PRIVATE */
 template<class T, void(*F)(T*)>
 using UniquePtr = std::unique_ptr<T, Deleter<T, F>>;
+/** @endcond */
 
 
 /** @cond PRIVATE
@@ -208,7 +210,7 @@ public:
   /**
    *  Empty Constructor
    */
-  MapLocation() : m_map_location { nullptr } {}
+  MapLocation() {}
 
   /**
    *  Constructor
@@ -575,6 +577,8 @@ VEC(UnitType, bc_VecUnitType)
 // Unit
 class Unit {
 public:
+  Unit() {}
+
   explicit Unit(bc_Unit* unit) : m_unit { unit } {
     log_error(unit, "Null bc_Unit!");
     m_unit_type = bc_Unit_unit_type(unit);
@@ -689,7 +693,7 @@ VEC(Unit, bc_VecUnit)
 // PlanetMap
 class PlanetMap {
 public:
-  PlanetMap() : m_planet_map { nullptr } {}
+  PlanetMap() {}
 
   PlanetMap(bc_PlanetMap* planet_map) : m_planet_map { planet_map } {
     log_error(planet_map, "Null bc_PlanetMap!");
@@ -1000,40 +1004,40 @@ public:
   std::vector<Unit> get_my_units() const { return to_vector(bc_GameController_my_units(m_gc)); }
   std::vector<Unit> get_units_in_space() const { return to_vector(bc_GameController_units_in_space(m_gc)); }
 
-  unsigned get_karbonite_at(MapLocation map_location) const {
+  unsigned get_karbonite_at(const MapLocation& map_location) const {
     unsigned val = bc_GameController_karbonite_at(m_gc, map_location.get_bc());
     CHECK_ERRORS();
     return val;
   }
 
-  std::vector<MapLocation> get_all_locations_within(MapLocation map_location, unsigned radius_squared) const {
+  std::vector<MapLocation> get_all_locations_within(const MapLocation& map_location, unsigned radius_squared) const {
     return to_vector(bc_GameController_all_locations_within(m_gc, map_location.get_bc(), radius_squared));
   }
 
-  bool can_sense_location(MapLocation map_location) const {
+  bool can_sense_location(const MapLocation& map_location) const {
     return bc_GameController_can_sense_location(m_gc, map_location.get_bc());
   }
 
   bool can_sense_unit(unsigned id) const { return bc_GameController_can_sense_unit(m_gc, id); }
 
-  std::vector<Unit> sense_nearby_units(MapLocation map_location, unsigned radius_squared) const {
+  std::vector<Unit> sense_nearby_units(const MapLocation& map_location, unsigned radius_squared) const {
     return to_vector(bc_GameController_sense_nearby_units(m_gc, map_location.get_bc(), radius_squared));
   }
 
-  std::vector<Unit> sense_nearby_units_by_team(MapLocation map_location, unsigned radius_squared, Team team) const {
+  std::vector<Unit> sense_nearby_units_by_team(const MapLocation& map_location, unsigned radius_squared, Team team) const {
     return to_vector(bc_GameController_sense_nearby_units_by_team(m_gc, map_location.get_bc(), radius_squared, team));
   }
 
-  std::vector<Unit> sense_nearby_units_by_type(MapLocation map_location, unsigned radius_squared, UnitType type) const {
+  std::vector<Unit> sense_nearby_units_by_type(const MapLocation& map_location, unsigned radius_squared, UnitType type) const {
     return to_vector(bc_GameController_sense_nearby_units_by_type(m_gc, map_location.get_bc(), radius_squared, type));
   }
 
-  bool has_unit_at_location(MapLocation map_location) const {
+  bool has_unit_at_location(const MapLocation& map_location) const {
     return bc_GameController_has_unit_at_location(m_gc, map_location.get_bc());
   }
 
   // XXX: Only use if after has_unit_at_location! Might crash if not
-  Unit sense_unit_at_location(MapLocation map_location) const {
+  Unit sense_unit_at_location(const MapLocation& map_location) const {
     auto ans = bc_GameController_sense_unit_at_location(m_gc, map_location.get_bc());
     CHECK_ERRORS();
     return Unit(ans);
@@ -1060,7 +1064,7 @@ public:
     CHECK_ERRORS();
   }
 
-  bool is_occupiable(MapLocation map_location) const {
+  bool is_occupiable(const MapLocation& map_location) const {
     auto ans = bc_GameController_is_occupiable(m_gc, map_location.get_bc());
     CHECK_ERRORS();
     return ans;
@@ -1162,16 +1166,16 @@ public:
     CHECK_ERRORS();
   }
 
-  bool can_begin_snipe(unsigned ranger_id, MapLocation map_location) const {
+  bool can_begin_snipe(unsigned ranger_id, const MapLocation& map_location) const {
     return bc_GameController_can_begin_snipe(m_gc, ranger_id, map_location.get_bc());
   }
 
-  void begin_snipe(unsigned ranger_id, MapLocation map_location) const {
+  void begin_snipe(unsigned ranger_id, const MapLocation& map_location) const {
     bc_GameController_begin_snipe(m_gc, ranger_id, map_location.get_bc());
     CHECK_ERRORS();
   }
 
-  bool can_begin_blink(unsigned mage_id, MapLocation map_location) const {
+  bool can_begin_blink(unsigned mage_id, const MapLocation& map_location) const {
     return bc_GameController_can_blink(m_gc, mage_id, map_location.get_bc());
   }
 
@@ -1179,7 +1183,7 @@ public:
     return bc_GameController_is_blink_ready(m_gc, mage_id);
   }
 
-  void blink(unsigned mage_id, MapLocation map_location) const {
+  void blink(unsigned mage_id, const MapLocation& map_location) const {
     bc_GameController_blink(m_gc, mage_id, map_location.get_bc());
     CHECK_ERRORS();
   }
@@ -1237,11 +1241,11 @@ public:
     return RocketLandingInfo { bc_GameController_rocket_landings(m_gc) };
   }
 
-  bool can_launch_rocket(unsigned rocket_id, MapLocation map_location) const {
+  bool can_launch_rocket(unsigned rocket_id, const MapLocation& map_location) const {
     return bc_GameController_can_launch_rocket(m_gc, rocket_id, map_location.get_bc());
   }
 
-  void launch_rocket(unsigned rocket_id, MapLocation map_location) const {
+  void launch_rocket(unsigned rocket_id, const MapLocation& map_location) const {
     bc_GameController_launch_rocket(m_gc, rocket_id, map_location.get_bc());
     CHECK_ERRORS();
   }
