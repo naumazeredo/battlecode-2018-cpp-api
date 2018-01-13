@@ -769,7 +769,7 @@ public:
 
     for (int i = 0; i < (int)m_height; i++) {
       for (int j = 0; j < (int)m_width; j++) {
-        MapLocation mp { m_planet, i, j };
+        MapLocation mp { m_planet, j, i };
         bool passable  = bc_PlanetMap_is_passable_terrain_at(m_planet_map.get(), mp.get_bc());
         auto karbonite = bc_PlanetMap_initial_karbonite_at(m_planet_map.get(), mp.get_bc());
         ans[i][j] = { passable, karbonite };
