@@ -41,6 +41,7 @@ namespace bc {
 #define log_error(condition, message) ((void)0)
 #define CHECK_ERRORS() ((void)0)
 #else
+#ifdef BACKTRACE
 #include <execinfo.h>
 #include <signal.h>
 #include <unistd.h>
@@ -57,6 +58,11 @@ void print_trace() {
   backtrace_symbols_fd(array, size, STDOUT_FILENO);
   exit(1);
 }
+#else
+void print_trace() {
+  printf("Compile with -DBACKTRACE to see a backtrace\n");
+}
+#endif
 
 #define S(x) #x
 #define S_(x) S(x)
@@ -81,6 +87,15 @@ if (bc_has_err()) { \
 
 #endif
 
+bool clear_error() {
+  if (bc_has_err()) {
+    char* err;
+    bc_get_last_err(&err);
+    bc_free_string(err);
+    return true;
+  }
+  return false;
+}
 
 // Auxiliar function for vectors
 // TODO: Write with C++ and constexpr
@@ -519,9 +534,9 @@ VEC(unsigned, bc_VecUnitID)
 using UnitType = bc_UnitType;
 
 /*  */
-bool is_robot(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
+bool is_structure(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
 /*  */
-bool is_structure(UnitType unit_type) { return !is_robot(unit_type); }
+bool is_robot(UnitType unit_type) { return !is_structure(unit_type); }
 
 /*  */
 unsigned unit_type_get_factory_cost(UnitType unit_type) {
@@ -965,6 +980,15 @@ public:
   const PlanetMap& get_mars_map()  const { return m_mars_map; }
 
   unsigned get_karbonite() const { return bc_GameController_karbonite(m_gc); }
+
+  // Not in C API
+  bool has_unit(unsigned id) const {
+    clear_error();
+    bc_Unit* unit = bc_GameController_unit(m_gc, id);
+    bool exists = !clear_error();
+    if (exists) delete_bc_Unit(unit);
+    return exists;
+  }
 
   Unit get_unit(unsigned id) const {
     bc_Unit* unit = bc_GameController_unit(m_gc, id);
