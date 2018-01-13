@@ -7,21 +7,21 @@ Table of Contents
       * [Summary](#summary-1)
       * [Members](#members)
          * [public void<a href="#bc___8hpp_1afd310c582a13a726edb7e8d259468a69"><code>print_trace</code></a><code>()</code>](#public-voidprint_trace)
-         * [public bool<a href="#bc___8hpp_1a676ff814b7f93e8f3e12b5e82234fcd1"><code>clear_error</code></a><code>()</code>](#public-boolclear_error)
-         * [public Planet<a href="#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b"><code>planet_other</code></a><code>(Planet planet)</code>](#public-planetplanet_otherplanet-planet)
-         * [public std::string<a href="#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76"><code>to_string</code></a><code>(Planet planet)</code>](#public-stdstringto_stringplanet-planet)
-         * [public int<a href="#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c"><code>direction_dx</code></a><code>(Direction direction)</code>](#public-intdirection_dxdirection-direction)
-         * [public int<a href="#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5"><code>direction_dy</code></a><code>(Direction direction)</code>](#public-intdirection_dydirection-direction)
-         * [public bool<a href="#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d"><code>direction_is_diagonal</code></a><code>(Direction direction)</code>](#public-booldirection_is_diagonaldirection-direction)
-         * [public Direction<a href="#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d"><code>direction_opposite</code></a><code>(Direction direction)</code>](#public-directiondirection_oppositedirection-direction)
-         * [public Direction<a href="#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e"><code>direction_rotate_left</code></a><code>(Direction direction)</code>](#public-directiondirection_rotate_leftdirection-direction)
-         * [public Direction<a href="#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d"><code>direction_rotate_right</code></a><code>(Direction direction)</code>](#public-directiondirection_rotate_rightdirection-direction)
-         * [public bool<a href="#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a"><code>is_structure</code></a><code>(UnitType unit_type)</code>](#public-boolis_structureunittype-unit_type)
-         * [public bool<a href="#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd"><code>is_robot</code></a><code>(UnitType unit_type)</code>](#public-boolis_robotunittype-unit_type)
-         * [public unsigned<a href="#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353"><code>unit_type_get_factory_cost</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_factory_costunittype-unit_type)
-         * [public unsigned<a href="#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee"><code>unit_type_get_blueprint_cost</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_blueprint_costunittype-unit_type)
-         * [public unsigned<a href="#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b"><code>unit_type_get_replicate_cost</code></a><code>()</code>](#public-unsignedunit_type_get_replicate_cost)
-         * [public unsigned<a href="#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b"><code>unit_type_get_value</code></a><code>(UnitType unit_type)</code>](#public-unsignedunit_type_get_valueunittype-unit_type)
+         * [public static bool<a href="#bc___8hpp_1a9eab1af869a744de81383a51ab14b882"><code>clear_error</code></a><code>()</code>](#public-static-boolclear_error)
+         * [public inline Planet<a href="#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b"><code>planet_other</code></a><code>(Planet planet)</code>](#public-inline-planetplanet_otherplanet-planet)
+         * [public inline std::string<a href="#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76"><code>to_string</code></a><code>(Planet planet)</code>](#public-inline-stdstringto_stringplanet-planet)
+         * [public inline int<a href="#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c"><code>direction_dx</code></a><code>(Direction direction)</code>](#public-inline-intdirection_dxdirection-direction)
+         * [public inline int<a href="#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5"><code>direction_dy</code></a><code>(Direction direction)</code>](#public-inline-intdirection_dydirection-direction)
+         * [public inline bool<a href="#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d"><code>direction_is_diagonal</code></a><code>(Direction direction)</code>](#public-inline-booldirection_is_diagonaldirection-direction)
+         * [public inline Direction<a href="#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d"><code>direction_opposite</code></a><code>(Direction direction)</code>](#public-inline-directiondirection_oppositedirection-direction)
+         * [public inline Direction<a href="#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e"><code>direction_rotate_left</code></a><code>(Direction direction)</code>](#public-inline-directiondirection_rotate_leftdirection-direction)
+         * [public inline Direction<a href="#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d"><code>direction_rotate_right</code></a><code>(Direction direction)</code>](#public-inline-directiondirection_rotate_rightdirection-direction)
+         * [public inline bool<a href="#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a"><code>is_structure</code></a><code>(UnitType unit_type)</code>](#public-inline-boolis_structureunittype-unit_type)
+         * [public inline bool<a href="#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd"><code>is_robot</code></a><code>(UnitType unit_type)</code>](#public-inline-boolis_robotunittype-unit_type)
+         * [public static unsigned<a href="#bc___8hpp_1abb55faf487cf5b743e55d6b3a031387a"><code>unit_type_get_factory_cost</code></a><code>(UnitType unit_type)</code>](#public-static-unsignedunit_type_get_factory_costunittype-unit_type)
+         * [public static unsigned<a href="#bc___8hpp_1aa9e9a53ac05a811bacf821801eb4e2f2"><code>unit_type_get_blueprint_cost</code></a><code>(UnitType unit_type)</code>](#public-static-unsignedunit_type_get_blueprint_costunittype-unit_type)
+         * [public static unsigned<a href="#bc___8hpp_1a859c53ef3db54acef1c97d2239833968"><code>unit_type_get_replicate_cost</code></a><code>()</code>](#public-static-unsignedunit_type_get_replicate_cost)
+         * [public inline unsigned<a href="#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b"><code>unit_type_get_value</code></a><code>(UnitType unit_type)</code>](#public-inline-unsignedunit_type_get_valueunittype-unit_type)
    * [class bc::AsteroidPattern](#class-bcasteroidpattern)
       * [Summary](#summary-2)
       * [Members](#members-1)
@@ -57,22 +57,22 @@ Table of Contents
          * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619"><code>get_units</code></a><code>() const</code>](#public-inline-stdvectorunitget_units-const)
          * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0"><code>get_my_units</code></a><code>() const</code>](#public-inline-stdvectorunitget_my_units-const)
          * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53"><code>get_units_in_space</code></a><code>() const</code>](#public-inline-stdvectorunitget_units_in_space-const)
-         * [public inline unsigned<a href="#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691"><code>get_karbonite_at</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-unsignedget_karbonite_atmaplocationmap_location-const)
-         * [public inline std::vector&lt;<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a4e45a2febc2700e6cb50b98a692530fb"><code>get_all_locations_within</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location,unsigned radius_squared) const</code>](#public-inline-stdvectormaplocationget_all_locations_withinmaplocationmap_locationunsigned-radius_squared-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1a77f912c59dac7c56000b06ff6166feb7"><code>can_sense_location</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolcan_sense_locationmaplocationmap_location-const)
+         * [public inline unsigned<a href="#classbc_1_1GameController_1a312b003379e4faabdac05bc6e9be2944"><code>get_karbonite_at</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-unsignedget_karbonite_atconstmaplocation-map_location-const)
+         * [public inline std::vector&lt;<a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a1fa63ad24724ef74254fa04be6886288"><code>get_all_locations_within</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location,unsigned radius_squared) const</code>](#public-inline-stdvectormaplocationget_all_locations_withinconstmaplocation-map_locationunsigned-radius_squared-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1a43318ff9c7a897a2676ff986f25a0da7"><code>can_sense_location</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolcan_sense_locationconstmaplocation-map_location-const)
          * [public inline bool<a href="#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27"><code>can_sense_unit</code></a><code>(unsigned id) const</code>](#public-inline-boolcan_sense_unitunsigned-id-const)
-         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a"><code>sense_nearby_units</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location,unsigned radius_squared) const</code>](#public-inline-stdvectorunitsense_nearby_unitsmaplocationmap_locationunsigned-radius_squared-const)
-         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1"><code>sense_nearby_units_by_team</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location,unsigned radius_squared,Team team) const</code>](#public-inline-stdvectorunitsense_nearby_units_by_teammaplocationmap_locationunsigned-radius_squaredteam-team-const)
-         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2"><code>sense_nearby_units_by_type</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location,unsigned radius_squared,UnitType type) const</code>](#public-inline-stdvectorunitsense_nearby_units_by_typemaplocationmap_locationunsigned-radius_squaredunittype-type-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107"><code>has_unit_at_location</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolhas_unit_at_locationmaplocationmap_location-const)
-         * [public inline<a href="#classbc_1_1Unit"><code>Unit</code></a><code></code><a href="#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2"><code>sense_unit_at_location</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inlineunitsense_unit_at_locationmaplocationmap_location-const)
+         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1acbb062a7fdbe6789e2f99001aaff76fc"><code>sense_nearby_units</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location,unsigned radius_squared) const</code>](#public-inline-stdvectorunitsense_nearby_unitsconstmaplocation-map_locationunsigned-radius_squared-const)
+         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1aeff1cc58ad19d1b9a865a577a43b4555"><code>sense_nearby_units_by_team</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location,unsigned radius_squared,Team team) const</code>](#public-inline-stdvectorunitsense_nearby_units_by_teamconstmaplocation-map_locationunsigned-radius_squaredteam-team-const)
+         * [public inline std::vector&lt;<a href="#classbc_1_1Unit"><code>Unit</code></a><code>&gt;</code><a href="#classbc_1_1GameController_1a0a4ef31890d40a7372d302c9b97d35d6"><code>sense_nearby_units_by_type</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location,unsigned radius_squared,UnitType type) const</code>](#public-inline-stdvectorunitsense_nearby_units_by_typeconstmaplocation-map_locationunsigned-radius_squaredunittype-type-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1a146611e078468c9681212bdd483254ee"><code>has_unit_at_location</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolhas_unit_at_locationconstmaplocation-map_location-const)
+         * [public inline<a href="#classbc_1_1Unit"><code>Unit</code></a><code></code><a href="#classbc_1_1GameController_1a24141b15c52a94f469f26d3356f3f0ea"><code>sense_unit_at_location</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inlineunitsense_unit_at_locationconstmaplocation-map_location-const)
          * [public inline const<a href="#classbc_1_1AsteroidPattern"><code>AsteroidPattern</code></a><code>&amp;</code><a href="#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607"><code>get_asteroid_pattern</code></a><code>() const</code>](#public-inline-constasteroidpatternget_asteroid_pattern-const)
          * [public inline const<a href="#classbc_1_1OrbitPattern"><code>OrbitPattern</code></a><code>&amp;</code><a href="#classbc_1_1GameController_1aff7c9034b27f65de970dd175c0d594c2"><code>get_orbit_pattern</code></a><code>() const</code>](#public-inline-constorbitpatternget_orbit_pattern-const)
          * [public inline unsigned<a href="#classbc_1_1GameController_1a360710a324bc0ad53186ba0946a1e661"><code>get_current_duration_of_flight</code></a><code>() const</code>](#public-inline-unsignedget_current_duration_of_flight-const)
          * [public inline std::vector&lt; int &gt;<a href="#classbc_1_1GameController_1ab95456005163781b3b885e6c0b40e95e"><code>get_team_array</code></a><code>(Planet planet) const</code>](#public-inline-stdvector-int-get_team_arrayplanet-planet-const)
          * [public inline void<a href="#classbc_1_1GameController_1a3b14db43392828f3cfdf0dd900aa5826"><code>write_team_array</code></a><code>(unsigned index,int value) const</code>](#public-inline-voidwrite_team_arrayunsigned-indexint-value-const)
          * [public inline void<a href="#classbc_1_1GameController_1af7960d09585c4619da3af1adeda1d7cd"><code>disintegrate_unit</code></a><code>(unsigned id) const</code>](#public-inline-voiddisintegrate_unitunsigned-id-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1aa4514059e7eb2a144202c398a8db3c0f"><code>is_occupiable</code></a><code>(</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolis_occupiablemaplocationmap_location-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1aeb61fa8e57105ddb84783d2b65367050"><code>is_occupiable</code></a><code>(const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolis_occupiableconstmaplocation-map_location-const)
          * [public inline bool<a href="#classbc_1_1GameController_1ae7f2fd1a41274fdce9a807fcc89bb31a"><code>can_move</code></a><code>(unsigned id,Direction direction) const</code>](#public-inline-boolcan_moveunsigned-iddirection-direction-const)
          * [public inline bool<a href="#classbc_1_1GameController_1ae244044dddf7f6b256ee5b58ad64b6ce"><code>is_move_ready</code></a><code>(unsigned id) const</code>](#public-inline-boolis_move_readyunsigned-id-const)
          * [public inline void<a href="#classbc_1_1GameController_1a9022d8a19326124643dbd9a009bc5cfe"><code>move_robot</code></a><code>(unsigned id,Direction direction) const</code>](#public-inline-voidmove_robotunsigned-iddirection-direction-const)
@@ -95,11 +95,11 @@ Table of Contents
          * [public inline bool<a href="#classbc_1_1GameController_1a77c53b59eb533f6e22ff079a25503d36"><code>can_javelin</code></a><code>(unsigned knight_id,unsigned target_id) const</code>](#public-inline-boolcan_javelinunsigned-knight_idunsigned-target_id-const)
          * [public inline bool<a href="#classbc_1_1GameController_1ac1a328922aa28243c6fb064585ef715d"><code>is_javelin_ready</code></a><code>(unsigned knight_id) const</code>](#public-inline-boolis_javelin_readyunsigned-knight_id-const)
          * [public inline void<a href="#classbc_1_1GameController_1a0d0df58c37778e08516a75429fb49bd8"><code>javelin</code></a><code>(unsigned knight_id,unsigned target_id) const</code>](#public-inline-voidjavelinunsigned-knight_idunsigned-target_id-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1aac5742e3f39055bb0a147c215cacd51b"><code>can_begin_snipe</code></a><code>(unsigned ranger_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolcan_begin_snipeunsigned-ranger_idmaplocationmap_location-const)
-         * [public inline void<a href="#classbc_1_1GameController_1a7edb36194237d50d2cdb27b683059e64"><code>begin_snipe</code></a><code>(unsigned ranger_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-voidbegin_snipeunsigned-ranger_idmaplocationmap_location-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1a03427b65ca860f0be427a8803d951d36"><code>can_begin_blink</code></a><code>(unsigned mage_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolcan_begin_blinkunsigned-mage_idmaplocationmap_location-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1ac667c67be90d5d63d64a9a7b06a8fa83"><code>can_begin_snipe</code></a><code>(unsigned ranger_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolcan_begin_snipeunsigned-ranger_idconstmaplocation-map_location-const)
+         * [public inline void<a href="#classbc_1_1GameController_1ab6f5859ad3c52852b19029190034c1d5"><code>begin_snipe</code></a><code>(unsigned ranger_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-voidbegin_snipeunsigned-ranger_idconstmaplocation-map_location-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1a89638a73699fc08905d3d2422ca33c91"><code>can_begin_blink</code></a><code>(unsigned mage_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolcan_begin_blinkunsigned-mage_idconstmaplocation-map_location-const)
          * [public inline bool<a href="#classbc_1_1GameController_1a4b624a44370544aab3da812e36866646"><code>is_blink_ready</code></a><code>(unsigned mage_id) const</code>](#public-inline-boolis_blink_readyunsigned-mage_id-const)
-         * [public inline void<a href="#classbc_1_1GameController_1a377dd53e81a4a4c3abca8cf0a6974813"><code>blink</code></a><code>(unsigned mage_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-voidblinkunsigned-mage_idmaplocationmap_location-const)
+         * [public inline void<a href="#classbc_1_1GameController_1a9d57ab7d8e1418c31437d70a122ad899"><code>blink</code></a><code>(unsigned mage_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-voidblinkunsigned-mage_idconstmaplocation-map_location-const)
          * [public inline bool<a href="#classbc_1_1GameController_1aabd6b77ff681b5cff80fe3804eb91b6b"><code>can_heal</code></a><code>(unsigned healer_id,unsigned target_id) const</code>](#public-inline-boolcan_healunsigned-healer_idunsigned-target_id-const)
          * [public inline bool<a href="#classbc_1_1GameController_1a550cc28d4942640a3a1453f87be53f27"><code>is_heal_ready</code></a><code>(unsigned healer_id) const</code>](#public-inline-boolis_heal_readyunsigned-healer_id-const)
          * [public inline void<a href="#classbc_1_1GameController_1ac030023653b0864dcf858f203d7bdb46"><code>heal</code></a><code>(unsigned healer_id,unsigned target_id) const</code>](#public-inline-voidhealunsigned-healer_idunsigned-target_id-const)
@@ -112,8 +112,8 @@ Table of Contents
          * [public inline bool<a href="#classbc_1_1GameController_1a1b2f66ca3750889f429f2784dd2d2fa1"><code>can_produce_robot</code></a><code>(unsigned factory_id,UnitType unit_type) const</code>](#public-inline-boolcan_produce_robotunsigned-factory_idunittype-unit_type-const)
          * [public inline void<a href="#classbc_1_1GameController_1ad23baf92fdaa8b0a971ba0cf921046f6"><code>produce_robot</code></a><code>(unsigned factory_id,UnitType unit_type) const</code>](#public-inline-voidproduce_robotunsigned-factory_idunittype-unit_type-const)
          * [public inline<a href="#classbc_1_1RocketLandingInfo"><code>RocketLandingInfo</code></a><code></code><a href="#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3"><code>get_rocket_landings</code></a><code>() const</code>](#public-inlinerocketlandinginfoget_rocket_landings-const)
-         * [public inline bool<a href="#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f"><code>can_launch_rocket</code></a><code>(unsigned rocket_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-boolcan_launch_rocketunsigned-rocket_idmaplocationmap_location-const)
-         * [public inline void<a href="#classbc_1_1GameController_1ad7730457a175c0e02b673e9048ce9c84"><code>launch_rocket</code></a><code>(unsigned rocket_id,</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>map_location) const</code>](#public-inline-voidlaunch_rocketunsigned-rocket_idmaplocationmap_location-const)
+         * [public inline bool<a href="#classbc_1_1GameController_1a84f5505f7190a068f610fc0ba5130c10"><code>can_launch_rocket</code></a><code>(unsigned rocket_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolcan_launch_rocketunsigned-rocket_idconstmaplocation-map_location-const)
+         * [public inline void<a href="#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964"><code>launch_rocket</code></a><code>(unsigned rocket_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-voidlaunch_rocketunsigned-rocket_idconstmaplocation-map_location-const)
          * [public inline bool<a href="#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b"><code>is_over</code></a><code>() const</code>](#public-inline-boolis_over-const)
          * [public inline Team<a href="#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7"><code>get_winning_team</code></a><code>() const</code>](#public-inline-teamget_winning_team-const)
    * [class bc::Location](#class-bclocation)
@@ -206,6 +206,7 @@ Table of Contents
    * [class bc::Unit](#class-bcunit)
       * [Summary](#summary-12)
       * [Members](#members-11)
+         * [public inline<a href="#classbc_1_1Unit_1a2d86e81119175536621b877217427cfe"><code>Unit</code></a><code>()</code>](#public-inlineunit)
          * [public inline explicit<a href="#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20"><code>Unit</code></a><code>(bc_Unit * unit)</code>](#public-inline-explicitunitbc_unit--unit)
          * [public inline<a href="#classbc_1_1Unit_1abbd01a2f8804a90592f98a8f2011123d"><code>Unit</code></a><code>(const</code><a href="#classbc_1_1Unit"><code>Unit</code></a><code>&amp; unit)</code>](#public-inlineunitconstunit-unit)
          * [public<a href="#classbc_1_1Unit_1a14aa95eeb4962ababa2711c08cc34be2"><code>Unit</code></a><code>(</code><a href="#classbc_1_1Unit"><code>Unit</code></a><code>&amp;&amp; unit) = default</code>](#publicunitunit-unit--default)
@@ -267,21 +268,21 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public void `[`print_trace`](#bc___8hpp_1afd310c582a13a726edb7e8d259468a69)`()`            | 
-`public bool `[`clear_error`](#bc___8hpp_1a676ff814b7f93e8f3e12b5e82234fcd1)`()`            | 
-`public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | Get other planet. 
-`public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | Create a human-readable representation of a Planet 
-`public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | Returns the x displacement of this direction. 
-`public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | Returns the y displacement of this direction. 
-`public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | Returns whether this direction is a diagonal one. 
-`public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | Returns the direction opposite this one, or Center if it's Center 
-`public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
-`public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
-`public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)`            | 
-`public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)`            | 
-`public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()`            | 
-`public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)`            | 
+`public static bool `[`clear_error`](#bc___8hpp_1a9eab1af869a744de81383a51ab14b882)`()`            | 
+`public inline Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | Get other planet. 
+`public inline std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | Create a human-readable representation of a Planet 
+`public inline int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)`            | Returns the x displacement of this direction. 
+`public inline int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)`            | Returns the y displacement of this direction. 
+`public inline bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)`            | Returns whether this direction is a diagonal one. 
+`public inline Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)`            | Returns the direction opposite this one, or Center if it's Center 
+`public inline Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)`            | Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
+`public inline Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)`            | Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
+`public inline bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)`            | 
+`public inline bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)`            | 
+`public static unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1abb55faf487cf5b743e55d6b3a031387a)`(UnitType unit_type)`            | 
+`public static unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1aa9e9a53ac05a811bacf821801eb4e2f2)`(UnitType unit_type)`            | 
+`public static unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a859c53ef3db54acef1c97d2239833968)`()`            | 
+`public inline unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)`            | 
 `class `[`bc::AsteroidPattern`](#classbc_1_1AsteroidPattern) | 
 `class `[`bc::AsteroidStrike`](#classbc_1_1AsteroidStrike) | 
 `class `[`bc::GameController`](#classbc_1_1GameController) | 
@@ -298,9 +299,9 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 #### `public void `[`print_trace`](#bc___8hpp_1afd310c582a13a726edb7e8d259468a69)`()` 
 
-#### `public bool `[`clear_error`](#bc___8hpp_1a676ff814b7f93e8f3e12b5e82234fcd1)`()` 
+#### `public static bool `[`clear_error`](#bc___8hpp_1a9eab1af869a744de81383a51ab14b882)`()` 
 
-#### `public Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)` 
+#### `public inline Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)` 
 
 Get other planet. 
 #### Parameters
@@ -309,7 +310,7 @@ Get other planet.
 #### Returns
 the other planet
 
-#### `public std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)` 
+#### `public inline std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)` 
 
 Create a human-readable representation of a Planet 
 #### Parameters
@@ -318,7 +319,7 @@ Create a human-readable representation of a Planet
 #### Returns
 the human-readable string
 
-#### `public int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)` 
+#### `public inline int `[`direction_dx`](#bc___8hpp_1a376b234b3b8e965a9a8c4750bf364b8c)`(Direction direction)` 
 
 Returns the x displacement of this direction. 
 #### Parameters
@@ -327,7 +328,7 @@ Returns the x displacement of this direction.
 #### Returns
 the x displacement
 
-#### `public int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)` 
+#### `public inline int `[`direction_dy`](#bc___8hpp_1a3f2be7da219ee9c159eafeb922fa67e5)`(Direction direction)` 
 
 Returns the y displacement of this direction. 
 #### Parameters
@@ -336,7 +337,7 @@ Returns the y displacement of this direction.
 #### Returns
 the y displacement
 
-#### `public bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)` 
+#### `public inline bool `[`direction_is_diagonal`](#bc___8hpp_1a4d2d6143d7bb8e6be938069c9077083d)`(Direction direction)` 
 
 Returns whether this direction is a diagonal one. 
 #### Parameters
@@ -345,7 +346,7 @@ Returns whether this direction is a diagonal one.
 #### Returns
 bool if the direction is diagonal or not
 
-#### `public Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)` 
+#### `public inline Direction `[`direction_opposite`](#bc___8hpp_1ae56f54d1c284dcbc7954060dac51779d)`(Direction direction)` 
 
 Returns the direction opposite this one, or Center if it's Center 
 #### Parameters
@@ -354,7 +355,7 @@ Returns the direction opposite this one, or Center if it's Center
 #### Returns
 the opposite direction
 
-#### `public Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)` 
+#### `public inline Direction `[`direction_rotate_left`](#bc___8hpp_1a31ad846fb08f589e3acae67d8e1b977e)`(Direction direction)` 
 
 Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center. 
 #### Parameters
@@ -363,7 +364,7 @@ Returns the direction 45 degrees to the left (counter-clockwise) of this one, or
 #### Returns
 the direction 45 degrees to the left
 
-#### `public Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)` 
+#### `public inline Direction `[`direction_rotate_right`](#bc___8hpp_1a7050792e84c83b0955b34db7d707e15d)`(Direction direction)` 
 
 Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center. 
 #### Parameters
@@ -372,17 +373,17 @@ Returns the direction 45 degrees to the right (clockwise) of this one, or Center
 #### Returns
 the direction 45 degrees to the right
 
-#### `public bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)` 
+#### `public inline bool `[`is_structure`](#bc___8hpp_1a367f7b1ad4bcce27bbd94a536393a89a)`(UnitType unit_type)` 
 
-#### `public bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)` 
+#### `public inline bool `[`is_robot`](#bc___8hpp_1a2ed320d0f77bc58e62def3a05bff51bd)`(UnitType unit_type)` 
 
-#### `public unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1ac2a1295865dd3ff78b0876dd8de3f353)`(UnitType unit_type)` 
+#### `public static unsigned `[`unit_type_get_factory_cost`](#bc___8hpp_1abb55faf487cf5b743e55d6b3a031387a)`(UnitType unit_type)` 
 
-#### `public unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1a772eff6f3ed29a705f5d0a49774281ee)`(UnitType unit_type)` 
+#### `public static unsigned `[`unit_type_get_blueprint_cost`](#bc___8hpp_1aa9e9a53ac05a811bacf821801eb4e2f2)`(UnitType unit_type)` 
 
-#### `public unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a5f27ecfafdd951a7fa3dcca81a54141b)`()` 
+#### `public static unsigned `[`unit_type_get_replicate_cost`](#bc___8hpp_1a859c53ef3db54acef1c97d2239833968)`()` 
 
-#### `public unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)` 
+#### `public inline unsigned `[`unit_type_get_value`](#bc___8hpp_1a31345858842950badc7c9e191ba5fa5b)`(UnitType unit_type)` 
 
 # class `bc::AsteroidPattern` 
 
@@ -456,22 +457,22 @@ the map strikes for each round
 `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units`](#classbc_1_1GameController_1acbba4a8b8432ab46d807f8c266a02619)`() const` | 
 `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_my_units`](#classbc_1_1GameController_1a21737a1bd2dd66534937ddd80e2105c0)`() const` | 
 `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` | 
-`public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`get_all_locations_within`](#classbc_1_1GameController_1a4e45a2febc2700e6cb50b98a692530fb)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` | 
-`public inline bool `[`can_sense_location`](#classbc_1_1GameController_1a77f912c59dac7c56000b06ff6166feb7)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a312b003379e4faabdac05bc6e9be2944)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`get_all_locations_within`](#classbc_1_1GameController_1a1fa63ad24724ef74254fa04be6886288)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared) const` | 
+`public inline bool `[`can_sense_location`](#classbc_1_1GameController_1a43318ff9c7a897a2676ff986f25a0da7)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline bool `[`can_sense_unit`](#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27)`(unsigned id) const` | 
-`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` | 
-`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` | 
-`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` | 
-`public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1acbb062a7fdbe6789e2f99001aaff76fc)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1aeff1cc58ad19d1b9a865a577a43b4555)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared,Team team) const` | 
+`public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1a0a4ef31890d40a7372d302c9b97d35d6)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared,UnitType type) const` | 
+`public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a146611e078468c9681212bdd483254ee)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1a24141b15c52a94f469f26d3356f3f0ea)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline const `[`AsteroidPattern`](#classbc_1_1AsteroidPattern)` & `[`get_asteroid_pattern`](#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607)`() const` | 
 `public inline const `[`OrbitPattern`](#classbc_1_1OrbitPattern)` & `[`get_orbit_pattern`](#classbc_1_1GameController_1aff7c9034b27f65de970dd175c0d594c2)`() const` | 
 `public inline unsigned `[`get_current_duration_of_flight`](#classbc_1_1GameController_1a360710a324bc0ad53186ba0946a1e661)`() const` | 
 `public inline std::vector< int > `[`get_team_array`](#classbc_1_1GameController_1ab95456005163781b3b885e6c0b40e95e)`(Planet planet) const` | 
 `public inline void `[`write_team_array`](#classbc_1_1GameController_1a3b14db43392828f3cfdf0dd900aa5826)`(unsigned index,int value) const` | 
 `public inline void `[`disintegrate_unit`](#classbc_1_1GameController_1af7960d09585c4619da3af1adeda1d7cd)`(unsigned id) const` | 
-`public inline bool `[`is_occupiable`](#classbc_1_1GameController_1aa4514059e7eb2a144202c398a8db3c0f)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline bool `[`is_occupiable`](#classbc_1_1GameController_1aeb61fa8e57105ddb84783d2b65367050)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline bool `[`can_move`](#classbc_1_1GameController_1ae7f2fd1a41274fdce9a807fcc89bb31a)`(unsigned id,Direction direction) const` | 
 `public inline bool `[`is_move_ready`](#classbc_1_1GameController_1ae244044dddf7f6b256ee5b58ad64b6ce)`(unsigned id) const` | 
 `public inline void `[`move_robot`](#classbc_1_1GameController_1a9022d8a19326124643dbd9a009bc5cfe)`(unsigned id,Direction direction) const` | 
@@ -494,11 +495,11 @@ the map strikes for each round
 `public inline bool `[`can_javelin`](#classbc_1_1GameController_1a77c53b59eb533f6e22ff079a25503d36)`(unsigned knight_id,unsigned target_id) const` | 
 `public inline bool `[`is_javelin_ready`](#classbc_1_1GameController_1ac1a328922aa28243c6fb064585ef715d)`(unsigned knight_id) const` | 
 `public inline void `[`javelin`](#classbc_1_1GameController_1a0d0df58c37778e08516a75429fb49bd8)`(unsigned knight_id,unsigned target_id) const` | 
-`public inline bool `[`can_begin_snipe`](#classbc_1_1GameController_1aac5742e3f39055bb0a147c215cacd51b)`(unsigned ranger_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline void `[`begin_snipe`](#classbc_1_1GameController_1a7edb36194237d50d2cdb27b683059e64)`(unsigned ranger_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline bool `[`can_begin_blink`](#classbc_1_1GameController_1a03427b65ca860f0be427a8803d951d36)`(unsigned mage_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline bool `[`can_begin_snipe`](#classbc_1_1GameController_1ac667c67be90d5d63d64a9a7b06a8fa83)`(unsigned ranger_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline void `[`begin_snipe`](#classbc_1_1GameController_1ab6f5859ad3c52852b19029190034c1d5)`(unsigned ranger_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline bool `[`can_begin_blink`](#classbc_1_1GameController_1a89638a73699fc08905d3d2422ca33c91)`(unsigned mage_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline bool `[`is_blink_ready`](#classbc_1_1GameController_1a4b624a44370544aab3da812e36866646)`(unsigned mage_id) const` | 
-`public inline void `[`blink`](#classbc_1_1GameController_1a377dd53e81a4a4c3abca8cf0a6974813)`(unsigned mage_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline void `[`blink`](#classbc_1_1GameController_1a9d57ab7d8e1418c31437d70a122ad899)`(unsigned mage_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline bool `[`can_heal`](#classbc_1_1GameController_1aabd6b77ff681b5cff80fe3804eb91b6b)`(unsigned healer_id,unsigned target_id) const` | 
 `public inline bool `[`is_heal_ready`](#classbc_1_1GameController_1a550cc28d4942640a3a1453f87be53f27)`(unsigned healer_id) const` | 
 `public inline void `[`heal`](#classbc_1_1GameController_1ac030023653b0864dcf858f203d7bdb46)`(unsigned healer_id,unsigned target_id) const` | 
@@ -511,8 +512,8 @@ the map strikes for each round
 `public inline bool `[`can_produce_robot`](#classbc_1_1GameController_1a1b2f66ca3750889f429f2784dd2d2fa1)`(unsigned factory_id,UnitType unit_type) const` | 
 `public inline void `[`produce_robot`](#classbc_1_1GameController_1ad23baf92fdaa8b0a971ba0cf921046f6)`(unsigned factory_id,UnitType unit_type) const` | 
 `public inline `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo)` `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` | 
-`public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
-`public inline void `[`launch_rocket`](#classbc_1_1GameController_1ad7730457a175c0e02b673e9048ce9c84)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` | 
+`public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1a84f5505f7190a068f610fc0ba5130c10)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline void `[`launch_rocket`](#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` | 
 `public inline Team `[`get_winning_team`](#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7)`() const` | 
 
@@ -552,23 +553,23 @@ the map strikes for each round
 
 #### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`get_units_in_space`](#classbc_1_1GameController_1a0de2c06a5130266d093ef962580d1f53)`() const` 
 
-#### `public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a219209d98dc0f25a0b092ed3fafd7691)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline unsigned `[`get_karbonite_at`](#classbc_1_1GameController_1a312b003379e4faabdac05bc6e9be2944)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
-#### `public inline std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`get_all_locations_within`](#classbc_1_1GameController_1a4e45a2febc2700e6cb50b98a692530fb)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` 
+#### `public inline std::vector< `[`MapLocation`](#classbc_1_1MapLocation)` > `[`get_all_locations_within`](#classbc_1_1GameController_1a1fa63ad24724ef74254fa04be6886288)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared) const` 
 
-#### `public inline bool `[`can_sense_location`](#classbc_1_1GameController_1a77f912c59dac7c56000b06ff6166feb7)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`can_sense_location`](#classbc_1_1GameController_1a43318ff9c7a897a2676ff986f25a0da7)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline bool `[`can_sense_unit`](#classbc_1_1GameController_1a57914ebe1f56841f33ed6ed4f83b8f27)`(unsigned id) const` 
 
-#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1a22ab6db729e5aa80a0491f15cab4da7a)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared) const` 
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units`](#classbc_1_1GameController_1acbb062a7fdbe6789e2f99001aaff76fc)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared) const` 
 
-#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1af86f4a1d56b1492d0daa004f98861cd1)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,Team team) const` 
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_team`](#classbc_1_1GameController_1aeff1cc58ad19d1b9a865a577a43b4555)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared,Team team) const` 
 
-#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1acb98208d86574de686bfd600538c30f2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location,unsigned radius_squared,UnitType type) const` 
+#### `public inline std::vector< `[`Unit`](#classbc_1_1Unit)` > `[`sense_nearby_units_by_type`](#classbc_1_1GameController_1a0a4ef31890d40a7372d302c9b97d35d6)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location,unsigned radius_squared,UnitType type) const` 
 
-#### `public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a671b894e97b54964349e604dfd914107)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`has_unit_at_location`](#classbc_1_1GameController_1a146611e078468c9681212bdd483254ee)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
-#### `public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1ae95d3d92ca38fabd331522f15ae005c2)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline `[`Unit`](#classbc_1_1Unit)` `[`sense_unit_at_location`](#classbc_1_1GameController_1a24141b15c52a94f469f26d3356f3f0ea)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline const `[`AsteroidPattern`](#classbc_1_1AsteroidPattern)` & `[`get_asteroid_pattern`](#classbc_1_1GameController_1aeeee9efb73ccbaab47c7fc9f00560607)`() const` 
 
@@ -582,7 +583,7 @@ the map strikes for each round
 
 #### `public inline void `[`disintegrate_unit`](#classbc_1_1GameController_1af7960d09585c4619da3af1adeda1d7cd)`(unsigned id) const` 
 
-#### `public inline bool `[`is_occupiable`](#classbc_1_1GameController_1aa4514059e7eb2a144202c398a8db3c0f)`(`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`is_occupiable`](#classbc_1_1GameController_1aeb61fa8e57105ddb84783d2b65367050)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline bool `[`can_move`](#classbc_1_1GameController_1ae7f2fd1a41274fdce9a807fcc89bb31a)`(unsigned id,Direction direction) const` 
 
@@ -628,15 +629,15 @@ the map strikes for each round
 
 #### `public inline void `[`javelin`](#classbc_1_1GameController_1a0d0df58c37778e08516a75429fb49bd8)`(unsigned knight_id,unsigned target_id) const` 
 
-#### `public inline bool `[`can_begin_snipe`](#classbc_1_1GameController_1aac5742e3f39055bb0a147c215cacd51b)`(unsigned ranger_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`can_begin_snipe`](#classbc_1_1GameController_1ac667c67be90d5d63d64a9a7b06a8fa83)`(unsigned ranger_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
-#### `public inline void `[`begin_snipe`](#classbc_1_1GameController_1a7edb36194237d50d2cdb27b683059e64)`(unsigned ranger_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline void `[`begin_snipe`](#classbc_1_1GameController_1ab6f5859ad3c52852b19029190034c1d5)`(unsigned ranger_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
-#### `public inline bool `[`can_begin_blink`](#classbc_1_1GameController_1a03427b65ca860f0be427a8803d951d36)`(unsigned mage_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`can_begin_blink`](#classbc_1_1GameController_1a89638a73699fc08905d3d2422ca33c91)`(unsigned mage_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline bool `[`is_blink_ready`](#classbc_1_1GameController_1a4b624a44370544aab3da812e36866646)`(unsigned mage_id) const` 
 
-#### `public inline void `[`blink`](#classbc_1_1GameController_1a377dd53e81a4a4c3abca8cf0a6974813)`(unsigned mage_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline void `[`blink`](#classbc_1_1GameController_1a9d57ab7d8e1418c31437d70a122ad899)`(unsigned mage_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline bool `[`can_heal`](#classbc_1_1GameController_1aabd6b77ff681b5cff80fe3804eb91b6b)`(unsigned healer_id,unsigned target_id) const` 
 
@@ -662,9 +663,9 @@ the map strikes for each round
 
 #### `public inline `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo)` `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` 
 
-#### `public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1aad3896c7562f79d9f6e575059086519f)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1a84f5505f7190a068f610fc0ba5130c10)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
-#### `public inline void `[`launch_rocket`](#classbc_1_1GameController_1ad7730457a175c0e02b673e9048ce9c84)`(unsigned rocket_id,`[`MapLocation`](#classbc_1_1MapLocation)` map_location) const` 
+#### `public inline void `[`launch_rocket`](#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
 #### `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` 
 
@@ -973,6 +974,7 @@ the matrix of pair (is passable cell, initial karbonite at cell)
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
+`public inline  `[`Unit`](#classbc_1_1Unit_1a2d86e81119175536621b877217427cfe)`()` | 
 `public inline  explicit `[`Unit`](#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20)`(bc_Unit * unit)` | 
 `public inline  `[`Unit`](#classbc_1_1Unit_1abbd01a2f8804a90592f98a8f2011123d)`(const `[`Unit`](#classbc_1_1Unit)` & unit)` | 
 `public  `[`Unit`](#classbc_1_1Unit_1a14aa95eeb4962ababa2711c08cc34be2)`(`[`Unit`](#classbc_1_1Unit)` && unit) = default` | 
@@ -1020,6 +1022,8 @@ the matrix of pair (is passable cell, initial karbonite at cell)
 `public inline unsigned `[`get_rocket_travel_time_decrease`](#classbc_1_1Unit_1ab0b2b8ea6b1035d2ba68f6f1474594c8)`() const` | 
 
 ## Members
+
+#### `public inline  `[`Unit`](#classbc_1_1Unit_1a2d86e81119175536621b877217427cfe)`()` 
 
 #### `public inline  explicit `[`Unit`](#classbc_1_1Unit_1adc7c66deaef5289f43380c0c86d51e20)`(bc_Unit * unit)` 
 
