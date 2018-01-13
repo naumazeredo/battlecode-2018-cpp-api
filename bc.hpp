@@ -46,7 +46,7 @@ namespace bc {
 #include <signal.h>
 #include <unistd.h>
 
-void print_trace() {
+static void print_trace() {
   fflush(stdout);
   void *array[10];
   size_t size;
@@ -87,7 +87,7 @@ if (bc_has_err()) { \
 
 #endif
 
-bool clear_error() {
+static bool clear_error() {
   if (bc_has_err()) {
     char* err;
     bc_get_last_err(&err);
@@ -103,13 +103,13 @@ bool clear_error() {
 #define VEC_INDEX(x) x ## _index
 #define VEC_DEL(x) delete_ ## x
 #define VEC(dest, orig) \
-std::vector<dest> to_vector(orig* vec) {       \
-  std::vector<dest> ans;                       \
-  size_t len = VEC_LEN(orig)(vec);             \
-  for (size_t i = 0; i < len; i++)             \
-    ans.emplace_back(VEC_INDEX(orig)(vec, i)); \
-  VEC_DEL(orig)(vec);                          \
-  return ans;                                  \
+static std::vector<dest> to_vector(orig* vec) { \
+  std::vector<dest> ans;                        \
+  size_t len = VEC_LEN(orig)(vec);              \
+  for (size_t i = 0; i < len; i++)              \
+    ans.emplace_back(VEC_INDEX(orig)(vec, i));  \
+  VEC_DEL(orig)(vec);                           \
+  return ans;                                   \
 }
 
 /** @cond PRIVATE */
@@ -143,14 +143,14 @@ using Planet = bc_Planet;
  * @param planet
  * @return the other planet
  */
-Planet      planet_other(Planet planet) { return bc_Planet_other(planet); }
+inline Planet planet_other(Planet planet) { return bc_Planet_other(planet); }
 
 /**
  * Create a human-readable representation of a Planet
  * @param planet
  * @return the human-readable string
  */
-std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
+inline std::string to_string(Planet planet) { return bc_Planet_debug(planet); }
 
 // Direction
 using Direction = bc_Direction;
@@ -162,42 +162,42 @@ using Direction = bc_Direction;
  * @param direction
  * @return the x displacement
  */
-int         direction_dx(Direction direction) { return bc_Direction_dx(direction); }
+inline int direction_dx(Direction direction) { return bc_Direction_dx(direction); }
 
 /**
  * Returns the y displacement of this direction.
  * @param direction
  * @return the y displacement
  */
-int         direction_dy(Direction direction) { return bc_Direction_dy(direction); }
+inline int direction_dy(Direction direction) { return bc_Direction_dy(direction); }
 
 /**
  * Returns whether this direction is a diagonal one.
  * @param direction
  * @return bool if the direction is diagonal or not
  */
-bool        direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
+inline bool direction_is_diagonal(Direction direction) { return bc_Direction_is_diagonal(direction); }
 
 /**
  * Returns the direction opposite this one, or Center if it's Center
  * @param direction
  * @return the opposite direction
  */
-Direction   direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
+inline Direction direction_opposite(Direction direction) { return bc_Direction_opposite(direction); }
 
 /**
  * Returns the direction 45 degrees to the left (counter-clockwise) of this one, or Center if it's Center.
  * @param direction
  * @return the direction 45 degrees to the left
  */
-Direction   direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
+inline Direction direction_rotate_left(Direction direction) { return bc_Direction_rotate_left(direction); }
 
 /**
  * Returns the direction 45 degrees to the right (clockwise) of this one, or Center if it's Center.
  * @param direction
  * @return the direction 45 degrees to the right
  */
-Direction   direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
+inline Direction direction_rotate_right(Direction direction) { return bc_Direction_rotate_right(direction); }
 
 // TODO: Direction to_string
 
@@ -536,19 +536,19 @@ VEC(unsigned, bc_VecUnitID)
 using UnitType = bc_UnitType;
 
 /*  */
-bool is_structure(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
+inline bool is_structure(UnitType unit_type) { return unit_type == Factory or unit_type == Rocket; }
 /*  */
-bool is_robot(UnitType unit_type) { return !is_structure(unit_type); }
+inline bool is_robot(UnitType unit_type) { return !is_structure(unit_type); }
 
 /*  */
-unsigned unit_type_get_factory_cost(UnitType unit_type) {
+static unsigned unit_type_get_factory_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_factory_cost(unit_type);
   CHECK_ERRORS();
   return ans;
 }
 
 /*  */
-unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
+static unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
   unsigned ans = bc_UnitType_blueprint_cost(unit_type);
   CHECK_ERRORS();
   return ans;
@@ -556,14 +556,14 @@ unsigned unit_type_get_blueprint_cost(UnitType unit_type) {
 
 // Don't need to receive UnitType as C API, because it makes no sense...
 /*  */
-unsigned unit_type_get_replicate_cost() {
+static unsigned unit_type_get_replicate_cost() {
   unsigned ans = bc_UnitType_replicate_cost(Worker);
   CHECK_ERRORS();
   return ans;
 }
 
 /*  */
-unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
+inline unsigned unit_type_get_value(UnitType unit_type) { return bc_UnitType_value(unit_type); }
 
 
 /** @cond PRIVATE
