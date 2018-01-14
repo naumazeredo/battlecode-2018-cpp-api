@@ -582,11 +582,13 @@ public:
   explicit Unit(bc_Unit* unit) : m_unit { unit } {
     log_error(unit, "Null bc_Unit!");
     m_unit_type = bc_Unit_unit_type(unit);
+    m_id   = bc_Unit_id(unit);
   }
 
   Unit(const Unit& unit) :
     m_unit { bc_Unit_clone(unit.m_unit.get()) },
-    m_unit_type { bc_Unit_unit_type(unit.m_unit.get()) }
+    m_unit_type { bc_Unit_unit_type(unit.m_unit.get()) },
+    m_id { bc_Unit_id(unit.m_unit.get()) }
   {}
   Unit(Unit&& unit) = default;
 
@@ -618,7 +620,8 @@ public:
   MapLocation get_map_location() const { return get_location().get_map_location(); }
 
   // All units
-  GET(unsigned, id);
+  //GET(unsigned, id);
+  unsigned get_id() const { return m_id; }
   GET(unsigned, health);
   GET(unsigned, max_health);
   GET(unsigned, vision_range);
@@ -681,8 +684,9 @@ public:
 private:
   UniquePtr<bc_Unit, delete_bc_Unit> m_unit;
 
-  // XXX: Stored because it's used for every assertion
+  // XXX: Stored for cache reasons
   UnitType m_unit_type;
+  unsigned m_id;
 };
 
 
@@ -738,9 +742,10 @@ public:
   */
 
   bool is_on_map(const MapLocation& location) const {
-    return (location.get_x() < (int)m_width) and
-          (location.get_y() < (int)m_height) and
-          (location.get_planet() == m_planet);
+    return
+      (location.get_x() >= 0 and location.get_x() < (int)m_width) and
+      (location.get_y() >= 0 and location.get_y() < (int)m_height) and
+      (location.get_planet() == m_planet);
   }
 
   bool is_passable_terrain_at(const MapLocation& map_location) const {
