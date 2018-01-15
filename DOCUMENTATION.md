@@ -6,7 +6,7 @@ Table of Contents
    * [namespace bc](#namespace-bc)
       * [Summary](#summary-1)
       * [Members](#members)
-         * [public void<a href="#bc___8hpp_1afd310c582a13a726edb7e8d259468a69"><code>print_trace</code></a><code>()</code>](#public-voidprint_trace)
+         * [public static void<a href="#bc___8hpp_1af3be2cc33fdb3cd5330b481c80cffd3d"><code>print_trace</code></a><code>()</code>](#public-static-voidprint_trace)
          * [public static bool<a href="#bc___8hpp_1a9eab1af869a744de81383a51ab14b882"><code>clear_error</code></a><code>()</code>](#public-static-boolclear_error)
          * [public inline Planet<a href="#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b"><code>planet_other</code></a><code>(Planet planet)</code>](#public-inline-planetplanet_otherplanet-planet)
          * [public inline std::string<a href="#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76"><code>to_string</code></a><code>(Planet planet)</code>](#public-inline-stdstringto_stringplanet-planet)
@@ -114,6 +114,7 @@ Table of Contents
          * [public inline<a href="#classbc_1_1RocketLandingInfo"><code>RocketLandingInfo</code></a><code></code><a href="#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3"><code>get_rocket_landings</code></a><code>() const</code>](#public-inlinerocketlandinginfoget_rocket_landings-const)
          * [public inline bool<a href="#classbc_1_1GameController_1a84f5505f7190a068f610fc0ba5130c10"><code>can_launch_rocket</code></a><code>(unsigned rocket_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-boolcan_launch_rocketunsigned-rocket_idconstmaplocation-map_location-const)
          * [public inline void<a href="#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964"><code>launch_rocket</code></a><code>(unsigned rocket_id,const</code><a href="#classbc_1_1MapLocation"><code>MapLocation</code></a><code>&amp; map_location) const</code>](#public-inline-voidlaunch_rocketunsigned-rocket_idconstmaplocation-map_location-const)
+         * [public inline unsigned<a href="#classbc_1_1GameController_1acb51a475b9e73b5a2c22ab893a1a0f6b"><code>get_time_left_ms</code></a><code>() const</code>](#public-inline-unsignedget_time_left_ms-const)
          * [public inline bool<a href="#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b"><code>is_over</code></a><code>() const</code>](#public-inline-boolis_over-const)
          * [public inline Team<a href="#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7"><code>get_winning_team</code></a><code>() const</code>](#public-inline-teamget_winning_team-const)
    * [class bc::Location](#class-bclocation)
@@ -269,7 +270,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public void `[`print_trace`](#bc___8hpp_1afd310c582a13a726edb7e8d259468a69)`()`            | 
+`public static void `[`print_trace`](#bc___8hpp_1af3be2cc33fdb3cd5330b481c80cffd3d)`()`            | 
 `public static bool `[`clear_error`](#bc___8hpp_1a9eab1af869a744de81383a51ab14b882)`()`            | 
 `public inline Planet `[`planet_other`](#bc___8hpp_1ab129eac4d03e8919482be61bef489a9b)`(Planet planet)`            | Get other planet. 
 `public inline std::string `[`to_string`](#bc___8hpp_1a3f46915eb6cdd13b92e04d4079796c76)`(Planet planet)`            | Create a human-readable representation of a Planet 
@@ -299,7 +300,7 @@ Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 ## Members
 
-#### `public void `[`print_trace`](#bc___8hpp_1afd310c582a13a726edb7e8d259468a69)`()` 
+#### `public static void `[`print_trace`](#bc___8hpp_1af3be2cc33fdb3cd5330b481c80cffd3d)`()` 
 
 #### `public static bool `[`clear_error`](#bc___8hpp_1a9eab1af869a744de81383a51ab14b882)`()` 
 
@@ -516,6 +517,7 @@ the map strikes for each round
 `public inline `[`RocketLandingInfo`](#classbc_1_1RocketLandingInfo)` `[`get_rocket_landings`](#classbc_1_1GameController_1a2c2ed052db056af0a3269c9b377e95f3)`() const` | 
 `public inline bool `[`can_launch_rocket`](#classbc_1_1GameController_1a84f5505f7190a068f610fc0ba5130c10)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
 `public inline void `[`launch_rocket`](#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline unsigned `[`get_time_left_ms`](#classbc_1_1GameController_1acb51a475b9e73b5a2c22ab893a1a0f6b)`() const` | 
 `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` | 
 `public inline Team `[`get_winning_team`](#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7)`() const` | 
 
@@ -669,6 +671,8 @@ the map strikes for each round
 
 #### `public inline void `[`launch_rocket`](#classbc_1_1GameController_1a8fb13057af998b2c1f0cb05cd2255964)`(unsigned rocket_id,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
+#### `public inline unsigned `[`get_time_left_ms`](#classbc_1_1GameController_1acb51a475b9e73b5a2c22ab893a1a0f6b)`() const` 
+
 #### `public inline bool `[`is_over`](#classbc_1_1GameController_1ad1fd0e92f15833e3c10181161aa8b47b)`() const` 
 
 #### `public inline Team `[`get_winning_team`](#classbc_1_1GameController_1af5d8f6949de85a9523edbf5a851ecfc7)`() const` 
@@ -728,16 +732,16 @@ Two-dimensional coordinates in the Battlecode world.
 --------------------------------|---------------------------------------------
 `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1ab313f647684390e3e78ec9fc26999305)`()` | Empty Constructor
 `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1aee5b70cc3589b43b42996e8f55c12e5b)`(Planet planet,int x,int y)` | Constructor 
-`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | 
-`public  `[`MapLocation`](#classbc_1_1MapLocation_1a5c268ca25f4def44aae94dc6336f2198)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` | 
+`public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | Copy constructur 
+`public  `[`MapLocation`](#classbc_1_1MapLocation_1a5c268ca25f4def44aae94dc6336f2198)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` | Move constructor 
 `public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` | Assignment operator (deep copy) 
-`public `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a3dbc68b4dbb4248cf472fbc7ce543f81)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` | 
+`public `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a3dbc68b4dbb4248cf472fbc7ce543f81)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` | Assignment operator (move) 
 `public inline Planet `[`get_planet`](#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54)`() const` | Returns the planet the MapLocation is at 
 `public inline int `[`get_x`](#classbc_1_1MapLocation_1a3e06a1063a6d1215b05eb395ba3657f5)`() const` | Returns the x coordinate 
 `public inline int `[`get_y`](#classbc_1_1MapLocation_1a06dbaa3ed5a43c024dfa5125c634a35c)`() const` | Returns the y coordinate 
-`public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` | 
-`public inline void `[`set_x`](#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706)`(int x)` | 
-`public inline void `[`set_y`](#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908)`(int y)` | 
+`public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` | Set the planet 
+`public inline void `[`set_x`](#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706)`(int x)` | Set the x coordinate of the map location 
+`public inline void `[`set_y`](#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908)`(int y)` | Set the y coordinate of the map location 
 `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add`](#classbc_1_1MapLocation_1afacfd29329458a5861bbcd17745f0ca0)`(Direction direction) const` | 
 `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`subtract`](#classbc_1_1MapLocation_1a518baf92a9903130089f7fb98b810cb5)`(Direction direction) const` | 
 `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add_multiple`](#classbc_1_1MapLocation_1a185e1f6170366b8686b5601ba6d91c6c)`(Direction direction,int multiple) const` | 
@@ -767,7 +771,15 @@ Constructor
 
 #### `public inline  `[`MapLocation`](#classbc_1_1MapLocation_1a0cc7e8519db71c6ccf462bb498b67d50)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` 
 
+Copy constructur 
+#### Parameters
+* `map_location`
+
 #### `public  `[`MapLocation`](#classbc_1_1MapLocation_1a5c268ca25f4def44aae94dc6336f2198)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` 
+
+Move constructor 
+#### Parameters
+* `map_location`
 
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a309cf8e4b945567f8f01e2f22ed2eac1)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location)` 
 
@@ -779,6 +791,13 @@ Assignment operator (deep copy)
 the assigned MapLocation
 
 #### `public `[`MapLocation`](#classbc_1_1MapLocation)` & `[`operator=`](#classbc_1_1MapLocation_1a3dbc68b4dbb4248cf472fbc7ce543f81)`(`[`MapLocation`](#classbc_1_1MapLocation)` &&) = default` 
+
+Assignment operator (move) 
+#### Parameters
+* `map_location` 
+
+#### Returns
+the assigned MapLocation
 
 #### `public inline Planet `[`get_planet`](#classbc_1_1MapLocation_1a985fd5880ada52a524857c01292eea54)`() const` 
 
@@ -800,9 +819,21 @@ the y coordinate
 
 #### `public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` 
 
+Set the planet 
+#### Parameters
+* `planet`
+
 #### `public inline void `[`set_x`](#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706)`(int x)` 
 
+Set the x coordinate of the map location 
+#### Parameters
+* `x`
+
 #### `public inline void `[`set_y`](#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908)`(int y)` 
+
+Set the y coordinate of the map location 
+#### Parameters
+* `y`
 
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add`](#classbc_1_1MapLocation_1afacfd29329458a5861bbcd17745f0ca0)`(Direction direction) const` 
 
