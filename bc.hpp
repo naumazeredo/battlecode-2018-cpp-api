@@ -316,7 +316,7 @@ public:
   void set_y(int y) { m_y = y; }
 
 
-  /*
+  /**
    * Returns the map location one square from this one in the given direction.
    * @param direction
    * @return the map location one square from this one in the given direction.
@@ -328,7 +328,7 @@ public:
                       m_y + direction_dy(direction));
   }
 
-  /*
+  /**
    * Returns the map location one square from this one in the opposite direction.
    * @param direction
    * @return the map location one square from this one in the opposite direction.
@@ -340,7 +340,7 @@ public:
                       m_y - direction_dy(direction));
   }
 
-  /*
+  /**
    * Returns the map location `multiple` squares from this one in the given
    * direction.
    * @param direction
@@ -353,7 +353,7 @@ public:
                       m_y + direction_dy(direction) * multiple);
   }
 
-  /*
+  /**
    * The location translated from this location by `dx` in the x direction and `dy`
    * in the y direction.
    * @param dx
@@ -365,7 +365,7 @@ public:
     return MapLocation(m_planet, m_x + dx, m_y + dy);
   }
 
-  /*
+  /**
    * Computes the square of the distance from this location to the specified
    * location. If on different planets, returns the maximum integer.
    * @param map_location
@@ -380,19 +380,19 @@ public:
     return dx * dx + dy * dy;
   }
 
-  /*
-  *  The Direction from this location to the specified location.
-  * @param map_location :
-  * @return The Direction from this location to the specified location.
-  * @throw DifferentPlanet - The locations are on different planets.
-  */
+  /**
+   *  The Direction from this location to the specified location.
+   * @param map_location :
+   * @return The Direction from this location to the specified location.
+   * @throw DifferentPlanet - The locations are on different planets.
+   */
   Direction direction_to(const MapLocation& map_location) const {
     auto ans = bc_MapLocation_direction_to(get_bc(), map_location.get_bc());
     CHECK_ERRORS();
     return ans;
   }
 
-  /*
+  /**
    * Determines whether this location is adjacent to the specified location,
    * including diagonally. Note that squares are not adjacent to themselves,
    * and squares on different planets are not adjacent to each other.
@@ -406,7 +406,7 @@ public:
             std::abs(m_y - map_location.get_y()) <= 1);
   }
 
-  /*
+  /**
    * Whether this location is within the distance squared range of the
    * specified location, inclusive. False for locations on different planets.
    * @param range
@@ -418,7 +418,7 @@ public:
     return range >= distance_squared_to(map_location);
   }
 
-  /*
+  /**
    * Overloading of the == operator
    * @param map_location
    * @return if the current MapLocation is equal to map_location
@@ -429,7 +429,7 @@ public:
             map_location.get_y() == m_y);
   }
 
-  /*
+  /**
    * Overloading of the != operator
    * @param map_location
    * @return if the current MapLocation is not equal to map_location
