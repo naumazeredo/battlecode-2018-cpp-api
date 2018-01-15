@@ -1266,6 +1266,10 @@ public:
     CHECK_ERRORS();
   }
 
+  unsigned get_time_left_ms() const {
+    return bc_GameController_get_time_left_ms(m_gc);
+  }
+
   bool is_over() const {
     return bc_GameController_is_over(m_gc);
   }
