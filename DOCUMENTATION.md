@@ -742,16 +742,16 @@ Two-dimensional coordinates in the Battlecode world.
 `public inline void `[`set_planet`](#classbc_1_1MapLocation_1adc404e0ed18b9d3701b03379c9e56f00)`(Planet planet)` | Set the planet 
 `public inline void `[`set_x`](#classbc_1_1MapLocation_1a57cd1f71b3680fea48615d15574a9706)`(int x)` | Set the x coordinate of the map location 
 `public inline void `[`set_y`](#classbc_1_1MapLocation_1ad82adb7e6a7d84f44245e097d08e6908)`(int y)` | Set the y coordinate of the map location 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add`](#classbc_1_1MapLocation_1afacfd29329458a5861bbcd17745f0ca0)`(Direction direction) const` | 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`subtract`](#classbc_1_1MapLocation_1a518baf92a9903130089f7fb98b810cb5)`(Direction direction) const` | 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add_multiple`](#classbc_1_1MapLocation_1a185e1f6170366b8686b5601ba6d91c6c)`(Direction direction,int multiple) const` | 
-`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`translate`](#classbc_1_1MapLocation_1a07f9f22a4ce93b7d9202d3497dd41253)`(int dx,int dy) const` | 
-`public inline unsigned `[`distance_squared_to`](#classbc_1_1MapLocation_1ac448524d2dc59e144d4839fefe6e4cb7)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
-`public inline Direction `[`direction_to`](#classbc_1_1MapLocation_1ad46b170b01f805bc23d0c1fc34e9e0eb)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
-`public inline bool `[`is_adjacent_to`](#classbc_1_1MapLocation_1a74eab87af0155901216f2f48d40d854e)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
-`public inline bool `[`is_within_range`](#classbc_1_1MapLocation_1ad9e1d075d5fb142fc9920bced92a2ea2)`(unsigned range,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
-`public inline bool `[`operator==`](#classbc_1_1MapLocation_1a5a039fbf186050dadf1234b3689adc02)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
-`public inline bool `[`operator!=`](#classbc_1_1MapLocation_1af9cf32ce1a51f5325479d2fa527a3e1f)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add`](#classbc_1_1MapLocation_1afacfd29329458a5861bbcd17745f0ca0)`(Direction direction) const` | Returns the map location one square from this one in the given direction. 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`subtract`](#classbc_1_1MapLocation_1a518baf92a9903130089f7fb98b810cb5)`(Direction direction) const` | Returns the map location one square from this one in the opposite direction. 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add_multiple`](#classbc_1_1MapLocation_1a185e1f6170366b8686b5601ba6d91c6c)`(Direction direction,int multiple) const` | Returns the map location `multiple` squares from this one in the given direction. 
+`public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`translate`](#classbc_1_1MapLocation_1a07f9f22a4ce93b7d9202d3497dd41253)`(int dx,int dy) const` | The location translated from this location by `dx` in the x direction and `dy` in the y direction. 
+`public inline unsigned `[`distance_squared_to`](#classbc_1_1MapLocation_1ac448524d2dc59e144d4839fefe6e4cb7)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | Computes the square of the distance from this location to the specified location. If on different planets, returns the maximum integer. 
+`public inline Direction `[`direction_to`](#classbc_1_1MapLocation_1ad46b170b01f805bc23d0c1fc34e9e0eb)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | The Direction from this location to the specified location. 
+`public inline bool `[`is_adjacent_to`](#classbc_1_1MapLocation_1a74eab87af0155901216f2f48d40d854e)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | Determines whether this location is adjacent to the specified location, including diagonally. Note that squares are not adjacent to themselves, and squares on different planets are not adjacent to each other. 
+`public inline bool `[`is_within_range`](#classbc_1_1MapLocation_1ad9e1d075d5fb142fc9920bced92a2ea2)`(unsigned range,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | Whether this location is within the distance squared range of the specified location, inclusive. False for locations on different planets. 
+`public inline bool `[`operator==`](#classbc_1_1MapLocation_1a5a039fbf186050dadf1234b3689adc02)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | Overloading of the == operator 
+`public inline bool `[`operator!=`](#classbc_1_1MapLocation_1af9cf32ce1a51f5325479d2fa527a3e1f)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` | Overloading of the != operator 
 
 ## Members
 
@@ -837,23 +837,100 @@ Set the y coordinate of the map location
 
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add`](#classbc_1_1MapLocation_1afacfd29329458a5861bbcd17745f0ca0)`(Direction direction) const` 
 
+Returns the map location one square from this one in the given direction. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the map location one square from this one in the given direction.
+
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`subtract`](#classbc_1_1MapLocation_1a518baf92a9903130089f7fb98b810cb5)`(Direction direction) const` 
+
+Returns the map location one square from this one in the opposite direction. 
+#### Parameters
+* `direction` 
+
+#### Returns
+the map location one square from this one in the opposite direction.
 
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`add_multiple`](#classbc_1_1MapLocation_1a185e1f6170366b8686b5601ba6d91c6c)`(Direction direction,int multiple) const` 
 
+Returns the map location `multiple` squares from this one in the given direction. 
+#### Parameters
+* `direction` 
+
+#### Returns
+Returns map the location `multiple` squares from this one in the given direction.
+
 #### `public inline `[`MapLocation`](#classbc_1_1MapLocation)` `[`translate`](#classbc_1_1MapLocation_1a07f9f22a4ce93b7d9202d3497dd41253)`(int dx,int dy) const` 
+
+The location translated from this location by `dx` in the x direction and `dy` in the y direction. 
+#### Parameters
+* `dx` 
+
+* `dy` 
+
+#### Returns
+The location translated from this location by `dx` in the x direction and `dy` in the y direction.
 
 #### `public inline unsigned `[`distance_squared_to`](#classbc_1_1MapLocation_1ac448524d2dc59e144d4839fefe6e4cb7)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
+Computes the square of the distance from this location to the specified location. If on different planets, returns the maximum integer. 
+#### Parameters
+* `map_location` 
+
+#### Returns
+the square of the distance from this location to the specified location. If on different planets, returns the maximum integer.
+
 #### `public inline Direction `[`direction_to`](#classbc_1_1MapLocation_1ad46b170b01f805bc23d0c1fc34e9e0eb)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
+
+The Direction from this location to the specified location. 
+#### Parameters
+* `map_location` : 
+
+#### Returns
+The Direction from this location to the specified location. 
+
+#### Exceptions
+* `DifferentPlanet` The locations are on different planets.
 
 #### `public inline bool `[`is_adjacent_to`](#classbc_1_1MapLocation_1a74eab87af0155901216f2f48d40d854e)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
+Determines whether this location is adjacent to the specified location, including diagonally. Note that squares are not adjacent to themselves, and squares on different planets are not adjacent to each other. 
+#### Parameters
+* `map_location` 
+
+#### Returns
+if this location is adjacent to the specified location
+
 #### `public inline bool `[`is_within_range`](#classbc_1_1MapLocation_1ad9e1d075d5fb142fc9920bced92a2ea2)`(unsigned range,const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
+
+Whether this location is within the distance squared range of the specified location, inclusive. False for locations on different planets. 
+#### Parameters
+* `range` 
+
+* `map_location` 
+
+#### Returns
+if this location is within the distance squared range of the specified location inclusive
 
 #### `public inline bool `[`operator==`](#classbc_1_1MapLocation_1a5a039fbf186050dadf1234b3689adc02)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
 
+Overloading of the == operator 
+#### Parameters
+* `map_location` 
+
+#### Returns
+if the current MapLocation is equal to map_location
+
 #### `public inline bool `[`operator!=`](#classbc_1_1MapLocation_1af9cf32ce1a51f5325479d2fa527a3e1f)`(const `[`MapLocation`](#classbc_1_1MapLocation)` & map_location) const` 
+
+Overloading of the != operator 
+#### Parameters
+* `map_location` 
+
+#### Returns
+if the current MapLocation is not equal to map_location
 
 # class `bc::OrbitPattern` 
 

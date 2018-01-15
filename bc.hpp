@@ -384,7 +384,7 @@ public:
    *  The Direction from this location to the specified location.
    * @param map_location :
    * @return The Direction from this location to the specified location.
-   * @throw DifferentPlanet - The locations are on different planets.
+   * @throw DifferentPlanet The locations are on different planets.
    */
   Direction direction_to(const MapLocation& map_location) const {
     auto ans = bc_MapLocation_direction_to(get_bc(), map_location.get_bc());

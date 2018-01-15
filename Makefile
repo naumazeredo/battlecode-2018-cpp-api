@@ -2,6 +2,9 @@ DOC=DOCUMENTATION.md
 
 all: docs toc
 
+install:
+	npm install -g https://github.com/naumazeredo/moxygen/tarball/master
+
 docs:
 	tail -n +26 bc.hpp > bc_p.hpp
 	g++ -C -E bc_p.hpp > bc_.hpp
@@ -18,6 +21,7 @@ toc:
 	./gh-md-toc $(DOC) > toc
 	sed -i '/Parameters/d' toc
 	sed -i '/Returns/d' toc
+	sed -i '/Exceptions/d' toc
 	sed -i 's/^###/####/' $(DOC)
 	echo "" >> toc
 	cat $(DOC) >> toc
