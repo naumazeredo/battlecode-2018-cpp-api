@@ -1217,6 +1217,10 @@ public:
     CHECK_ERRORS();
   }
 
+  bool can_overcharge(unsigned healer_id, unsigned target_id) const {
+    return bc_GameController_can_overcharge(m_gc, healer_id, target_id);
+  }
+
   bool is_overcharge_ready(unsigned healer_id) const {
     return bc_GameController_is_overcharge_ready(m_gc, healer_id);
   }
